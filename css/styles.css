@@ -185,13 +185,11 @@ body.nav-open {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.015);
-  transition: opacity .8s ease, transform 5s ease;
+  transition: opacity .8s ease;
 }
 
 .hero-video.is-active {
   opacity: 1;
-  transform: scale(1);
 }
 
 .hero-shade {

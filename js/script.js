@@ -63,12 +63,45 @@ function scheduleNext(duration) {
   }, duration);
 }
 
+const heroCopyEyebrow = document.querySelector('.hero-copy__eyebrow');
+const heroCopyHeadline = document.querySelector('.hero-copy__headline');
+const heroCopyContent = document.querySelector('.hero-copy__content');
+const heroCopyData = [
+  {
+    eyebrow: '폐업 걱정 없이 안심할 수 있는',
+    headline: '<span class="hero-copy__line1">명동에서 21년 이상</span><span class="hero-copy__line2">한 자리를 지킨 치과</span>',
+  },
+  {
+    eyebrow: '구강악안면외과 전문의 / 통합치의학 전문의',
+    headline: '<span class="hero-copy__line1">서울대 출신</span><span class="hero-copy__line2">대표 원장 직접 진료</span>',
+  },
+  {
+    eyebrow: '3차원 정밀 진단 결과를 바탕으로',
+    headline: '<span class="hero-copy__line1">자연 치아에 가까운 보철 제작</span><span class="hero-copy__line2">자체 기공 시스템</span>',
+  },
+];
+
+function updateHeroCopy(index) {
+  if (!heroCopyEyebrow || !heroCopyHeadline || !heroCopyContent) return;
+
+  heroCopyContent.classList.add('is-hidden');
+  window.setTimeout(() => {
+    const copy = heroCopyData[index] || heroCopyData[0];
+    heroCopyEyebrow.textContent = copy.eyebrow;
+    heroCopyHeadline.innerHTML = copy.headline;
+    heroCopyContent.classList.remove('is-hidden');
+  }, 220);
+}
+
 function playHeroVideo(index) {
   if (!heroVideos.length) return;
 
   heroIndex = index % heroVideos.length;
   const activeVideo = heroVideos[heroIndex];
   const duration = getVideoDuration(activeVideo);
+
+  heroCopyContent?.classList.remove('is-hidden');
+  updateHeroCopy(heroIndex);
 
   heroVideos.forEach((video, videoIndex) => {
     const isActive = videoIndex === heroIndex;
@@ -171,3 +204,130 @@ storyNextButton?.addEventListener("click", () => {
 
 showStoryCase(0, false);
 restartStoryTimer();
+
+const digitalTabs = [...document.querySelectorAll("[data-digital-tab]")];
+const digitalPanels = [...document.querySelectorAll("[data-digital-panel]")];
+
+function showDigitalPanel(name) {
+  if (!digitalTabs.length || !digitalPanels.length) return;
+  const selected = digitalPanels.some((panel) => panel.dataset.digitalPanel === name) ? name : "ct";
+  digitalTabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.digitalTab === selected));
+  digitalPanels.forEach((panel) => panel.classList.toggle("is-active", panel.dataset.digitalPanel === selected));
+}
+
+digitalTabs.forEach((tab) => {
+  tab.addEventListener("click", (event) => {
+    event.preventDefault();
+    showDigitalPanel(tab.dataset.digitalTab);
+    history.replaceState(null, "", `#${tab.dataset.digitalTab}`);
+  });
+});
+
+if (digitalTabs.length) {
+  showDigitalPanel(location.hash.slice(1));
+  window.addEventListener("hashchange", () => showDigitalPanel(location.hash.slice(1)));
+}
+
+document.querySelectorAll("[data-sub-tab]").forEach((tab) => {
+  tab.addEventListener("click", (event) => {
+    event.preventDefault();
+    tab.closest(".subpage-tabs")?.querySelectorAll("[data-sub-tab]").forEach((item) => {
+      item.classList.toggle("is-active", item === tab);
+    });
+  });
+});
+
+const doctorSection = document.querySelector('.doctor-section');
+if (doctorSection) {
+  const doctorObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        // 섹션이 50% 이상 보이면 애니메이션 시작
+        doctorSection.classList.add('is-visible');
+      } else if (!entry.isIntersecting) {
+        // 섹션이 화면에서 완전히 벗어나면 클래스 제거
+        doctorSection.classList.remove('is-visible');
+      }
+      // 50% 미만이지만 화면에 일부 보이면 클래스 유지 (애니메이션 멈춘 상태)
+    });
+  }, {
+    threshold: [0.5],
+  });
+
+  doctorObserver.observe(doctorSection);
+}
+
+/* Fixed background replacement for subpage visuals — ensure image is not cropped while keeping fixed effect */
+function setupFixedHeroBackgrounds() {
+  const heroSections = [...document.querySelectorAll('.digital-visual')];
+  if (!heroSections.length) return;
+  const header = document.querySelector('.site-header');
+  if (!header) {
+    window.setTimeout(setupFixedHeroBackgrounds, 120);
+    return;
+  }
+
+  const headerHeight = header.offsetHeight;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const img = document.querySelector(`.fixed-hero-bg[data-source-section="${entry.target.dataset.fixedIndex}"]`);
+      if (!img) return;
+      img.classList.toggle('is-visible', entry.isIntersecting && entry.intersectionRatio > 0.1);
+    });
+  }, {
+    threshold: [0, 0.1, 0.2],
+  });
+
+  heroSections.forEach((sec, idx) => {
+    const cs = window.getComputedStyle(sec);
+    const bg = cs.backgroundImage;
+    if (!bg || bg === 'none' || !bg.includes('url(')) return;
+    const urlMatch = bg.match(/url\((['"]?)(.*?)\1\)/);
+    if (!urlMatch) return;
+    const url = urlMatch[2];
+
+    const img = document.createElement('img');
+    img.className = 'fixed-hero-bg';
+    img.dataset.sourceSection = idx;
+    img.dataset.fixedIndex = idx;
+    img.src = url;
+    img.alt = '';
+    img.style.top = headerHeight + 'px';
+    img.style.width = 'auto';
+    img.style.height = 'auto';
+    img.style.maxWidth = '100vw';
+    img.style.display = 'block';
+    img.style.visibility = 'hidden';
+
+    img.addEventListener('load', () => {
+      const viewportWidth = window.innerWidth;
+      const width = Math.min(img.naturalWidth, viewportWidth);
+      img.style.width = width + 'px';
+      img.style.height = 'auto';
+    });
+
+    document.body.appendChild(img);
+    sec.classList.add('use-fixed-bg');
+    sec.dataset.fixedIndex = idx;
+    observer.observe(sec);
+  });
+
+  function updateFixedTops() {
+    const header = document.querySelector('.site-header');
+    const currentHeaderHeight = header ? header.offsetHeight : 0;
+    document.querySelectorAll('.fixed-hero-bg').forEach((img) => {
+      img.style.top = currentHeaderHeight + 'px';
+      if (img.naturalWidth) {
+        const viewportWidth = window.innerWidth;
+        const width = Math.min(img.naturalWidth, viewportWidth);
+        img.style.width = width + 'px';
+      }
+    });
+  }
+
+  window.addEventListener('resize', updateFixedTops);
+}
+
+// Fixed background setup disabled because it interfered with the subpage hero display.
+// window.addEventListener('DOMContentLoaded', () => setupFixedHeroBackgrounds());

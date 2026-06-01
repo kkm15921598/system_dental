@@ -3,25 +3,140 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>디지털진료시스템 | 시스템치과</title>
+  <title>디지털 진료 시스템 | 시스템치과</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/font.css">
 </head>
 <body>
   <div data-include="partials/header.html"></div>
 
-  <main>
-    <section class="page-head">
-      <div class="wrap">
-        <p>DIGITAL DENTAL SYSTEM</p>
-        <h1>디지털진료시스템</h1>
+  <main class="digital-page">
+    <section class="digital-visual subpage-digital">
+      <div class="digital-crumb"><div class="crumb-inner"><span>홈</span><i>›</i><span>디지털 진료 시스템</span></div></div>
+      <div class="digital-visual-copy">
+        <span class="visual-icon"><img src="images/digital.png" alt=""></span>
+        <h1>디지털 진료 시스템</h1>
+        <p>충치부터 사랑니, 턱관절 치료까지<br>구강 상태에 맞춘 체계적인 일반진료</p>
       </div>
     </section>
 
-    <section class="page-body">
-      <div class="wrap">
-        <p class="lead">첨단 디지털 장비 기반의 빠르고 정교한 치료 시스템</p>
-        <p class="desc">3D-CT, 3D CAD/CAM 등 첨단 디지털 장비로 정확한 진단과 정교한 보철 제작을 구현합니다.<br>디지털 워크플로우를 통해 치료의 정밀도와 속도를 동시에 높입니다.</p>
+    <nav class="digital-tabs" aria-label="디지털 진료 시스템 메뉴">
+      <a class="is-active" href="#ct" data-digital-tab="ct">3D 정밀진단 CT</a>
+      <a href="#cerec" data-digital-tab="cerec">세렉 시스템</a>
+      <a href="#lab" data-digital-tab="lab">원내기공실</a>
+      <a href="#equipment" data-digital-tab="equipment">보유장비</a>
+    </nav>
+
+    <section class="digital-panel is-active" id="ct" data-digital-panel="ct">
+      <div class="digital-inner">
+        <h2 class="digital-title">3D 정밀진단 CT</h2>
+        <div class="ct-intro">
+          <div>
+            <h3>정확한 치료의 시작은,<br><em>정밀한 진단</em>에 있습니다</h3>
+            <p>3D CT를 통해 치아와 잇몸, 신경 위치까지<br>입체적으로 분석하여 체계적인 치료 계획을 수립합니다.</p>
+            <div class="ct-points">
+              <span>
+                <svg viewBox="0 0 112 128" aria-hidden="true">
+                  <path class="hex" d="M56 3 108 33v62l-52 30L4 95V33Z"/>
+                  <path d="m30 48 26-15 26 15v32L56 95 30 80Zm0 0 26 16 26-16M56 33v62m-19-3 19-12 19 12M56 64v16m0-34v7"/>
+                </svg>
+                <b>3차원 입체 분석</b>
+              </span>
+              <span>
+                <svg viewBox="0 0 112 128" aria-hidden="true">
+                  <path class="hex" d="M56 3 108 33v62l-52 30L4 95V33Z"/>
+                  <path d="M54 42c-5-8-18-8-23 1-5 9 1 21 3 29 2 7 2 20 7 23 6 3 7-9 8-15 1-7 3-11 7-11 5 0 6 6 7 13 1 5 2 15 7 13 4-2 4-12 5-18"/>
+                  <path d="M65 71c6 7 12 11 19 11m-17-15 16-4m-10 12 7 12"/>
+                </svg>
+                <b>신경 위치 확인</b>
+              </span>
+              <span>
+                <svg viewBox="0 0 112 128" aria-hidden="true">
+                  <path class="hex" d="M56 3 108 33v62l-52 30L4 95V33Z"/>
+                  <path d="M38 40h36v55H38Zm10 0v-6h16v6m-18 14h6m6 0h10m-22 12h6m6 0h10m-22 12h6m6 0h10"/>
+                  <path d="m44 53 3 3 6-7m-9 16 3 3 6-7m-9 16 3 3 6-7"/>
+                </svg>
+                <b>정확한 치료 계획</b>
+              </span>
+            </div>
+          </div>
+          <img src="images/3차원 Digital CT.png" alt="3D CT 장비">
+        </div>
+        <div class="ct-detail">
+          <img src="images/1.png" alt="3D CT 분석 화면">
+          <div>
+            <h4>3D CT 시스템</h4>
+            <h3>3차원 CT 기반의<br><em>정밀 진단</em> 시스템</h3>
+            <p>일반적인 2D 파노라마 촬영으로 확인하기 어려운 치조골 상태와 신경 위치까지 3차원 영상으로 정밀하게 확인할 수 있습니다.</p>
+            <hr>
+            <p>환자의 구강 상태를 보다 면밀하게 분석하여 치료 계획 수립에 필요한 정보를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="digital-panel" id="cerec" data-digital-panel="cerec">
+      <div class="digital-inner">
+        <h2 class="digital-title">세렉 시스템</h2>
+        <div class="cerec-intro">
+          <div>
+            <h3>디지털 기술로 완성하는<br><em>정밀 맞춤 보철 시스템</em></h3>
+            <p>CEREC은 독일 SIRONA사의 디지털 보철 시스템으로<br>구강 스캔부터 디자인, 제작까지 디지털로 진행됩니다.<br>환자 치아 상태에 맞춰 보다 정밀하고 자연스러운<br>맞춤 보철 제작이 가능합니다.</p>
+          </div>
+          <img src="images/세렉시스템1.png" alt="세렉 시스템">
+        </div>
+        <h3 class="sub-heading">CEREC 시스템 프로세스</h3>
+        <div class="process-grid">
+          <article><b>STEP<br><strong>01</strong></b><img src="images/세렉시스템2.png" alt=""><h4>정밀 구강 스캔</h4><p>3D 카메라를 활용해<br>치아 상태를 정밀하게 분석합니다.</p></article>
+          <article><b>STEP<br><strong>02</strong></b><img src="images/3.gigongso.png" alt=""><h4>디지털 맞춤 디자인</h4><p>환자의 치아 형태와 교합을 고려해<br>보철물을 설계합니다.</p></article>
+          <article><b>STEP<br><strong>03</strong></b><img src="images/세렉장점1.png" alt=""><h4>정밀 보철 제작</h4><p>디지털 밀링머신을 기반으로<br>정밀한 보철물을 제작합니다.</p></article>
+        </div>
+        <h3 class="sub-heading">CEREC 시스템의 장점</h3>
+        <div class="merit-grid">
+          <article><i>◷</i><b>빠른 보철 제작</b><p>디지털 시스템을 통해<br>치료 기간을 줄일 수 있습니다.</p></article>
+          <article><i>♧</i><b>임시치아 기간 최소화</b><p>정밀한 제작과 빠른 적용으로<br>불편함을 줄여드립니다.</p></article>
+          <article><i>◎</i><b>자연치와 유사한 심미성</b><p>우수한 강도와 초정밀 디자인으로<br>자연스러운 결과를 제공합니다.</p></article>
+          <article><i>▤</i><b>환자 맞춤 정밀 제작</b><p>개인별 맞춤형 보철물 기반으로<br>오래 쓸 보철 제작이 가능합니다.</p></article>
+        </div>
+        <div class="cerec-banner"><img src="images/세렉장점2.png" alt=""><div><h3>디지털 기술로 완성하는<br>정밀하고 자연스러운 보철 치료</h3><p>CEREC 시스템을 통해 보다 정밀하고 빠르게<br>환자 맞춤 보철 치료를 제공합니다.</p></div></div>
+      </div>
+    </section>
+
+    <section class="digital-panel" id="lab" data-digital-panel="lab">
+      <div class="digital-inner">
+        <h2 class="digital-title">원내기공실</h2>
+        <div class="lab-intro">
+          <div><h3>더 빠르게 제작하고,<br>더 세밀하게 완성합니다</h3><strong>원내 기공 시스템을 통해<br>정밀한 맞춤 보철 제작이 가능합니다</strong><p>시스템치과는 자체 기공실을 운영하여<br>환자 치아 상태에 맞춘 정밀 보철 제작이 가능합니다.</p></div>
+          <div class="lab-gallery"><img src="images/원내 기공실1.png" alt=""><img src="images/원내기공실 2.png" alt=""><img src="images/원내기공실 3.png" alt=""><img src="images/원내기공실4.png" alt=""></div>
+        </div>
+        <h3 class="sub-heading">원내 기공실의 특징</h3>
+        <div class="lab-features">
+          <article><div><b>01</b><h4>빠른 보철 제작 가능</h4><p>원내 제작 시스템을 통해<br>치료 기간과 대기 시간을 줄여드립니다</p></div><img src="images/원내기공실 3.png" alt=""></article>
+          <article><div><b>02</b><h4>세밀한 맞춤 제작 및 수정</h4><p>환자 치아 상태에 맞춰<br>정교하게 제작하고 수정합니다</p></div><img src="images/원내기공실 2.png" alt=""></article>
+          <article><div><b>03</b><h4>자연치와 유사한 심미성</h4><p>주변 치아와 조화를 이루는<br>자연스러운 보철을 완성합니다</p></div><img src="images/원내기공실5.png" alt=""></article>
+          <article><div><b>04</b><h4>환자 맞춤형 정밀 보철 제작</h4><p>치아 형태와 교합을 고려한<br>환자 맞춤형 보철을 제작합니다</p></div><img src="images/원내기공실6.png" alt=""></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="digital-panel" id="equipment" data-digital-panel="equipment">
+      <div class="digital-inner">
+        <h2 class="digital-title">보유장비</h2>
+        <div class="equipment-grid">
+          <article><img src="images/CEREC - 3D Digital CAD CAM.png" alt=""><h3>CEREC - 3D Digital CAD/CAM</h3><p>구강 내부를 디지털 스캔하여<br>정밀 보철물을 제작하는<br>디지털 보철 장비입니다.</p></article>
+          <article><img src="images/3차원 Digital CT.png" alt=""><h3>3D Digital CT</h3><p>치조골과 신경 위치까지<br>3차원으로 정밀 분석이<br>가능한 디지털 CT 시스템입니다.</p></article>
+          <article><img src="images/PIEZO 급속교정.png" alt=""><h3>PIEZO 골삭제기</h3><p>미세 진동 기술을 활용하여<br>조직 손상을 줄이는<br>시술 장비입니다.</p></article>
+          <article><img src="images/KAVO 임플란트 엔진.png" alt=""><h3>KAVO 임플란트 엔진</h3><p>정밀한 토크 조절이 가능한<br>독일 KAVO사의<br>임플란트 시스템 장비입니다.</p></article>
+          <article><img src="images/W&H 임플란트 엔진.png" alt=""><h3>W&amp;H 임플란트 엔진</h3><p>안정적인 식립을 위한<br>정밀 임플란트 엔진 시스템입니다.</p></article>
+          <article><img src="images/턱관절 물리치료기.png" alt=""><h3>루페메가</h3><p>확대 진료 장비를 통해<br>보다 정밀한 진료와 치료를<br>진행합니다.</p></article>
+          <article><img src="images/3파장 치아미백기.png" alt=""><h3>3파장 치아미백기</h3><p>3가지 광파장을 활용하여 보다<br>효과적인 치아미백 치료를<br>돕습니다.</p></article>
+          <article><img src="images/AutoCalve.png" alt=""><h3>AutoClave</h3><p>고온 · 고압 멸균 시스템을 통해<br>치과 기구를 안전하게 소독합니다.</p></article>
+        </div>
+        <div class="equipment-bottom">
+          <img src="images/초음파 세척기.png" alt="">
+          <div><h3>초음파 세척기</h3><p>초음파 기반 세척 시스템으로<br>보다 위생적인 기구 관리를<br>진행합니다.</p></div>
+          <div class="equipment-note"><b>▣</b><h3>정확한 진단과 세밀한 치료를 위한<br>디지털 장비 시스템</h3><p>시스템치과는 다양한 디지털 장비를 통해<br>정확하고 안전한 진료 환경을 제공합니다.</p></div>
+        </div>
       </div>
     </section>
   </main>

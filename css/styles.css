@@ -39,13 +39,13 @@
 .general-panel .general-heading .general-subcopy { font-size:18px; }
 .general-split { display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; background:#fafafa; }
 .general-intro-card>div,.general-system-intro>div { padding:52px 56px; }
-.general-split h3 { margin:0 0 20px; font-size:30px; line-height:1.35; letter-spacing:-.055em; }
+.general-split h3 { margin:0 0 20px; font-size:30px; font-weight:500; line-height:1.35; letter-spacing:-.055em; }
 .general-split p:not(.general-label) { margin:0; color:#666; font-size:16px; line-height:1.75; }
 .general-split img { width:100%; height:330px; object-fit:cover; }
 .general-section { margin-top:88px; }
 .general-section-title { display:flex; align-items:flex-start; gap:18px; margin-bottom:30px; }
 .general-section-title span { color:#cf2f34; font-size:15px; font-weight:800; line-height:1.4; }
-.general-section-title h3 { margin:0; font-size:30px; line-height:1.25; letter-spacing:-.055em; }
+.general-section-title h3 { margin:0; font-size:30px; font-weight:500; line-height:1.25; letter-spacing:-.055em; }
 .general-card-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
 .general-card-grid article,.general-method-grid article { overflow:hidden; border:1px solid #e2e2e2; background:#fff; }
 .general-card-grid img { width:100%; height:190px; object-fit:cover; }
@@ -75,7 +75,7 @@
 .general-feature-row { display:grid; grid-template-columns:1fr 1fr; align-items:center; overflow:hidden; background:#fafafa; }
 .general-feature-row.is-reverse div { order:2; }
 .general-feature-row>div { padding:46px 50px; }
-.general-feature-row h3 { margin:0 0 16px; font-size:29px; letter-spacing:-.05em; }
+.general-feature-row h3 { margin:0 0 16px; font-size:29px; font-weight:500; letter-spacing:-.05em; }
 .general-feature-row p:not(.general-label) { margin:0; color:#666; font-size:15px; line-height:1.75; }
 .general-feature-row img { width:100%; height:285px; object-fit:cover; }
 .general-tmj-grid img { height:205px; }

@@ -3304,11 +3304,10 @@ section {
 .implant-system-intro { display:grid; grid-template-columns:.92fr 1.08fr; min-height:310px; align-items:center; margin-top:92px; background:#fafafa; }
 .implant-system-intro>div { padding:46px 52px; }
 .implant-system-intro img { width:100%; height:310px; object-fit:cover; }
-.implant-feature-list { margin-top:22px; }
-.implant-feature-list article { display:grid; grid-template-columns:1fr 1fr; min-height:230px; background:#fafafa; }
-.implant-feature-list article+article { margin-top:18px; }
-.implant-feature-list img { width:100%; height:230px; object-fit:cover; }
-.implant-feature-list div { display:flex; flex-direction:column; justify-content:center; padding:30px 46px; }
+.implant-feature-list { margin-top:22px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.implant-feature-list article { display:flex; flex-direction:column; background:#fafafa; }
+.implant-feature-list img { width:100%; height:300px; object-fit:cover; }
+.implant-feature-list div { display:flex; flex-direction:column; padding:16px 40px 20px; }
 .implant-feature-list h3 { margin:0 0 14px; font-size:22px; font-weight:600; letter-spacing:-.035em; }
 .implant-feature-list p { margin:0; color:#666; font-size:14px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
 .implant-caution { display:grid; grid-template-columns:285px 1fr; gap:40px; align-items:center; margin:78px 0 0; padding:30px 42px; border-radius:8px; background:#f7f7f7; }
@@ -3585,10 +3584,9 @@ section {
   .implant-system-intro { margin-top:58px; }
   .implant-system-intro>div,.advanced-diagnosis div { padding:28px 22px; }
   .implant-system-intro img,.advanced-diagnosis img { height:210px; }
-  .implant-feature-list article { grid-template-columns:1fr; }
-  .implant-feature-list article:nth-child(even) div { order:2; }
+  .implant-feature-list { grid-template-columns:1fr; }
   .implant-feature-list img { height:190px; }
-  .implant-feature-list div { padding:24px 22px; }
+  .implant-feature-list div { padding:16px 22px 18px; }
   .implant-caution { grid-template-columns:1fr; gap:17px; margin-top:52px; padding:24px 22px; }
   .implant-caution>p { padding:17px 0 0; border-top:1px solid #ddd; border-left:0; }
   .advanced-diagnosis { margin-top:54px; }
@@ -3718,7 +3716,6 @@ section {
 .implant-panel .system-node strong,
 .implant-panel .advanced-case-grid b,
 .implant-panel .advanced-case-grid p,
-.implant-panel .full-implant li,
 .implant-panel .implant-process-intro p:last-child,
 .implant-panel .implant-process b,
 .implant-panel .implant-process strong,
@@ -3726,6 +3723,8 @@ section {
 .implant-panel .implant-process-detail-grid p,
 .implant-panel .implant-cta p,
 .implant-panel .implant-cta a { font-size:16px; }
+/* 전체 임플란트 안내 박스(다음과 같은 경우 고려할 수 있습니다) 텍스트는 15px */
+.implant-panel .full-implant li { font-size:15px; }
 
 /* ===== 서브페이지(디지털·심미·일반진료·치과소개) 최소 글씨 16px =====
    기존 11~15px 본문·설명 텍스트를 16px로 올립니다. (16px 이상 제목·강조는 유지)

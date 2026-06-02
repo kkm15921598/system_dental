@@ -231,11 +231,54 @@ if (digitalTabs.length) {
 document.querySelectorAll("[data-sub-tab]").forEach((tab) => {
   tab.addEventListener("click", (event) => {
     event.preventDefault();
+    const selected = tab.dataset.subTab;
     tab.closest(".subpage-tabs")?.querySelectorAll("[data-sub-tab]").forEach((item) => {
       item.classList.toggle("is-active", item === tab);
     });
+    document.querySelectorAll("[data-sub-panel]").forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.subPanel === selected);
+    });
+    if (selected) {
+      history.replaceState(null, "", `#${selected}`);
+      window.scrollTo({ top: tab.closest(".subpage-tabs")?.offsetTop || 0, behavior: "smooth" });
+    }
   });
 });
+
+const subTabs = [...document.querySelectorAll("[data-sub-tab]")];
+if (subTabs.length && document.querySelector("[data-sub-panel]")) {
+  const activeSubTab = subTabs.find((tab) => tab.dataset.subTab === location.hash.slice(1));
+  activeSubTab?.click();
+}
+
+const tourImage = document.querySelector("[data-tour-image]");
+const tourPrevButton = document.querySelector(".tour-prev");
+const tourNextButton = document.querySelector(".tour-next");
+const tourImages = [
+  "images/치과둘러보기1.png",
+  "images/치과둘러보기2.png",
+  "images/치과둘러보기3.png",
+  "images/치과둘러보기4.png",
+  "images/치과둘러보기5.png",
+  "images/치과둘러보기6.png",
+];
+let tourIndex = 0;
+
+function showTourImage(index) {
+  if (!tourImage) return;
+
+  tourIndex = (index + tourImages.length) % tourImages.length;
+  tourImage.classList.add("is-changing");
+
+  window.setTimeout(() => {
+    tourImage.src = tourImages[tourIndex];
+    tourImage.alt = `시스템치과 내부 공간 ${tourIndex + 1}`;
+    tourImage.classList.remove("is-changing");
+  }, 160);
+}
+
+tourPrevButton?.addEventListener("click", () => showTourImage(tourIndex - 1));
+tourNextButton?.addEventListener("click", () => showTourImage(tourIndex + 1));
 
 const doctorSection = document.querySelector('.doctor-section');
 if (doctorSection) {

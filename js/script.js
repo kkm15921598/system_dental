@@ -16,16 +16,16 @@ const fallbackDuration = 6000;
 
 const storyCases = [
   {
-    before: "images/realstory_before_1.png",
-    after: "images/realstory_after_1.png",
+    before: "images/realstory_before2.png",
+    after: "images/realstory_after2.png",
   },
   {
-    before: "images/realstory_before_2.png",
-    after: "images/realstory_after_2.png",
+    before: "images/realstory_before3.png",
+    after: "images/realstory_after3.png",
   },
   {
-    before: "images/realstory_before_3.png",
-    after: "images/realstory_after_3.png",
+    before: "images/realstory_before4.png",
+    after: "images/realstory_after4.png",
   },
 ];
 let storyIndex = 0;
@@ -68,16 +68,16 @@ const heroCopyHeadline = document.querySelector('.hero-copy__headline');
 const heroCopyContent = document.querySelector('.hero-copy__content');
 const heroCopyData = [
   {
-    eyebrow: '폐업 걱정 없이 안심할 수 있는',
-    headline: '<span class="hero-copy__line1">명동에서 21년 이상</span><span class="hero-copy__line2">한 자리를 지킨 치과</span>',
-  },
-  {
     eyebrow: '구강악안면외과 전문의 / 통합치의학 전문의',
     headline: '<span class="hero-copy__line1">서울대 출신</span><span class="hero-copy__line2">대표 원장 직접 진료</span>',
   },
   {
     eyebrow: '3차원 정밀 진단 결과를 바탕으로',
     headline: '<span class="hero-copy__line1">자연 치아에 가까운 보철 제작</span><span class="hero-copy__line2">자체 기공 시스템</span>',
+  },
+  {
+    eyebrow: '폐업 걱정 없이 안심할 수 있는',
+    headline: '<span class="hero-copy__line1">명동에서 21년 이상</span><span class="hero-copy__line2">한 자리를 지킨 치과</span>',
   },
 ];
 
@@ -280,24 +280,38 @@ function showTourImage(index) {
 tourPrevButton?.addEventListener("click", () => showTourImage(tourIndex - 1));
 tourNextButton?.addEventListener("click", () => showTourImage(tourIndex + 1));
 
-const doctorSection = document.querySelector('.doctor-section');
-if (doctorSection) {
-  const doctorObserver = new IntersectionObserver((entries, observer) => {
+const animatedSections = [
+  '.doctor-section',
+  '.implant-section',
+  '.digital-section',
+  '.story-section',
+  '.event-section',
+  '.info-section',
+]
+  .map((selector) => document.querySelector(selector))
+  .filter(Boolean);
+
+if (animatedSections.length) {
+  let lastAnimationScrollY = window.scrollY || document.documentElement.scrollTop;
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+    const isScrollingDown = currentScrollY > lastAnimationScrollY;
+
     entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-        // 섹션이 50% 이상 보이면 애니메이션 시작
-        doctorSection.classList.add('is-visible');
-      } else if (!entry.isIntersecting) {
-        // 섹션이 화면에서 완전히 벗어나면 클래스 제거
-        doctorSection.classList.remove('is-visible');
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+        entry.target.classList.add('is-visible');
+      } else if (!isScrollingDown) {
+        entry.target.classList.remove('is-visible');
       }
-      // 50% 미만이지만 화면에 일부 보이면 클래스 유지 (애니메이션 멈춘 상태)
     });
+
+    lastAnimationScrollY = currentScrollY;
   }, {
-    threshold: [0.5],
+    threshold: [0, 0.25, 0.4],
   });
 
-  doctorObserver.observe(doctorSection);
+  animatedSections.forEach((section) => sectionObserver.observe(section));
 }
 
 /* Fixed background replacement for subpage visuals — ensure image is not cropped while keeping fixed effect */
@@ -374,3 +388,82 @@ function setupFixedHeroBackgrounds() {
 
 // Fixed background setup disabled because it interfered with the subpage hero display.
 // window.addEventListener('DOMContentLoaded', () => setupFixedHeroBackgrounds());
+
+const privacyDetailToggle = document.querySelector('.privacy-detail-toggle');
+const privacyDetailPopup = document.querySelector('.privacy-detail-popup');
+const privacyDetailClose = document.querySelector('.privacy-detail-close');
+
+function setPrivacyDetailOpen(isOpen) {
+  if (!privacyDetailToggle || !privacyDetailPopup) return;
+  privacyDetailPopup.classList.toggle('is-open', isOpen);
+  privacyDetailToggle.setAttribute('aria-expanded', String(isOpen));
+}
+
+privacyDetailToggle?.addEventListener('click', (event) => {
+  event.preventDefault();
+  setPrivacyDetailOpen(!privacyDetailPopup?.classList.contains('is-open'));
+});
+
+privacyDetailClose?.addEventListener('click', (event) => {
+  event.preventDefault();
+  setPrivacyDetailOpen(false);
+});
+
+privacyDetailPopup?.addEventListener('click', (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.privacy-detail-wrap')) {
+    setPrivacyDetailOpen(false);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    setPrivacyDetailOpen(false);
+  }
+});
+
+const consultForm = document.querySelector('.consult-form');
+const consultSubmit = document.querySelector('.consult-submit');
+
+consultSubmit?.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (!consultForm || !consultForm.reportValidity()) return;
+
+  const formData = new FormData(consultForm);
+  const subject = '[시스템치과] 임플란트 할인 혜택 상담 신청';
+  const body = [
+    '임플란트 할인 혜택 상담을 신청합니다.',
+    '',
+    `이름: ${formData.get('name') || ''}`,
+    `연락처: ${formData.get('phone') || ''}`,
+    `상담 내용: ${formData.get('message') || ''}`,
+    `상담 시간: ${formData.get('time') || ''}`,
+    '개인정보 수집 및 이용 동의: 동의함',
+  ].join('\n');
+
+  window.location.href = `mailto:zbxm2000@naver.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
+
+const systemList = document.querySelector('.system-list');
+
+if (systemList && window.matchMedia('(hover: hover)').matches) {
+  const preview = document.createElement('div');
+  preview.className = 'system-list-preview';
+  systemList.appendChild(preview);
+
+  systemList.querySelectorAll('article').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      preview.innerHTML = card.innerHTML;
+      preview.style.top = `${card.offsetTop}px`;
+      preview.classList.add('is-visible');
+    });
+  });
+
+  systemList.addEventListener('mouseleave', () => {
+    preview.classList.remove('is-visible');
+  });
+}

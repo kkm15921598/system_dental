@@ -240,7 +240,6 @@ document.querySelectorAll("[data-sub-tab]").forEach((tab) => {
     });
     if (selected) {
       history.replaceState(null, "", `#${selected}`);
-      window.scrollTo({ top: tab.closest(".subpage-tabs")?.offsetTop || 0, behavior: "smooth" });
     }
   });
 });
@@ -255,12 +254,11 @@ const tourImage = document.querySelector("[data-tour-image]");
 const tourPrevButton = document.querySelector(".tour-prev");
 const tourNextButton = document.querySelector(".tour-next");
 const tourImages = [
-  "images/sub2_1.png",
-  "images/sub2_2.png",
-  "images/sub2_3.png",
-  "images/sub2_4.png",
-  "images/sub2_5.png",
-  "images/sub2_6.png",
+  "images/sub1_2_img1.png",
+  "images/sub1_2_img2.png",
+  "images/sub1_2_img3.png",
+  "images/sub1_2_img5.png",
+  "images/sub1_2_img6.png",
 ];
 let tourIndex = 0;
 

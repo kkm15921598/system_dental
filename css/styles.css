@@ -3159,6 +3159,7 @@ section {
 .ct-detail h3 { margin:0; font-size:38px; line-height:1.2; }
 .ct-detail p { color:#666; font-size:16px; line-height:1.7; }
 .ct-detail hr { width:60px; margin:24px 0; border:0; border-top:1px solid #ddd; }
+.cerec-intro { align-items:start; }
 .cerec-intro img { width:100%; height:440px; object-fit:contain; }
 .sub-heading { margin:58px 0 35px; font-size:25px; font-weight:500; text-align:center; }
 .sub-heading::after { content:""; display:block; width:34px; margin:10px auto 0; border-top:2px solid var(--accent); }
@@ -3178,7 +3179,7 @@ section {
 .cerec-banner div { padding:25px 38px; }
 .cerec-banner h3 { margin:0 0 12px; font-size:23px; line-height:1.4; }
 .cerec-banner p { margin:0; color:#ccc; font-size:13px; line-height:1.6; }
-.lab-intro { grid-template-columns:.82fr 1.18fr; gap:28px; }
+.lab-intro { grid-template-columns:.82fr 1.18fr; gap:28px; align-items:start; }
 .lab-intro h3 { font-size:38px; }
 .lab-intro strong { display:block; margin:36px 0 28px; color:#e22d35; font-size:19px; line-height:1.7; }
 .lab-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
@@ -3211,20 +3212,21 @@ section {
 .about-intro h3 { margin:0 0 24px; font-size:34px; font-weight:500; line-height:1.16; letter-spacing:-.055em; }
 .about-intro em { color:#b32b2f; font-style:normal; }
 .about-intro p { margin:0; color:#333; font-size:16px; font-weight:300; line-height:1.45; }
-.doctor-heading { margin:0 0 72px; font-size:21px; font-weight:600; text-align:center; }
+[data-sub-panel="doctors"] .about-intro p { font-size:18px; }
+.doctor-heading { margin:0 0 72px; font-size:30px; font-weight:600; text-align:center; }
 .about-doctor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:50px 20px; }
 .about-doctor-card { min-height:830px; padding:28px 30px 32px; border:1px solid #d8d8d8; background:#fff; }
 .doctor-profile { display:grid; grid-template-columns:52% 48%; min-height:300px; align-items:start; }
 .doctor-profile img { width:100%; height:300px; object-fit:contain; object-position:center bottom; }
 .doctor-profile div { padding:48px 0 0 10px; }
 .doctor-profile b { display:block; margin-bottom:9px; color:#b22d31; font-size:14px; font-weight:400; letter-spacing:-.025em; }
-.doctor-profile h4 { margin:0 0 7px; font-size:22px; font-weight:600; letter-spacing:-.04em; }
+.doctor-profile h4 { margin:0 0 7px; font-size:30px; font-weight:600; letter-spacing:-.04em; }
 .doctor-profile p { margin:0; color:#666; font-size:14px; font-weight:300; letter-spacing:-.025em; }
 .doctor-details { padding:42px 0 0 5px; }
-.doctor-details h5 { margin:0 0 17px; font-size:16px; font-weight:600; letter-spacing:-.035em; }
+.doctor-details h5 { margin:0 0 17px; font-size:22px; font-weight:600; letter-spacing:-.035em; }
 .doctor-details h5:not(:first-child) { margin-top:44px; }
 .doctor-details ul { margin:0; padding-left:18px; }
-.doctor-details li { color:#222; font-size:14px; font-weight:300; line-height:1.62; letter-spacing:-.025em; }
+.doctor-details li { color:#222; font-size:16px; font-weight:300; line-height:1.62; letter-spacing:-.025em; }
 .tour-section { margin-top:16px; padding:125px 0 145px; background:#fafafa; }
 .tour-slider { position:relative; display:flex; width:min(900px,calc(100% - 160px)); margin:0 auto; align-items:center; justify-content:center; }
 .tour-slider>img { display:block; width:800px; max-width:100%; height:545px; object-fit:cover; opacity:1; transition:opacity .2s ease; }

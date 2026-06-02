@@ -3258,17 +3258,17 @@ section {
 .location-info b { color:#a12d2e; font-size:27px; font-weight:400; }
 .location-info b img { display:block; width:20px; height:24px; object-fit:contain; }
 .location-info h4,.navigation-box h4 { margin:0 0 11px; font-size:22px; font-weight:600; }
-.location-info p,.navigation-box p { margin:0; font-size:13px; font-weight:300; line-height:1.55; }
+.location-info p,.navigation-box p { margin:0; font-size:16px; font-weight:300; line-height:1.55; }
 .navigation-box { padding-left:48px; border-left:1px solid #ddd; }
 .navigation-links { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:30px; }
-.navigation-links a { display:flex; min-height:55px; align-items:center; gap:13px; padding:7px 16px; border:1px solid #aaa; font-size:13px; }
+.navigation-links a { display:flex; min-height:55px; align-items:center; gap:13px; padding:7px 16px; border:1px solid #aaa; font-size:14px; }
 .navigation-links img { width:28px; height:32px; object-fit:contain; }
 .subway-heading { margin-top:74px; }
 .route-section { padding:45px 0 90px; background:#fafafa; }
 .route-grid { display:grid; grid-template-columns:1fr 1fr; gap:65px; width:min(1120px,calc(100% - 40px)); margin:0 auto; }
 .route-grid img { display:block; width:100%; height:auto; }
-.route-grid p { margin:14px 0 0; color:#333; font-size:12px; font-weight:300; }
-.route-grid b { display:inline-block; margin-right:9px; padding:4px 10px; border-radius:15px; color:#fff; background:#55c963; font-size:10px; font-weight:400; }
+.route-grid p { margin:14px 0 0; color:#333; font-size:14px; font-weight:300; }
+.route-grid b { display:inline-block; margin-right:9px; padding:4px 10px; border-radius:15px; color:#fff; background:#55c963; font-size:14px; font-weight:400; }
 .route-grid a:last-child b { background:#288ef2; }
 
 /* ---- Implant subpage ---- */
@@ -3283,24 +3283,24 @@ section {
 .implant-panel .implant-head p { font-size:18px; }
 .implant-panel em { color:#a12d2e; font-style:normal; }
 .implant-number { display:block; margin-bottom:7px; color:#a12d2e; font-size:14px; font-weight:700; }
-.implant-kicker { margin:0 0 13px; color:#333; font-size:13px; font-weight:500; }
+.implant-kicker { margin:0 0 13px; color:#333; font-size:16px; font-weight:500; }
 .implant-recommend { display:grid; grid-template-columns:260px 1fr; gap:42px; align-items:end; margin-top:106px; padding:42px 12px 44px; background:linear-gradient(90deg,#fff,#fafafa 28%,#fff); }
 .implant-section-label b { display:block; margin-bottom:11px; color:#a12d2e; font-size:14px; }
-.implant-section-label span { display:block; margin-bottom:24px; font-size:12px; font-weight:500; }
+.implant-section-label span { display:block; margin-bottom:24px; font-size:16px; font-weight:500; }
 .implant-section-label h3 { margin:0; font-size:26px; line-height:1.2; letter-spacing:-.05em; }
 .recommend-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 .recommend-grid article { min-height:145px; padding:20px 10px 16px; border:1px solid #e4e4e4; border-radius:8px; text-align:center; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.025); }
-.recommend-grid i { display:grid; width:34px; height:34px; margin:0 auto 12px; place-items:center; border:1px solid #a12d2e; border-radius:50%; color:#a12d2e; font-size:10px; font-style:normal; font-weight:700; }
-.recommend-grid strong { display:block; font-size:14px; font-weight:600; }
-.recommend-grid p { margin:7px 0 0; color:#777; font-size:12px; font-weight:300; line-height:1.45; }
+.recommend-grid i { display:grid; width:34px; height:34px; margin:0 auto 12px; place-items:center; border:1px solid #a12d2e; border-radius:50%; color:#a12d2e; font-size:14px; font-style:normal; font-weight:700; }
+.recommend-grid strong { display:block; font-size:16px; font-weight:600; }
+.recommend-grid p { margin:7px 0 0; color:#777; font-size:16px; font-weight:300; line-height:1.45; }
 .implant-definition { display:grid; grid-template-columns:1fr 320px; gap:70px; align-items:center; margin-top:82px; padding:68px 74px; background:#f8f8f8; }
 .implant-definition h3,.implant-system-intro h3,.advanced-diagnosis h3,.advanced-system h3,.advanced-cases-head h3,.full-implant h3 { margin:0 0 22px; font-size:34px; font-weight:500; line-height:1.22; letter-spacing:-.05em; }
-.implant-definition p,.implant-system-intro p,.advanced-diagnosis p,.advanced-system>p,.advanced-cases-head p { margin:0; color:#666; font-size:15px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
-.implant-definition small { display:block; margin-top:22px; color:#888; font-size:11px; line-height:1.55; }
+.implant-definition p,.implant-system-intro p,.advanced-diagnosis p,.advanced-system>p,.advanced-cases-head p { margin:0; color:#666; font-size:16px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
+.implant-definition small { display:block; margin-top:22px; color:#888; font-size:14px; line-height:1.55; }
 .definition-flow { display:grid; gap:8px; }
-.definition-flow span { position:relative; display:flex; min-height:45px; align-items:center; gap:16px; padding:9px 16px; border-radius:25px; color:#a12d2e; background:#fff; font-size:10px; font-weight:700; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+.definition-flow span { position:relative; display:flex; min-height:45px; align-items:center; gap:16px; padding:9px 16px; border-radius:25px; color:#a12d2e; background:#fff; font-size:16px; font-weight:700; box-shadow:0 4px 15px rgba(0,0,0,.04); }
 .definition-flow span:not(:last-child)::after { content:""; position:absolute; left:28px; bottom:-9px; height:10px; border-left:1px dashed #e9a7a9; }
-.definition-flow b { color:#333; font-size:13px; font-weight:500; }
+.definition-flow b { color:#333; font-size:16px; font-weight:500; }
 .implant-system-intro { display:grid; grid-template-columns:.92fr 1.08fr; min-height:310px; align-items:center; margin-top:92px; background:#fafafa; }
 .implant-system-intro>div { padding:46px 52px; }
 .implant-system-intro img { width:100%; height:310px; object-fit:cover; }
@@ -3325,7 +3325,7 @@ section {
 .system-core img { display:block; width:100%; height:auto; }
 .system-node { position:absolute; display:flex; width:174px; height:174px; flex-direction:column; align-items:center; justify-content:center; border:1px solid #dedede; border-radius:50%; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.025); }
 .system-node img { width:54px; height:54px; margin-bottom:4px; object-fit:contain; }
-.system-node small { color:#777; font-size:10px; }
+.system-node small { color:#777; font-size:14px; }
 .system-node strong { margin-top:6px; font-size:14px; font-weight:600; }
 .system-node--ct { left:50%; top:0; transform:translateX(-50%); }
 .system-node--diagnosis { right:23px; top:130px; }
@@ -3338,18 +3338,18 @@ section {
 .advanced-case-grid article { overflow:hidden; border:1px solid #eee; background:#fff; }
 .advanced-case-grid img { display:block; width:100%; height:178px; object-fit:cover; }
 .advanced-case-grid div { min-height:160px; padding:20px; }
-.advanced-case-grid b { color:#a12d2e; font-size:13px; }
+.advanced-case-grid b { color:#a12d2e; font-size:14px; }
 .advanced-case-grid h4 { margin:9px 0 12px; font-size:22px; font-weight:600; }
-.advanced-case-grid p { margin:0; color:#666; font-size:13px; font-weight:300; line-height:1.65; }
+.advanced-case-grid p { margin:0; color:#666; font-size:14px; font-weight:300; line-height:1.65; }
 .full-implant { display:grid; grid-template-columns:280px 1fr; gap:30px; margin-top:82px; padding:42px 12px; background:linear-gradient(90deg,#fff,#fafafa 28%,#fff); }
 .full-implant ol { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:0; padding:0; list-style:none; }
-.full-implant li { min-height:108px; padding:16px 12px; border:1px solid #e5e5e5; border-radius:6px; color:#555; font-size:12px; line-height:1.5; background:#fff; }
+.full-implant li { min-height:108px; padding:16px 12px; border:1px solid #e5e5e5; border-radius:6px; color:#555; font-size:14px; line-height:1.5; background:#fff; }
 .full-implant li b { display:block; margin-bottom:14px; color:#a12d2e; font-size:19px; }
 .implant-process-panel { padding-bottom:0; }
 .implant-process-intro { display:grid; grid-template-columns:.92fr 1.08fr; align-items:stretch; margin-top:92px; overflow:hidden; background:#f8f8f8; }
 .implant-process-intro>div { display:flex; min-height:350px; padding:48px 52px; flex-direction:column; justify-content:center; }
 .implant-process-intro h3 { margin:8px 0 20px; font-size:34px; font-weight:500; line-height:1.22; letter-spacing:-.055em; }
-.implant-process-intro p:last-child { margin:0; color:#666; font-size:15px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
+.implant-process-intro p:last-child { margin:0; color:#666; font-size:16px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
 .implant-process-intro img { display:block; width:100%; height:100%; min-height:350px; object-fit:cover; }
 .implant-process-section { padding:72px 0 76px; background:#fff; }
 .implant-process-panel .implant-process-section { margin-top:92px; padding:0 0 68px; border-bottom:1px solid #eee; }
@@ -3357,14 +3357,14 @@ section {
 .implant-process { display:grid; grid-template-columns:repeat(5,1fr); gap:28px; }
 .implant-process article { position:relative; text-align:center; }
 .implant-process article:not(:last-child)::after { content:"›"; position:absolute; right:-20px; top:37px; color:#a12d2e; font-size:26px; }
-.implant-process b { display:block; margin-bottom:12px; color:#999; font-size:10px; font-weight:500; }
-.implant-process span { display:grid; width:68px; height:68px; margin:0 auto 14px; place-items:center; border:1px solid #ddd; border-radius:50%; color:#a12d2e; font-size:15px; font-weight:600; background:#fff; }
-.implant-process strong { font-size:13px; font-weight:500; }
+.implant-process b { display:block; margin-bottom:12px; color:#999; font-size:14px; font-weight:500; }
+.implant-process span { display:grid; width:68px; height:68px; margin:0 auto 14px; place-items:center; border:1px solid #ddd; border-radius:50%; color:#a12d2e; font-size:16px; font-weight:600; background:#fff; }
+.implant-process strong { font-size:14px; font-weight:500; }
 .implant-process-detail-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:72px 0 92px; }
 .implant-process-detail-grid article { overflow:hidden; border:1px solid #eee; background:#fff; }
 .implant-process-detail-grid img { display:block; width:100%; height:200px; object-fit:cover; }
 .implant-process-detail-grid div { min-height:150px; padding:20px; }
-.implant-process-detail-grid b { color:#a12d2e; font-size:12px; font-weight:600; }
+.implant-process-detail-grid b { color:#a12d2e; font-size:14px; font-weight:600; }
 .implant-process-detail-grid h3 { margin:9px 0 10px; font-size:22px; font-weight:600; letter-spacing:-.035em; }
 .implant-process-detail-grid p { margin:0; color:#666; font-size:14px; font-weight:300; line-height:1.7; letter-spacing:-.02em; }
 .implant-cta { padding:37px 0; color:#fff; background:#303030; }
@@ -3372,7 +3372,7 @@ section {
 .implant-cta p { margin:0 0 7px; color:#ccc; font-size:14px; }
 .implant-cta h2 { margin:0; font-size:25px; font-weight:500; }
 .implant-cta div>div:last-child { display:flex; gap:10px; }
-.implant-cta a { display:grid; min-width:145px; height:48px; place-items:center; border:1px solid rgba(255,255,255,.65); color:#fff; font-size:13px; }
+.implant-cta a { display:grid; min-width:145px; height:48px; place-items:center; border:1px solid rgba(255,255,255,.65); color:#fff; font-size:14px; }
 .implant-cta a:first-child { border-color:#d33b3b; background:#d33b3b; }
 
 /* ---- Cosmetic subpage ---- */
@@ -3552,20 +3552,20 @@ section {
   .doctor-profile { min-height:175px; }
   .doctor-profile img { height:175px; }
   .doctor-profile div { padding-top:25px; }
-  .doctor-details li { font-size:11px; }
+  .doctor-details li { font-size:14px; }
   .tour-section { padding:65px 0 75px; }
   .tour-slider { width:calc(100% - 86px); }
   .tour-slider>img { height:auto; }
   .tour-prev { left:-42px; }
   .tour-next { right:-42px; }
   .tour-arrow { width:38px; height:38px; font-size:37px; line-height:31px; }
-  .fee-table { min-width:760px; font-size:12px; }
+  .fee-table { min-width:760px; font-size:14px; }
   .fee-note { grid-template-columns:1fr; padding:14px 16px; }
   .location-heading { margin-top:55px; }
   .location-heading span { width:43px; height:43px; }
   .location-details { gap:28px; padding:27px 15px; }
   .navigation-box { padding:24px 0 0; border-top:1px solid #ddd; border-left:0; }
-  .navigation-links a { padding:5px 9px; font-size:11px; }
+  .navigation-links a { padding:5px 9px; font-size:14px; }
   .route-section { padding:28px 0 50px; }
   .route-grid { gap:30px; }
   .implant-panel { padding:48px 0 62px; }
@@ -3574,7 +3574,7 @@ section {
   .implant-title::before { width:25px; height:28px; }
   .implant-head { padding-left:0; }
   .implant-head h3 { font-size:29px; }
-  .implant-head p { font-size:15px; }
+  .implant-head p { font-size:16px; }
   .implant-recommend,.implant-definition,.implant-system-intro,.advanced-diagnosis,.full-implant { grid-template-columns:1fr; }
   .implant-recommend { gap:20px; margin-top:55px; padding:24px 0; }
   .implant-section-label h3 { font-size:23px; }
@@ -3599,7 +3599,7 @@ section {
   .system-node { position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; height:92px; flex-direction:row; justify-content:flex-start; gap:11px; margin-top:9px; padding:12px 18px; border-radius:8px; text-align:left; transform:none; }
   .system-node img { width:46px; height:46px; flex:0 0 auto; margin:0; }
   .system-node small { color:#a12d2e; }
-  .system-node strong { margin:0; font-size:13px; }
+  .system-node strong { margin:0; font-size:14px; }
   .advanced-cases { margin-top:58px; }
   .advanced-case-grid { grid-template-columns:1fr; }
   .advanced-case-grid img { height:190px; }
@@ -3610,7 +3610,7 @@ section {
   .implant-process-intro { grid-template-columns:1fr; margin-top:58px; }
   .implant-process-intro>div { min-height:0; padding:28px 22px; }
   .implant-process-intro h3 { font-size:25px; }
-  .implant-process-intro p:last-child { font-size:13px; }
+  .implant-process-intro p:last-child { font-size:14px; }
   .implant-process-intro img { min-height:0; height:225px; }
   .implant-process-section { padding:48px 0; }
   .implant-process-panel .implant-process-section { margin-top:58px; padding:0 0 46px; }
@@ -3698,4 +3698,93 @@ section {
   .whitening-system p,
   .general-split p:not(.general-label),
   .general-feature-row p:not(.general-label) { font-size:14px; }
+}
+
+/* ===== 임플란트 하위페이지(원데이/고난도/치료 과정) 최소 글씨 16px =====
+   기존 14px·15px 텍스트만 16px로 올리고, 16px 이상은 그대로 둡니다.
+   .implant-panel 한정이라 다른 서브페이지에는 영향을 주지 않습니다. */
+.implant-panel .implant-number,
+.implant-panel .implant-section-label b,
+.implant-panel .recommend-grid i,
+.implant-panel .implant-definition p,
+.implant-panel .implant-definition small,
+.implant-panel .implant-system-intro p,
+.implant-panel .implant-feature-list p,
+.implant-panel .implant-caution>p,
+.implant-panel .advanced-diagnosis p,
+.implant-panel .advanced-system>p,
+.implant-panel .advanced-cases-head p,
+.implant-panel .system-node small,
+.implant-panel .system-node strong,
+.implant-panel .advanced-case-grid b,
+.implant-panel .advanced-case-grid p,
+.implant-panel .full-implant li,
+.implant-panel .implant-process-intro p:last-child,
+.implant-panel .implant-process b,
+.implant-panel .implant-process strong,
+.implant-panel .implant-process-detail-grid b,
+.implant-panel .implant-process-detail-grid p,
+.implant-panel .implant-cta p,
+.implant-panel .implant-cta a { font-size:16px; }
+
+/* ===== 서브페이지(디지털·심미·일반진료·치과소개) 최소 글씨 16px =====
+   기존 11~15px 본문·설명 텍스트를 16px로 올립니다. (16px 이상 제목·강조는 유지)
+   디지털 페이지는 .digital-page, 나머지 서브페이지는 .subpage 로 한정합니다. */
+/* 디지털 */
+.digital-page .ct-points b,
+.digital-page .ct-detail p,
+.digital-page .process-grid p,
+.digital-page .merit-grid p,
+.digital-page .cerec-banner p,
+.digital-page .lab-features p,
+.digital-page .equipment-grid p,
+.digital-page .equipment-bottom p,
+/* 치과소개 */
+.subpage .doctor-profile b,
+.subpage .doctor-profile p,
+.subpage .fee-table,
+.subpage .fee-note b,
+.subpage .fee-note p,
+.subpage .navigation-links a,
+.subpage .route-grid p,
+.subpage .route-grid b,
+/* 심미 */
+.subpage .cosmetic-kicker,
+.subpage .cosmetic-benefit-grid p,
+.subpage .cosmetic-material p,
+.subpage .cosmetic-cerec p,
+.subpage .cosmetic-subhead p,
+.subpage .whitening-system p,
+.subpage .cosmetic-step-grid p,
+.subpage .whitening-step-grid b,
+.subpage .whitening-step-grid h4,
+.subpage .whitening-step-grid p,
+.subpage .before-after-grid figcaption,
+.subpage .case-pair-grid figcaption,
+.subpage .milknate-grid p,
+.subpage .cosmetic-cta p,
+.subpage .cosmetic-cta a,
+/* 일반진료 */
+.subpage .general-kicker,
+.subpage .general-label,
+.subpage .general-section-title span,
+.subpage .general-card-grid b,
+.subpage .general-method-grid b,
+.subpage .general-card-grid p,
+.subpage .general-method-grid p,
+.subpage .general-before-after figcaption,
+.subpage .general-split p:not(.general-label),
+.subpage .general-feature-row p:not(.general-label),
+.subpage .general-cta p,
+.subpage .general-cta a { font-size:16px; }
+
+/* 모바일에서만 16px 미만으로 작아지는 제목·항목 (PC 크기는 유지) */
+@media (max-width:760px) {
+  .digital-page .equipment-grid h3,
+  .subpage .doctor-details li,
+  .subpage .cosmetic-step-grid h4,
+  .subpage .general-card-grid h4,
+  .subpage .general-method-grid h4,
+  .subpage .general-case-grid h4,
+  .subpage .general-number-list span { font-size:16px; }
 }

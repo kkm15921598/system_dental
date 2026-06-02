@@ -255,12 +255,12 @@ const tourImage = document.querySelector("[data-tour-image]");
 const tourPrevButton = document.querySelector(".tour-prev");
 const tourNextButton = document.querySelector(".tour-next");
 const tourImages = [
-  "images/치과둘러보기1.png",
-  "images/치과둘러보기2.png",
-  "images/치과둘러보기3.png",
-  "images/치과둘러보기4.png",
-  "images/치과둘러보기5.png",
-  "images/치과둘러보기6.png",
+  "images/sub2_1.png",
+  "images/sub2_2.png",
+  "images/sub2_3.png",
+  "images/sub2_4.png",
+  "images/sub2_5.png",
+  "images/sub2_6.png",
 ];
 let tourIndex = 0;
 

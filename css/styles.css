@@ -3372,6 +3372,16 @@ section {
     font-size: 18px;
     letter-spacing: -.01em;
   }
+
+  /* 원데이 임플란트: 1열로 쌓고 고정 높이 해제 (섹션이 너무 길어져 등장 애니메이션이 안 뜨는 문제 방지) */
+  .implant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .implant-section {
+    min-height: 0;
+    padding: 70px 0;
+  }
 }
 
 @media (max-width: 640px) {

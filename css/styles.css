@@ -1144,12 +1144,14 @@ section {
   transform: translateX(-50%);
 }
 
-.doctor-photo__card:hover {
+.doctor-photo__card:hover,
+.doctor-photo__card.is-active {
   z-index: 11;
   opacity: 1;
 }
 
-.doctor-photo__card:hover .doctor-name {
+.doctor-photo__card:hover .doctor-name,
+.doctor-photo__card.is-active .doctor-name {
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -1188,11 +1190,13 @@ section {
 }
 
 /* 한 명에 마우스를 올리면 나머지는 흑백 처리 */
-.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card img {
+.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card img,
+.doctor-photo:has(.doctor-photo__card.is-active) .doctor-photo__card img {
   filter: grayscale(100%);
 }
 
-.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card:hover img {
+.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card:hover img,
+.doctor-photo:has(.doctor-photo__card.is-active) .doctor-photo__card.is-active img {
   filter: grayscale(0);
 }
 
@@ -1211,38 +1215,6 @@ section {
     position: absolute;
     left: 0;
     bottom: 0;
-  }
-}
-
-@media (max-width: 1100px) {
-  .doctor-photo {
-    position: static;
-    width: 100%;
-    max-width: 440px;
-    min-height: 0;
-    margin: 20px 0 0 auto;
-    display: none;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: end;
-    gap: 6px;
-    overflow: visible;
-  }
-
-  .doctor-photo__card {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .doctor-photo__card img {
-    position: static;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
   }
 }
 
@@ -1514,6 +1486,13 @@ section {
   width: 485px;
   height: auto;
   transform: translate(34px, -100px);
+}
+
+/* 1300px 이하(980 초과): 디지털 기구 이미지 왼쪽으로 150px 이동 */
+@media (min-width: 981px) and (max-width: 1300px) {
+  .machine img {
+    transform: translate(-116px, -100px);
+  }
 }
 
 .digital-section .section-copy {
@@ -2392,6 +2371,17 @@ section {
 .info-title h2 em {
   color: var(--red);
   font-style: normal;
+}
+
+/* 1100px 이하: 각 섹션 대표 헤딩 60px → 48px (히어로 헤드라인 제외) */
+@media (max-width: 1100px) {
+  .doctor-section .section-copy h2,
+  .implant-section .section-copy h2,
+  .digital-section .section-copy h2,
+  .story-wrap h2,
+  .info-title h2 {
+    font-size: 48px;
+  }
 }
 
 .info-title span {
@@ -3338,6 +3328,22 @@ section {
   text-align: center;
 }
 
+/* 임플란트 섹션 ≤1300: 고정 높이 해제 + checks 박스 배경/아이콘 (버튼은 원래 위치 유지) */
+@media (max-width: 1300px) {
+  .implant-section {
+    min-height: 0;
+    padding: 70px 0;
+  }
+
+}
+
+/* ≤1100: 닥터 그룹 1열(풀폭)로 쌓아 오른쪽 잘림 방지 */
+@media (max-width: 1100px) {
+  .doctor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 980px) {
   .nav-toggle {
     display: block;
@@ -3374,146 +3380,312 @@ section {
   }
 
   /* 원데이 임플란트: 1열로 쌓고 고정 높이 해제 (섹션이 너무 길어져 등장 애니메이션이 안 뜨는 문제 방지) */
+  /* check 목록 ↔ 자세히보기 버튼 사이 여백 절반(124px → 62px) */
   .implant-grid {
+    grid-template-columns: 1fr;
+    gap: 62px;
+  }
+
+  /* checks 박스 뒤 검은색 반투명(50%) 배경 + 왼쪽 육각 아이콘 박스 안으로 */
+  .checks {
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 30px 26px 30px 30px;
+  }
+
+  .checks article {
+    padding-left: 52px;
+  }
+
+  .checks article img {
+    left: 15px;
+  }
+
+  /* 의사소개: 1열로 쌓아 의사 그룹(포개진 모습 그대로)을 자세히보기 버튼 아래로 */
+  .doctor-grid {
     grid-template-columns: 1fr;
   }
 
-  .implant-section {
+  /* 의사 그룹 위로 100px 이동 + 하단(다리) 잘라내고 그만큼 섹션 높이 축소 */
+  .doctor-photo {
+    margin-top: -150px;
+    margin-bottom: -180px;
+    /* 하단(다리)만 자르고, 오른쪽은 음수로 열어 박스 밖으로 나간 맨 오른쪽 의사는 살림 */
+    clip-path: inset(0 -260px 180px 0);
+  }
+
+  /* 위 여백 절반(120px → 60px) */
+  .doctor-section .section-copy {
+    margin-top: 60px;
+  }
+
+  /* "System Dental Doctor" + 전문의 문구 한 줄로 */
+  .doctor-section .section-copy h2 br,
+  .doctor-section .section-copy p br {
+    display: none;
+  }
+
+  /* 섹션3 Digital: 1열로 쌓아 슬라이드를 자세히보기 버튼 아래로 + 고정 높이 해제 */
+  .digital-grid {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  .digital-section {
+    height: auto;
     min-height: 0;
     padding: 70px 0;
+  }
+
+  /* 기구 이미지를 섹션 상단 우측에 배치 (문구와 겹침 허용) */
+  .machine {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 46%;
+    min-height: 0;
+    z-index: 0;
+    margin: 0;
+  }
+
+  .machine img {
+    width: 100%;
+    transform: none;
+    margin: 0;
+  }
+
+  /* 디지털 슬라이더 해제: 5개 카드 모두 펼쳐 표시, 가로 100% */
+  .system-slider {
+    width: 100%;
+    margin: 24px auto 0;
+  }
+
+  .system-viewport {
+    height: auto;
+    overflow: visible;
+  }
+
+  .system-list {
+    grid-auto-rows: auto;
+    transform: none !important;
+  }
+
+  .system-list article {
+    width: 100%;
+  }
+
+  .system-nav {
+    display: none;
+  }
+
+  /* 섹션5 이벤트: 1열로 쌓아 상담신청 폼을 아래로 + 고정 높이 해제, 위 내용과 70px 간격 */
+  .event-grid {
+    grid-template-columns: 1fr;
+    width: auto;
+    gap: 70px;
+  }
+
+  .event-section {
+    height: auto;
+    min-height: 0;
+    padding: 70px 0;
+  }
+
+  /* 스토리 섹션 고정 높이(844px) 해제 — 안 그러면 하단에 빈 빨간 공간이 남음 */
+  .story-section {
+    height: auto;
+    min-height: 0;
+    padding: 70px 0;
+  }
+
+  /* 상담 폼 박스를 가로 100%로 (라벨 96px 고정 + 입력칸 유동 구조 유지), 위 여백 10px */
+  .consult-form {
+    width: 100%;
+    max-width: none;
+    margin: 10px auto 0;
+  }
+
+  /* 섹션6 진료안내&오시는길: 지도를 진료안내/오시는길 아래로 */
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 안내 문구를 타이틀 아래로 + 한 줄로 */
+  .info-title {
+    grid-template-columns: 1fr;
+  }
+
+  .info-title p,
+  .info-title h2,
+  .info-title span {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  /* 타이틀(진료안내 & 오시는 길)과 설명문(시스템치과는~) 사이 여백 10px */
+  .info-title span {
+    margin-top: 10px;
+  }
+
+  .info-title span br {
+    display: none;
+  }
+
+  /* 지도 왼쪽 여백 제거 + 풋(주소·버튼) 풀폭으로 → 버튼이 지도 끝까지 꽉 참 */
+  .map-foot {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .map-image {
+    width: 100%;
+    height: auto;
+  }
+
+  /* "오시는 길" 아이콘을 텍스트 왼쪽에 가로 배치 */
+  .map-pin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 주소 1줄로 */
+  .map-addr em br {
+    display: none;
+  }
+
+  /* 영상 버튼 2개를 각각 50%로 한 줄 꽉 채움 + 폰트 16px */
+  .map-videos {
+    width: 100%;
+  }
+
+  .map-card a.map-video-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* 푸터: 진료시간·병원정보를 세로로 쌓고 왼쪽 정렬 */
+  .footer-top,
+  .footer-info {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-info > div::before {
+    display: none;
+  }
+
+  /* ≤980에서는 섹션이 세로로 길어져 스크롤 등장 애니메이션(40% 노출 조건)이 안 터지므로
+     모든 등장 대상 콘텐츠를 항상 표시 (모바일은 애니메이션 없이 바로 보이게) */
+  .implant-section .section-copy,
+  .implant-section .hex-list div,
+  .checks article,
+  .digital-section .section-copy,
+  .machine,
+  .system-list article,
+  .story-wrap > p,
+  .story-wrap h2,
+  .story-wrap > span,
+  .story-wrap small,
+  .before-after,
+  .event-head,
+  .benefits article,
+  .event-note,
+  .consult-form,
+  .info-title,
+  .info-block,
+  .map-card,
+  .doctor-section .section-copy,
+  .doctor-photo,
+  .doctor-photo__card {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
 @media (max-width: 640px) {
-  .wrap {
-    width: min(100% - 28px, 1120px);
+  /* 히어로 문구 32px */
+  .hero-copy__headline {
+    font-size: 32px;
   }
 
-  .site-header {
-    height: auto;
-    min-height: 106px;
-    padding: 30px 0;
-  }
-
-  .nav-wrap {
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .gnb {
-    width: min(86vw, 320px);
-  }
-
-  .hero {
-    min-height: 860px;
-  }
-
-  .hero-media,
-  .hero-shade {
-    bottom: 0;
-  }
-
-  .hero-copy {
-    min-height: 860px;
-    transform: none;
-  }
-
+  /* 히어로 상단 eyebrow 문구 18px → 16px */
   .hero-copy p {
-    font-size: 15px;
+    font-size: 16px;
   }
 
-  .hero-copy h1 {
-    font-size: 34px;
-  }
-
-  .pager {
-    margin-top: 28px;
-  }
-
-  .quick-panel,
-  .hours-card dl,
-  .benefits,
-  .before-after {
-    grid-template-columns: 1fr;
-  }
-
-  .hours-card div {
-    justify-content: initial;
-    border-left: 0;
-  }
-
-  .hours-card div + div {
-    border-top: 1px solid #ebe7e2;
-    border-left: 0;
-  }
-
-  .doctor-section,
+  /* 각 섹션 상하 여백 통일 (60px) */
+  .implant-section,
   .digital-section,
+  .story-section,
   .event-section,
   .info-section {
-    padding: 58px 0;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
-  .doctor-section {
-    min-height: calc(100vw * 700 / 1920 - 8px);
-    padding: 0;
-    background: #e7e2dd;
-  }
-
-  .doctor-grid {
-    min-height: calc(100vw * 700 / 1920 - 8px);
-    padding-top: 80px;
-  }
-
-  .doctor-section .section-copy {
-    transform: none;
-  }
-
-  .doctor-section .section-copy h2 {
-    font-size: 34px;
-  }
-
-  .doctor-photo {
-    min-height: 1px;
-    transform: none;
-  }
-
-  .hex-list {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-
+  /* 각 섹션 제목 48px → 32px */
+  .doctor-section .section-copy h2,
   .implant-section .section-copy h2,
   .digital-section .section-copy h2,
-  .story-wrap h2 {
-    font-size: 34px;
+  .story-wrap h2,
+  .info-title h2,
+  .event-head h2 {
+    font-size: 32px;
   }
 
-  .consult-form {
-    padding-inline: 22px;
+  /* 전화상담을 아이콘 버튼형으로 (번호·문의사항 숨김, 아이콘+라벨 중앙, 33% 칸) */
+  .phone-card__number,
+  .phone-card small {
+    display: none;
   }
 
-  .consult-form label {
-    grid-template-columns: 1fr;
+  .phone-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 14px 8px;
+    border-left: 0;
   }
 
-  .info-title {
-    gap: 10px;
-    padding-bottom: 24px;
+  .phone-card span {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 0;
+    font-size: 17px;
   }
 
-  .info-title h2 {
-    font-size: 34px;
+  .phone-card span img {
+    width: 50px;
+    height: 50px;
   }
 
-  .info-left {
-    grid-template-columns: 1fr;
-    gap: 34px;
+  /* 각 섹션 자세히보기 버튼 ~70% 축소 */
+  .outline-btn,
+  .outline-btn.white,
+  .doctor-section .outline-btn {
+    width: 140px;
+    min-width: 140px;
+    height: 40px;
+    font-size: 14px;
   }
 
-  .sns {
-    gap: 18px;
+  /* 의료진 그룹: 이 모습 그대로 60%로 축소 + 우측 정렬, 왼쪽으로 100px 이동, 하단 빈 공간만큼 섹션 높이 축소 */
+  .doctor-photo {
+    margin-left: 0;
+    margin-bottom: -380px;
+    transform: translateX(-100px) scale(0.6) !important;
+    transform-origin: top right;
+  }
+
+  /* 모바일: 의사 이름 툴팁 숨김 + 흑백 효과 끄기 */
+  .doctor-name {
+    display: none;
+  }
+
+  .doctor-photo .doctor-photo__card img {
+    filter: none !important;
   }
 
   .to-top {
@@ -3583,40 +3755,6 @@ section {
   .floating-consult-icon svg {
     width: 19px;
     height: 19px;
-  }
-
-  .map-foot {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .map-card a {
-    align-self: flex-start;
-  }
-
-  .map-videos {
-    flex-wrap: wrap;
-    align-self: flex-start;
-  }
-
-  .site-footer {
-    padding-top: 42px;
-  }
-
-  .footer-top {
-    padding-bottom: 34px;
-  }
-
-  .footer-bottom {
-    min-height: auto;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 22px 0;
-  }
-
-  .footer-bottom nav {
-    flex-wrap: wrap;
-    gap: 12px 24px;
   }
 }
 

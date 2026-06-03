@@ -673,3 +673,22 @@ if (toTopBtn) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+// 의료진: 탭(클릭)하면 이름 표시 (모바일/터치용, PC 호버는 그대로)
+const doctorCards = [...document.querySelectorAll('.doctor-photo__card')];
+
+if (doctorCards.length) {
+  doctorCards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasActive = card.classList.contains('is-active');
+      doctorCards.forEach((c) => c.classList.remove('is-active'));
+      if (!wasActive) card.classList.add('is-active');
+    });
+  });
+
+  // 바깥을 탭하면 닫기
+  document.addEventListener('click', () => {
+    doctorCards.forEach((c) => c.classList.remove('is-active'));
+  });
+}

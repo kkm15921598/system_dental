@@ -174,6 +174,10 @@ html {
   scroll-behavior: smooth;
 }
 
+#consulting-form {
+  scroll-margin-top: 130px;
+}
+
 body {
   margin: 0;
   color: #222;
@@ -517,6 +521,69 @@ body.nav-open {
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, .08));
 }
 
+/* 1400px 이하: 영상은 hero 상단만 덮고, 패널은 영상 아래 풀폭으로 (PC는 그대로) */
+@media (max-width: 1400px) {
+  .hero-media,
+  .hero-shade {
+    bottom: 159px;
+  }
+
+  /* 영상 세로 10% 축소(700→630), 가운데 문구는 항상 세로 중앙 */
+  .hero-copy {
+    min-height: 630px;
+    transform: none;
+  }
+
+  .quick-panel {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 0;
+  }
+}
+
+/* 1100px 이하: 영상 세로 추가 축소(90%→567px), 패널이 2줄이라 영상 잘림 318px, 헤드라인 -10px */
+@media (max-width: 1100px) {
+  .hero-media,
+  .hero-shade {
+    bottom: 318px;
+  }
+
+  .hero-copy {
+    min-height: 567px;
+  }
+
+  .hero-copy__headline {
+    font-size: 50px;
+  }
+}
+
+/* 1300px 이하: 오시는길·상담문의 버튼 폭 축소로 양옆 여백 제거 */
+@media (max-width: 1300px) {
+  .quick-panel {
+    grid-template-columns: 2.15fr 1.05fr 170px 170px;
+  }
+}
+
+/* 1100px 이하: 진료시간은 윗줄 전체, 전화상담·오시는길·상담문의는 아랫줄로 */
+@media (max-width: 1100px) {
+  .quick-panel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 진료시간(윗줄) 아래 구분선 */
+  .hours-card {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid #e5e1dc;
+  }
+
+  /* 아랫줄로 내려온 전화상담의 왼쪽 구분선 제거 */
+  .phone-card {
+    border-left: 0;
+  }
+}
+
 .hours-card,
 .phone-card {
   display: flex;
@@ -721,6 +788,27 @@ body.nav-open {
   background: var(--red);
 }
 
+/* 1400px 이하: 오시는길·상담문의 버튼 높이를 진료시간 카드(159px)와 동일하게
+   (.quick 기본 정의 뒤에 둬서 우선 적용, ≤980은 아래 980 블록이 다시 200px로) */
+@media (max-width: 1400px) {
+  .quick {
+    height: 159px;
+    min-height: 159px;
+  }
+
+  .quick-link {
+    min-height: 159px;
+  }
+}
+
+/* 1300px 이하: 오시는길·상담문의 아이콘 80% 크기로 축소 (76→61px) */
+@media (max-width: 1300px) {
+  .quick img {
+    width: 61px;
+    height: 61px;
+  }
+}
+
 .line-icon {
   position: relative;
   width: 42px;
@@ -796,7 +884,7 @@ section {
 .doctor-section.is-visible .section-copy {
   opacity: 1;
   transform: translateX(18px);
-  transition: opacity .9s ease .3s, transform .9s ease .3s;
+  transition: opacity .85s ease .12s, transform .85s ease .12s;
 }
 
 
@@ -1027,25 +1115,134 @@ section {
   transition-delay: 1.6s;
 }
 
+.doctor-name {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  z-index: 12;
+  padding: 7px 16px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(165, 42, 44, .96);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .22);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.doctor-name::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 6px solid transparent;
+  border-top-color: rgba(165, 42, 44, .96);
+  transform: translateX(-50%);
+}
+
+.doctor-photo__card:hover {
+  z-index: 11;
+  opacity: 1;
+}
+
+.doctor-photo__card:hover .doctor-name {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 말풍선 개별 위치 미세조정 (기준 bottom: calc(100% + 6px)) */
+.doctor-photo__card--a .doctor-name {
+  left: calc(50% + 20px); /* 김혜린: 오른쪽으로 20px */
+  bottom: calc(100% - 39px); /* 김혜린: 아래로 45px */
+}
+
+.doctor-photo__card--b .doctor-name {
+  bottom: calc(100% + 11px); /* Dr 정: 위로 5px */
+}
+
+.doctor-photo__card--c .doctor-name {
+  left: calc(50% - 5px); /* 홍국영: 왼쪽으로 5px */
+  bottom: calc(100% + 81px); /* 홍국영: 위로 75px */
+}
+
+.doctor-photo__card--d .doctor-name {
+  bottom: calc(100% + 56px); /* 정지안: 위로 50px */
+}
+
+.doctor-photo__card--e .doctor-name {
+  bottom: calc(100% + 51px); /* 하재영: 위로 45px */
+}
+
+.doctor-photo__card--f .doctor-name {
+  bottom: calc(100% - 19px); /* 변석현: 아래로 25px */
+}
+
+/* 이미지는 그대로 두고 hover(박스) 영역만 사람 부분으로 축소 */
+.doctor-photo__card img {
+  pointer-events: none;
+  transition: filter .35s ease;
+}
+
+/* 한 명에 마우스를 올리면 나머지는 흑백 처리 */
+.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card img {
+  filter: grayscale(100%);
+}
+
+.doctor-photo:has(.doctor-photo__card:hover) .doctor-photo__card:hover img {
+  filter: grayscale(0);
+}
+
+/* 앞줄 카드 hover 박스 축소는 데스크탑(>1100px)에서만 — 아래 구간 반응형 레이아웃과 충돌 방지 */
+@media (min-width: 1101px) {
+  .doctor-photo__card--c,
+  .doctor-photo__card--d,
+  .doctor-photo__card--e {
+    width: 220px;
+    height: 380px;
+  }
+
+  .doctor-photo__card--c img,
+  .doctor-photo__card--d img,
+  .doctor-photo__card--e img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
+
 @media (max-width: 1100px) {
   .doctor-photo {
-    min-height: auto;
+    position: static;
     width: 100%;
+    max-width: 440px;
+    min-height: 0;
+    margin: 20px 0 0 auto;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: end;
+    gap: 6px;
+    overflow: visible;
   }
 
   .doctor-photo__card {
     position: static;
-    width: 48%;
-    height: 320px;
-    margin-bottom: 18px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .doctor-photo__card:nth-child(odd) {
-    margin-right: 4%;
-  }
-
-  .doctor-photo__card:nth-child(even) {
-    margin-right: 0;
+  .doctor-photo__card img {
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 }
 
@@ -1202,6 +1399,13 @@ section {
   padding-left: 0;
 }
 
+/* 1300px 이하: 원데이 임플란트 checks 왼쪽 여백 제거 (.checks 기본 정의 뒤에 둬서 우선 적용) */
+@media (max-width: 1300px) {
+  .checks {
+    margin-left: 0;
+  }
+}
+
 .checks::before {
   display: none;
 }
@@ -1240,6 +1444,14 @@ section {
   z-index: 0;
 }
 
+/* 1200px 이하: checks 흰 점 + 세로 연결선 숨김 */
+@media (max-width: 1200px) {
+  .checks article::before,
+  .checks article:not(:last-child)::after {
+    display: none;
+  }
+}
+
 .checks article img {
   position: absolute;
   top: 0;
@@ -1275,8 +1487,8 @@ section {
 }
 
 .digital-section {
-  height: 1000px;
-  min-height: 1000px;
+  height: 800px;
+  min-height: 800px;
   padding: 0;
   background: url(../images/section_03_bg.png) center bottom / cover no-repeat;
 }
@@ -1299,15 +1511,15 @@ section {
 
 .machine img {
   display: block;
-  width: 660px;
+  width: 485px;
   height: auto;
-  transform: translateX(-96px);
+  transform: translate(34px, -100px);
 }
 
 .digital-section .section-copy {
   align-self: center;
   padding-bottom: 0;
-  transform: translateY(105px);
+  transform: translateY(5px);
 }
 
 .digital-section .section-copy .eyebrow {
@@ -1391,12 +1603,73 @@ section {
   transform: rotate(22deg);
 }
 
+.system-slider {
+  align-self: end;
+  margin-bottom: 152px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 420px;
+}
+
+/* 1400px 이하(980 초과 구간): 슬라이더를 그리드에서 빼서 콘텐츠 우측 가장자리(42px)에 고정 →
+   화면이 줄면 그 가장자리를 따라 자연스럽게 왼쪽으로 이동 */
+@media (min-width: 981px) and (max-width: 1400px) {
+  .digital-section {
+    position: relative;
+  }
+
+  .digital-grid {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
+  .system-slider {
+    position: absolute;
+    right: 42px;
+    bottom: 152px;
+    margin-bottom: 0;
+  }
+}
+
+.system-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  color: #A52A2C;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.system-nav:hover:not(:disabled) {
+  opacity: .6;
+}
+
+.system-nav:disabled {
+  opacity: .22;
+  cursor: default;
+}
+
+.system-viewport {
+  width: calc(100% + 40px);
+  height: 388px;
+  margin: 0 -20px;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
 .system-list {
   position: relative;
   display: grid;
   grid-auto-rows: 112px;
   gap: 26px;
-  align-self: center;
+  transition: transform .45s cubic-bezier(.4, 0, .2, 1);
 }
 
 .system-list article {
@@ -1430,66 +1703,6 @@ section {
   color: #888888;
   font-size: 15px;
   font-weight: 300;
-}
-
-@media (hover: hover) {
-  .digital-section.is-visible .system-list:hover article {
-    transform: scale(.94);
-    transition: opacity .2s ease, transform .24s ease, box-shadow .24s ease;
-    transition-delay: 0s;
-  }
-
-  .digital-section.is-visible .system-list article:hover {
-    z-index: 2;
-    box-shadow: 0 18px 38px rgba(55, 70, 90, .18);
-    transform: scale(1);
-  }
-
-  .system-list-preview {
-    position: absolute;
-    right: 0;
-    z-index: 4;
-    display: grid;
-    width: 420px;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: auto;
-    background: #fff;
-    box-shadow: 0 18px 38px rgba(55, 70, 90, .18);
-    text-align: center;
-    transform: translateY(8px);
-    transition: opacity .18s ease, transform .18s ease;
-  }
-
-  .system-list-preview.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .system-list-preview img {
-    display: block;
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-  }
-
-  .system-list-preview div {
-    padding: 24px 20px 28px;
-  }
-
-  .system-list-preview b {
-    display: block;
-    color: #222222;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .system-list-preview p {
-    margin: 10px 0 0;
-    color: #888888;
-    font-size: 15px;
-    font-weight: 300;
-  }
 }
 
 .story-section {
@@ -1549,32 +1762,44 @@ section {
   display: grid;
   grid-template-columns: 90px auto 90px;
   align-items: center;
+  justify-items: center;
   justify-content: center;
   margin: 0 auto 54px;
   column-gap: 44px;
 }
 
 .before-after button {
-  width: 54px;
-  height: 80px;
-  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .55);
+  border-radius: 50%;
   color: #fff;
-  background: transparent;
-  font-size: 78px;
-  font-weight: 200;
-  line-height: 1;
+  background: rgba(255, 255, 255, .14);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   cursor: pointer;
-  opacity: .86;
-  transition: opacity .2s ease, transform .2s ease;
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.before-after button svg {
+  width: 26px;
+  height: 26px;
 }
 
 .before-after button:hover {
-  opacity: 1;
-  transform: scale(1.16);
+  color: #c0392f;
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
 }
 
 .before-after button:active {
-  transform: scale(1.04);
+  transform: scale(.98);
 }
 
 .story-case {
@@ -1582,12 +1807,30 @@ section {
   grid-template-columns: 1fr 1fr;
   width: 980px;
   margin: 0;
-  transition: opacity .32s ease, transform .32s ease;
+  transition: transform .42s cubic-bezier(.22, 1, .36, 1), opacity .42s ease;
+  will-change: transform, opacity;
 }
 
-.story-case.is-changing {
-  opacity: .35;
-  transform: translateY(8px);
+/* 1200px 이하: 슬라이드 버튼 60% 축소 + 이미지 폭 유동화(%) */
+@media (max-width: 1200px) {
+  .before-after {
+    grid-template-columns: 40px 1fr 40px;
+    column-gap: 16px;
+  }
+
+  .before-after button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .before-after button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .story-case {
+    width: 100%;
+  }
 }
 
 .story-photo {
@@ -1617,6 +1860,34 @@ section {
 .story-photo:last-child figcaption {
   color: #fff;
   background: #d61f26;
+}
+
+.story-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 30px;
+}
+
+.story-dots button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .4);
+  cursor: pointer;
+  transition: width .4s cubic-bezier(.22, 1, .36, 1), background-color .3s ease;
+}
+
+.story-dots button:hover {
+  background: rgba(255, 255, 255, .7);
+}
+
+.story-dots button.is-active {
+  width: 32px;
+  background: #ffffff;
 }
 
 .story-wrap small {
@@ -1803,6 +2074,16 @@ section {
   align-items: start;
   width: 1235px;
   margin: 94px auto 0;
+}
+
+/* 1300px 이하: 혜택 그리드와 상담폼 사이 빈 여백 줄이기 (gap 축소 + 중앙 정렬) */
+@media (max-width: 1300px) {
+  .event-grid {
+    grid-template-columns: 540px 540px;
+    gap: 36px;
+    width: auto;
+    justify-content: center;
+  }
 }
 
 .benefits {
@@ -2302,80 +2583,337 @@ section {
   object-fit: contain;
 }
 
+/* ===== 우측 고정 TOP 버튼 ===== */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 116px;
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  line-height: 1;
+  border: 1px solid rgba(165, 42, 44, .22);
+  border-radius: 50%;
+  color: #A52A2C;
+  background: rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .14);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity .3s ease, transform .3s ease, visibility .3s ease, background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top svg {
+  display: block;
+}
+
+.to-top span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+
+.to-top:hover,
+.to-top:focus-visible {
+  color: #ffffff;
+  background: #A52A2C;
+  border-color: #A52A2C;
+  box-shadow: 0 12px 26px rgba(165, 42, 44, .4);
+  transform: translateY(-3px);
+}
+
+.to-top:active {
+  transform: translateY(-1px);
+}
+
+/* ===== 하단 중앙 알약형 플로팅바 ===== */
 .floating-sns {
   position: fixed;
-  right: 22px;
-  top: 50%;
+  left: 50%;
+  bottom: 22px;
   z-index: 30;
-  display: grid;
-  justify-items: end;
-  gap: 8px;
-  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(1400px, calc(100% - 40px));
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, .6);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 12px 34px rgba(17, 17, 17, .14), 0 2px 6px rgba(17, 17, 17, .06);
+  transform: translateX(-50%);
+  transition: width .45s cubic-bezier(.4, 0, .2, 1), gap .45s cubic-bezier(.4, 0, .2, 1), padding .45s cubic-bezier(.4, 0, .2, 1);
 }
 
-.floating-sns a {
-  display: grid;
-  width: 68px;
-  min-height: 68px;
-  padding: 8px 5px 6px;
-  place-items: center;
-  gap: 3px;
-  border: 1px solid #eeeeee;
-  border-radius: 8px;
+.floating-sns-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+  max-width: 1400px;
+  overflow: visible;
+  opacity: 1;
+  transition: max-width .45s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, margin .45s cubic-bezier(.4, 0, .2, 1);
+}
+
+.floating-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: #888888;
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.floating-toggle:hover,
+.floating-toggle:focus-visible {
+  background: #e6e6e6;
   color: #555555;
-  background: rgba(255, 255, 255, .96);
-  box-shadow: 0 5px 16px rgba(0, 0, 0, .1);
+}
+
+.floating-toggle .icon-open {
+  display: none;
+}
+
+.floating-sns.collapsed {
+  width: 64px;
+  gap: 0;
+  padding: 12px;
+}
+
+.floating-sns.collapsed .floating-sns-content {
+  max-width: 0;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.floating-sns.collapsed .floating-toggle .icon-close {
+  display: none;
+}
+
+.floating-sns.collapsed .floating-toggle .icon-open {
+  display: inline-flex;
+}
+
+.floating-sns-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.floating-sns-icons a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 56px;
+  padding: 7px 4px;
+  border-radius: 16px;
+  color: #555555;
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 500;
   text-decoration: none;
-  transition: box-shadow .2s ease, transform .2s ease;
+  transition: background-color .2s ease, transform .2s ease;
 }
 
-.floating-sns a:hover,
-.floating-sns a:focus-visible {
-  box-shadow: 0 8px 20px rgba(165, 42, 44, .2);
-  transform: translateX(-4px);
+.floating-sns-icons a:hover,
+.floating-sns-icons a:focus-visible {
+  background: rgba(165, 42, 44, .08);
+  transform: translateY(-2px);
 }
 
-.floating-sns img {
-  width: 36px;
-  height: 36px;
+.floating-sns-icons img {
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
-.floating-sns a.floating-consult {
-  width: 68px;
-  min-height: 58px;
-  border-color: #A52A2C;
-  color: #ffffff;
-  background: #A52A2C;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.25;
-  text-align: center;
-  transition: width .24s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+.floating-promo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  padding: 0 6px 0 8px;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
-.floating-consult-wide {
-  display: none;
+.floating-promo-sub {
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #888888;
+}
+
+.floating-promo-divider {
+  align-self: center;
+  width: 1px;
+  height: 38px;
+  margin: 0 10px;
+  background: #d6d6d6;
+}
+
+.floating-promo-main {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
   white-space: nowrap;
+}
+
+.floating-promo-date {
+  align-self: center;
+  padding: 4px 13px;
+  border: 1px solid #A52A2C;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #A52A2C;
+  background: transparent;
+}
+
+.floating-promo-main b {
+  font-weight: 700;
+  color: #A52A2C;
+}
+
+/* 메인 문구 줄바꿈은 1084px 이하에서만 (PC는 한 줄 유지) */
+.promo-break {
+  display: none;
+}
+
+/* ===== 플로팅 바 반응형 (PC 기본값 유지, 폭별 단계 조정) ===== */
+@media (max-width: 1371px) {
+  /* "홈페이지 신청자 한정" 문구 숨김 */
+  .floating-promo-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 1186px) {
+  /* "~26.6.30" 날짜 문구 숨김 */
+  .floating-promo-date {
+    display: none;
+  }
+}
+
+@media (max-width: 1084px) {
+  /* "국산 정품 임플란트 / 최대 49% 할인 이벤트" 두 줄 + 폰트 축소 */
+  .floating-promo-main {
+    line-height: 1.3;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .promo-break {
+    display: inline;
+  }
+}
+
+@media (max-width: 880px) {
+  /* 이벤트 문구 영역 전체 숨김 */
+  .floating-promo {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  /* SNS 아이콘 우측 세로 구분선 숨김 */
+  .floating-promo-divider {
+    display: none;
+  }
+
+  /* SNS 아이콘(유튜브·인스타·블로그) 전체 숨김 → 상담 버튼만 남김 */
+  .floating-sns-icons {
+    display: none;
+  }
+
+  /* 상담 버튼을 가용 폭 전체로 채움 */
+  .floating-sns-content {
+    flex: 1;
+  }
+
+  .floating-sns a.floating-consult {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 384px) {
+  /* X(닫기) 버튼 숨김 → 상담 버튼만 꽉 차게 */
+  .floating-toggle {
+    display: none;
+  }
+
+  /* 바깥 흰색 배경(배경·테두리·그림자·블러) 제거 → 빨간 버튼만 노출 */
+  .floating-sns {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.floating-sns a.floating-consult {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c23437 0%, #A52A2C 100%);
+  box-shadow: 0 8px 20px rgba(165, 42, 44, .34);
+  font-size: 19px;
+  font-weight: 400;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.floating-consult-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .floating-sns a.floating-consult:hover,
 .floating-sns a.floating-consult:focus-visible {
-  width: 154px;
-  background: #bd3235;
-  transform: none;
-}
-
-.floating-consult:hover .floating-consult-short,
-.floating-consult:focus-visible .floating-consult-short {
-  display: none;
-}
-
-.floating-consult:hover .floating-consult-wide,
-.floating-consult:focus-visible .floating-consult-wide {
-  display: inline;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 26px rgba(165, 42, 44, .44);
 }
 
 .map-card {
@@ -2401,6 +2939,15 @@ section {
   max-width: 100%;
   margin-top: 16px;
   margin-left: auto;
+}
+
+/* 1400px 이하: 영상 버튼 2개를 주소 아래로 내림 */
+@media (max-width: 1400px) {
+  .map-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
 }
 
 .map-addr {
@@ -2443,6 +2990,48 @@ section {
   color: var(--red);
   font-size: 20px;
   font-weight: 500;
+}
+
+.map-videos {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+}
+
+.map-card a.map-video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 0;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.map-video-btn.line4 {
+  background: #00a5de; /* 4호선 */
+}
+
+.map-video-btn.line2 {
+  background: #00a84d; /* 2호선 */
+}
+
+.map-card a.map-video-btn:hover,
+.map-card a.map-video-btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+  filter: brightness(1.07);
+}
+
+.map-card a.map-video-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, .16);
 }
 
 .implant-section .section-copy,
@@ -2500,7 +3089,7 @@ section {
 }
 
 .digital-section .section-copy {
-  --digital-copy-y: 105px;
+  --digital-copy-y: 5px;
   opacity: 0;
   transform: translateY(calc(var(--digital-copy-y) + 34px));
 }
@@ -2602,6 +3191,14 @@ section {
   gap: 84px;
   align-items: start;
   padding-bottom: 35px;
+}
+
+/* 1400px 이하: 브랜드~정보 사이 빈 여백을 화면폭 비례로 자연스럽게 축소 */
+@media (max-width: 1400px) {
+  .footer-top {
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(28px, 4vw, 84px);
+  }
 }
 
 .footer-brand img {
@@ -2775,151 +3372,6 @@ section {
     font-size: 18px;
     letter-spacing: -.01em;
   }
-
-  .hero {
-    min-height: 760px;
-  }
-
-  .hero-media,
-  .hero-shade {
-    bottom: 0;
-  }
-
-  .hero-copy {
-    min-height: 760px;
-  }
-
-  .quick-panel,
-  .doctor-grid,
-  .implant-grid,
-  .digital-grid,
-  .event-grid,
-  .info-title,
-  .info-grid,
-  .footer-top,
-  .footer-info {
-    grid-template-columns: 1fr;
-  }
-
-  .quick-panel {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    margin-top: -86px;
-    max-width: 680px;
-    transform: none;
-  }
-
-  .quick {
-    width: 100%;
-    min-height: 200px;
-    padding: 16px;
-  }
-
-  .hours-card dl,
-  .benefits {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .doctor-photo {
-    min-height: 1px;
-    transform: none;
-    overflow: visible;
-  }
-
-  .doctor-card {
-    display: none;
-  }
-
-  .doctor-section .section-copy {
-    transform: none;
-  }
-
-  .info-title p,
-  .info-title h2,
-  .info-title span {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .info-left {
-    max-width: 640px;
-  }
-
-  .footer-top {
-    gap: 36px;
-  }
-
-  .footer-info {
-    gap: 28px;
-  }
-
-  .footer-info > div::before {
-    display: none;
-  }
-
-  .footer-address {
-    white-space: normal;
-  }
-
-  .digital-grid {
-    gap: 20px;
-    width: auto;
-    height: auto;
-  }
-
-  /* --- responsive: release fixed PC dimensions so nothing overflows --- */
-  .implant-section {
-    min-height: 0;
-    padding: 70px 0;
-  }
-
-  .digital-section,
-  .story-section {
-    height: auto;
-    min-height: 0;
-    padding: 70px 0;
-  }
-
-  .implant-grid,
-  .event-grid {
-    width: auto;
-    height: auto;
-    gap: 40px;
-  }
-
-  .checks {
-    margin-left: 0;
-  }
-
-  .machine {
-    min-height: 0;
-  }
-
-  .machine img {
-    width: 100%;
-    max-width: 660px;
-    margin: 0 auto;
-    transform: none;
-  }
-
-  .system-list article {
-    width: 100%;
-  }
-
-  .system-list {
-    grid-auto-rows: auto;
-  }
-
-  .consult-form {
-    width: 100%;
-    max-width: 540px;
-    margin: 0 auto;
-  }
-
-  .story-case {
-    width: 100%;
-  }
 }
 
 @media (max-width: 640px) {
@@ -3054,30 +3506,73 @@ section {
     gap: 18px;
   }
 
-  .floating-sns {
-    right: 10px;
-    gap: 5px;
+  .to-top {
+    right: 14px;
+    bottom: 138px;
+    width: 48px;
+    height: 48px;
   }
 
-  .floating-sns a {
-    width: 52px;
-    min-height: 52px;
-    padding: 5px 3px 4px;
+  .floating-sns {
+    bottom: 12px;
+    gap: 8px;
+    padding: 8px 12px;
+    width: min(1400px, calc(100% - 20px));
+    border-radius: 22px;
+  }
+
+  .floating-sns-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .floating-promo {
+    order: -1;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
+    padding: 1px 0 5px;
+    white-space: normal;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .floating-promo-sub {
+    font-size: 11px;
+  }
+
+  .floating-promo-main {
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  .floating-sns-icons {
+    gap: 2px;
+  }
+
+  .floating-sns-icons a {
+    width: 48px;
+    padding: 5px 3px;
     font-size: 10px;
   }
 
-  .floating-sns img {
-    width: 27px;
-    height: 27px;
+  .floating-sns-icons img {
+    width: 24px;
+    height: 24px;
   }
 
   .floating-sns a.floating-consult {
-    width: 52px;
+    height: 46px;
+    padding: 0 18px;
+    font-size: 17px;
   }
 
-  .floating-sns a.floating-consult:hover,
-  .floating-sns a.floating-consult:focus-visible {
-    width: 138px;
+  .floating-consult-icon svg {
+    width: 19px;
+    height: 19px;
   }
 
   .map-foot {
@@ -3086,6 +3581,11 @@ section {
   }
 
   .map-card a {
+    align-self: flex-start;
+  }
+
+  .map-videos {
+    flex-wrap: wrap;
     align-self: flex-start;
   }
 
@@ -3270,6 +3770,9 @@ section {
 .route-grid p { margin:14px 0 0; color:#333; font-size:14px; font-weight:300; }
 .route-grid b { display:inline-block; margin-right:9px; padding:4px 10px; border-radius:15px; color:#fff; background:#55c963; font-size:14px; font-weight:400; }
 .route-grid a:last-child b { background:#288ef2; }
+.route-video { position:relative; width:100%; aspect-ratio:16 / 9; overflow:hidden; border-radius:6px; background:#000; }
+.route-video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.route-grid .route-item--myeongdong b { background:#288ef2; }
 
 /* ---- Implant subpage ---- */
 .implant-panel { display:none; padding:70px 0 92px; background:#fff; }

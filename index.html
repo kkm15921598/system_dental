@@ -52,9 +52,9 @@
           </a>
         </div>
         <div class="quick quick-action red">
-          <a class="quick-link" href="https://map.naver.com/p/entry/place/11853147?lng=126.9838118&amp;lat=37.5648398&amp;placePath=%2F%3Fac%3D1%26adm_lat%3D37.340254%26adm_long%3D127.122637%26bizId%3D11853147%26bookingRedirectUrl%3Dhttps%25253A%25252F%25252Fm.booking.naver.com%25252Fbooking%25252F13%25252Fbizes%25252F267023%25253Ftheme%25253Dplace%252526service-target%25253Dmap-pc%252526lang%25253Dko%26debug%3D0%26deviceType%3Dpc%26lgl_lat%3D37.340254%26lgl_long%3D127.122637%26lgl_rcode%3D02135114%26ngn_country%3DKR%26nlu_query%3D%257B%2522qr%2522%253A%255B%257B%2522query%2522%253A%2522%25EC%2594%25A8%25EC%258A%25A4%25ED%2585%259C%2520%25EC%25B9%2598%25EA%25B3%25BC%2522%252C%2522c_score%2522%253A0.0%252C%2522score%2522%253A2.0%252C%2522qr_category%2522%253A1%252C%2522qr_type%2522%253A2%257D%252C%257B%2522query%2522%253A%2522%25EC%258B%259C%25EC%258A%25A4%25ED%2585%259C%2522%252C%2522c_score%2522%253A-0.269%252C%2522score%2522%253A-2.846%252C%2522qr_category%2522%253A4%252C%2522qr_type%2522%253A31%257D%255D%252C%2522hospital%2522%253A%257B%2522q%2522%253A%2522%25EC%258B%259C%25EC%258A%25A4%25ED%2585%259C%25EC%25B9%2598%25EA%25B3%25BC%2522%252C%2522sid%2522%253A%252211853147%2522%252C%2522source%2522%253A%2522placesearch%2522%257D%252C%2522nluQuery%2522%253A%2522%25EC%258B%259C%25EC%258A%25A4%25ED%2585%259C%25EC%25B9%2598%25EA%25B3%25BC%2522%257D%26nqx_theme%3D%257B%2522theme%2522%253A%257B%2522sub%2522%253A%255B%257B%2522name%2522%253A%2522location%2522%257D%252C%257B%2522name%2522%253A%2522hospital%2522%257D%255D%257D%257D%26r1%3D%25EA%25B2%25BD%25EA%25B8%25B0%25EB%258F%2584%26r2%3D%25EC%2584%25B1%25EB%2582%25A8%25EC%258B%259C%2520%25EB%25B6%2584%25EB%258B%25B9%25EA%25B5%25AC%26r3%3D%25EA%25B5%25AC%25EB%25AF%25B8%25EB%258F%2599%26rcode%3D02135114%26responseType%3Djson%26rev%3D45%26sm%3Dtop_hty%26spq%3D0%26ssc%3Dtab.nx.all%26target%3Dpc%26where%3Dnexearch%26x%3D127.122637%26y%3D37.340254&amp;searchType=place&amp;c=15.00,0,0,0,dh" target="_blank" rel="noopener" aria-label="네이버 예약">
+          <a class="quick-link" href="#consulting-form" aria-label="상담 문의">
             <span><img src="images/quick_booking.png" alt=""></span>
-            <b>네이버 예약 <img src="images/right icon.png" alt=""></b>
+            <b>상담 문의 <img src="images/right icon.png" alt=""></b>
           </a>
         </div>
       </div>
@@ -71,22 +71,28 @@
         </div>
         <div class="doctor-photo" aria-label="시스템치과 의료진 이미지">
           <div class="doctor-photo__card doctor-photo__card--a">
-            <img src="images/dr_k.png" alt="의료진 사진 1">
+            <span class="doctor-name">김혜린 원장</span>
+            <img src="images/dr_k.png" alt="김혜린 원장">
           </div>
           <div class="doctor-photo__card doctor-photo__card--b">
-            <img src="images/dr_jung.png" alt="의료진 사진 2">
+            <span class="doctor-name">Dr 정 대표원장</span>
+            <img src="images/dr_jung.png" alt="Dr 정 대표원장">
           </div>
           <div class="doctor-photo__card doctor-photo__card--c">
-            <img src="images/dr_hong.png" alt="의료진 사진 3">
+            <span class="doctor-name">홍국영 대표원장</span>
+            <img src="images/dr_hong.png" alt="홍국영 대표원장">
           </div>
           <div class="doctor-photo__card doctor-photo__card--d">
-            <img src="images/dr_j.png" alt="의료진 사진 4">
+            <span class="doctor-name">정지안 대표원장</span>
+            <img src="images/dr_j.png" alt="정지안 대표원장">
           </div>
           <div class="doctor-photo__card doctor-photo__card--e">
-            <img src="images/dr_ha.png" alt="의료진 사진 5">
+            <span class="doctor-name">하재영 대표원장</span>
+            <img src="images/dr_ha.png" alt="하재영 대표원장">
           </div>
           <div class="doctor-photo__card doctor-photo__card--f">
-            <img src="images/dr_b.png" alt="의료진 사진 6">
+            <span class="doctor-name">변석현 원장</span>
+            <img src="images/dr_b.png" alt="변석현 원장">
           </div>
         </div>
       </div>
@@ -139,12 +145,22 @@
         <div class="machine">
           <img src="images/section_03_ob.png" alt="디지털 진료 장비">
         </div>
-        <div class="system-list">
+        <div class="system-slider">
+          <button type="button" class="system-nav system-nav--up" aria-label="이전 항목">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polyline points="6 15 12 9 18 15"></polyline></svg>
+          </button>
+          <div class="system-viewport">
+          <div class="system-list">
           <article><img src="images/1.3D-CT.png" alt=""><div><b>3D-CT</b><p>컴퓨터 분석으로 정확한 3차원 진단</p></div></article>
           <article><img src="images/2.3D CADCAM.png" alt=""><div><b>3D CAD/CAM</b><p>맞춤형 어버트먼트 직접 제작</p></div></article>
           <article><img src="images/3.gigongso.png" alt=""><div><b>자체기공소</b><p>자체기공소를 통한 원활한 당일치료</p></div></article>
           <article><img src="images/4.3D scanner.png" alt=""><div><b>3D 구강스캐너</b><p>본뜨는 과정 대신, 3D로 구강 스캔</p></div></article>
           <article><img src="images/5.3D robot.png" alt=""><div><b>3D 치아로봇</b><p>바로 그 자리에서 치아 보철물 제작</p></div></article>
+          </div>
+          </div>
+          <button type="button" class="system-nav system-nav--down" aria-label="다음 항목">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -155,7 +171,9 @@
         <h2>시스템 임플란트 리얼스토리</h2>
         <span>말 보다 "<b>결과</b>"로 증명합니다.</span>
         <div class="before-after">
-          <button class="story-prev" aria-label="이전">&lsaquo;</button>
+          <button class="story-prev" aria-label="이전">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+          </button>
           <figure class="story-case">
             <div class="story-photo">
               <img class="story-before-img" src="images/realstory_before2.png" alt="임플란트 시술 전">
@@ -166,8 +184,11 @@
               <figcaption>After</figcaption>
             </div>
           </figure>
-          <button class="story-next" aria-label="다음">&rsaquo;</button>
+          <button class="story-next" aria-label="다음">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+          </button>
         </div>
+        <div class="story-dots" role="tablist" aria-label="사례 선택"></div>
         <small>시술 경험 및 개인 상태에 따라 결과가 달라질 수 있으며, 동일 조건으로 촬영하였습니다.</small>
       </div>
     </section>
@@ -259,7 +280,16 @@
                 <span class="map-pin"><i></i><strong>오시는 길</strong></span>
                 <em>서울특별시 중구 명동길 21<br>명동아르누보센텀 3층</em>
               </span>
-              <a href="#">오시는길 영상 보기 +</a>
+              <div class="map-videos">
+                <a class="map-video-btn line4" href="https://youtu.be/ecz5_hijTps" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                  명동역 출발 영상
+                </a>
+                <a class="map-video-btn line2" href="https://youtu.be/0AxMRWxSpO4" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                  을지로입구역 출발 영상
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -267,23 +297,44 @@
     </section>
   </main>
 
+  <button type="button" class="to-top" aria-label="맨 위로 이동">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="6 14 12 8 18 14"></polyline></svg>
+    <span>TOP</span>
+  </button>
+
   <nav class="floating-sns" aria-label="SNS 바로가기">
-    <a href="https://www.youtube.com/@%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%B9%98%EA%B3%BC" target="_blank" rel="noopener" aria-label="유튜브">
-      <img src="images/Utube.png" alt="">
-      <span>유튜브</span>
-    </a>
-    <a href="https://www.instagram.com/system_dental" target="_blank" rel="noopener" aria-label="인스타그램">
-      <img src="images/Insta.png" alt="">
-      <span>인스타</span>
-    </a>
-    <a href="https://blog.naver.com/system_dental" target="_blank" rel="noopener" aria-label="블로그">
-      <img src="images/blog.png" alt="">
-      <span>블로그</span>
-    </a>
+    <div class="floating-sns-content">
+    <div class="floating-sns-icons">
+      <a href="https://www.youtube.com/@%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%B9%98%EA%B3%BC" target="_blank" rel="noopener" aria-label="유튜브">
+        <img src="images/Utube.png" alt="">
+        <span>유튜브</span>
+      </a>
+      <a href="https://www.instagram.com/system_dental" target="_blank" rel="noopener" aria-label="인스타그램">
+        <img src="images/Insta.png" alt="">
+        <span>인스타</span>
+      </a>
+      <a href="https://blog.naver.com/system_dental" target="_blank" rel="noopener" aria-label="블로그">
+        <img src="images/blog.png" alt="">
+        <span>블로그</span>
+      </a>
+      <span class="floating-promo-divider" aria-hidden="true"></span>
+    </div>
+    <div class="floating-promo">
+      <span class="floating-promo-date">~ 26.6.30</span>
+      <span class="floating-promo-sub">홈페이지 신청자 한정</span>
+      <span class="floating-promo-main">국산 정품 임플란트<br class="promo-break"> <b>최대 49% 할인</b> 이벤트</span>
+    </div>
     <a class="floating-consult" href="#event" aria-label="상담 신청">
-      <span class="floating-consult-short">상담<br>신청</span>
-      <span class="floating-consult-wide">혜택 상담 신청하기</span>
+      <span class="floating-consult-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+      </span>
+      <span class="floating-consult-text">임플란트 할인 혜택 상담 신청하기</span>
     </a>
+    </div>
+    <button class="floating-toggle" type="button" aria-label="닫기" aria-expanded="true">
+      <svg class="icon-close" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      <svg class="icon-open" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </button>
   </nav>
 
   <div data-include="partials/footer.html"></div>

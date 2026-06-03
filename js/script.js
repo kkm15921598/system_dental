@@ -7,6 +7,8 @@ const storyAfterImg = document.querySelector(".story-after-img");
 const storyCase = document.querySelector(".story-case");
 const storyPrevButton = document.querySelector(".story-prev");
 const storyNextButton = document.querySelector(".story-next");
+const storyDots = document.querySelector(".story-dots");
+let storyDotButtons = [];
 
 let heroIndex = 0;
 let heroTimer;
@@ -167,18 +169,46 @@ if (heroVideos.length) {
   playHeroVideo(0);
 }
 
-function showStoryCase(index, shouldRestart = true) {
+function showStoryCase(index, shouldRestart = true, dir = "next") {
   if (!storyBeforeImg || !storyAfterImg || !storyCases.length) return;
 
   storyIndex = (index + storyCases.length) % storyCases.length;
+  updateStoryDots();
 
-  storyCase?.classList.add("is-changing");
-
-  window.setTimeout(() => {
+  const applyImages = () => {
     storyBeforeImg.src = storyCases[storyIndex].before;
     storyAfterImg.src = storyCases[storyIndex].after;
-    storyCase?.classList.remove("is-changing");
-  }, 180);
+  };
+
+  // 가로 슬라이드 푸시: 현재 사례가 한쪽으로 밀려나가고, 다음 사례가 반대쪽에서 밀려 들어옴
+  if (storyCase) {
+    const SHIFT = 90;
+    const outX = dir === "prev" ? SHIFT : -SHIFT;   // 밀려나가는 방향
+    const inX = dir === "prev" ? -SHIFT : SHIFT;    // 반대쪽에서 들어오는 시작 위치
+
+    storyCase.style.transition = "transform .3s ease, opacity .3s ease";
+    storyCase.style.opacity = "0";
+    storyCase.style.transform = `translateX(${outX}px)`;
+
+    const onSlideOut = (e) => {
+      if (e.target !== storyCase || e.propertyName !== "transform") return;
+      storyCase.removeEventListener("transitionend", onSlideOut);
+
+      applyImages();
+
+      // 반대쪽으로 순간 이동(전환 없이) 후 제자리로 밀어 넣기
+      storyCase.style.transition = "none";
+      storyCase.style.transform = `translateX(${inX}px)`;
+      void storyCase.offsetWidth; // 리플로우 강제
+      storyCase.style.transition = "transform .42s cubic-bezier(.22, 1, .36, 1), opacity .42s ease";
+      storyCase.style.opacity = "1";
+      storyCase.style.transform = "translateX(0)";
+    };
+
+    storyCase.addEventListener("transitionend", onSlideOut);
+  } else {
+    applyImages();
+  }
 
   if (shouldRestart) {
     restartStoryTimer();
@@ -186,7 +216,7 @@ function showStoryCase(index, shouldRestart = true) {
 }
 
 function nextStoryCase() {
-  showStoryCase(storyIndex + 1, false);
+  showStoryCase(storyIndex + 1, false, "next");
 }
 
 function restartStoryTimer() {
@@ -195,13 +225,40 @@ function restartStoryTimer() {
 }
 
 storyPrevButton?.addEventListener("click", () => {
-  showStoryCase(storyIndex - 1);
+  showStoryCase(storyIndex - 1, true, "prev");
 });
 
 storyNextButton?.addEventListener("click", () => {
-  showStoryCase(storyIndex + 1);
+  showStoryCase(storyIndex + 1, true, "next");
 });
 
+function updateStoryDots() {
+  storyDotButtons.forEach((dot, i) => {
+    const active = i === storyIndex;
+    dot.classList.toggle("is-active", active);
+    dot.setAttribute("aria-selected", String(active));
+  });
+}
+
+function buildStoryDots() {
+  if (!storyDots) return;
+  storyDots.innerHTML = "";
+  storyDotButtons = storyCases.map((_, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", `${i + 1}번째 사례 보기`);
+    dot.addEventListener("click", () => {
+      if (i === storyIndex) return;
+      showStoryCase(i, true, i > storyIndex ? "next" : "prev");
+    });
+    storyDots.appendChild(dot);
+    return dot;
+  });
+  updateStoryDots();
+}
+
+buildStoryDots();
 showStoryCase(0, false);
 restartStoryTimer();
 
@@ -446,22 +503,114 @@ consultSubmit?.addEventListener('click', (event) => {
   window.location.href = `mailto:zbxm2000@naver.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 
-const systemList = document.querySelector('.system-list');
+const floatingBar = document.querySelector('.floating-sns');
+const floatingToggle = floatingBar && floatingBar.querySelector('.floating-toggle');
+const floatingContent = floatingBar && floatingBar.querySelector('.floating-sns-content');
 
-if (systemList && window.matchMedia('(hover: hover)').matches) {
-  const preview = document.createElement('div');
-  preview.className = 'system-list-preview';
-  systemList.appendChild(preview);
+if (floatingToggle) {
+  floatingToggle.addEventListener('click', () => {
+    const collapsed = floatingBar.classList.toggle('collapsed');
+    floatingToggle.setAttribute('aria-expanded', String(!collapsed));
+    floatingToggle.setAttribute('aria-label', collapsed ? '열기' : '닫기');
 
-  systemList.querySelectorAll('article').forEach((card) => {
-    card.addEventListener('mouseenter', () => {
-      preview.innerHTML = card.innerHTML;
-      preview.style.top = `${card.offsetTop}px`;
-      preview.classList.add('is-visible');
-    });
+    if (floatingContent) {
+      // 접히는 동안에는 내용을 잘라내고, 다 펼쳐진 뒤에 버튼 그림자가 보이도록 overflow 해제
+      floatingContent.style.overflow = 'hidden';
+      if (!collapsed) {
+        const reveal = (e) => {
+          if (e.propertyName !== 'max-width') return;
+          floatingContent.style.overflow = 'visible';
+          floatingContent.removeEventListener('transitionend', reveal);
+        };
+        floatingContent.addEventListener('transitionend', reveal);
+      }
+    }
+  });
+}
+
+// 디지털 시스템 세로 슬라이더 (3개씩 보이기)
+const systemSlider = document.querySelector('.system-slider');
+
+if (systemSlider) {
+  const track = systemSlider.querySelector('.system-list');
+  const upBtn = systemSlider.querySelector('.system-nav--up');
+  const downBtn = systemSlider.querySelector('.system-nav--down');
+  const cards = track ? track.querySelectorAll('article') : [];
+  const VISIBLE = 3;
+  const STEP = 138; // 카드 높이 112 + 간격 26
+  const maxIndex = Math.max(0, cards.length - VISIBLE);
+  let index = 0;
+
+  const isDesktop = () => window.matchMedia('(min-width: 981px)').matches;
+  const AUTOPLAY_MS = 3000;
+  let timer = null;
+
+  const render = () => {
+    if (!isDesktop()) {
+      track.style.transform = '';
+      return;
+    }
+    track.style.transform = `translateY(${-index * STEP}px)`;
+    upBtn.disabled = index <= 0;
+    downBtn.disabled = index >= maxIndex;
+  };
+
+  const stopAuto = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    if (!isDesktop() || maxIndex === 0) return;
+    timer = setInterval(() => {
+      index = index >= maxIndex ? 0 : index + 1; // 끝에 닿으면 처음으로 순환
+      render();
+    }, AUTOPLAY_MS);
+  };
+
+  upBtn.addEventListener('click', () => {
+    if (index > 0) {
+      index -= 1;
+      render();
+    }
+    startAuto(); // 수동 조작 후 타이머 재시작
   });
 
-  systemList.addEventListener('mouseleave', () => {
-    preview.classList.remove('is-visible');
+  downBtn.addEventListener('click', () => {
+    if (index < maxIndex) {
+      index += 1;
+      render();
+    }
+    startAuto();
+  });
+
+  // 마우스를 올리면 잠시 멈춤
+  systemSlider.addEventListener('mouseenter', stopAuto);
+  systemSlider.addEventListener('mouseleave', startAuto);
+
+  window.addEventListener('resize', () => {
+    render();
+    startAuto();
+  });
+
+  render();
+  startAuto();
+}
+
+// 우측 고정 TOP 버튼: 스크롤 내리면 표시, 클릭 시 맨 위로
+const toTopBtn = document.querySelector('.to-top');
+
+if (toTopBtn) {
+  const toggleToTop = () => {
+    toTopBtn.classList.toggle('is-visible', window.scrollY > 400);
+  };
+  window.addEventListener('scroll', toggleToTop, { passive: true });
+  toggleToTop();
+
+  toTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }

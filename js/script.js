@@ -307,7 +307,7 @@ if (subTabs.length && document.querySelector("[data-sub-panel]")) {
   activeSubTab?.click();
 }
 
-const tourImage = document.querySelector("[data-tour-image]");
+const tourTrack = document.querySelector("[data-tour-track]");
 const tourPrevButton = document.querySelector(".tour-prev");
 const tourNextButton = document.querySelector(".tour-next");
 const tourImages = [
@@ -318,22 +318,81 @@ const tourImages = [
   "images/sub1_2_img6.png",
 ];
 let tourIndex = 0;
+let tourAnimating = false;
+let tourPosition = 1;
 
-function showTourImage(index) {
-  if (!tourImage) return;
-
-  tourIndex = (index + tourImages.length) % tourImages.length;
-  tourImage.classList.add("is-changing");
-
-  window.setTimeout(() => {
-    tourImage.src = tourImages[tourIndex];
-    tourImage.alt = `시스템치과 내부 공간 ${tourIndex + 1}`;
-    tourImage.classList.remove("is-changing");
-  }, 160);
+function createTourImage(index, isClone = false) {
+  const image = document.createElement("img");
+  image.src = tourImages[index];
+  image.alt = `시스템치과 내부 공간 ${index + 1}`;
+  if (!isClone) {
+    image.dataset.tourImage = "";
+  }
+  return image;
 }
 
-tourPrevButton?.addEventListener("click", () => showTourImage(tourIndex - 1));
-tourNextButton?.addEventListener("click", () => showTourImage(tourIndex + 1));
+function setTourTrackPosition(shouldAnimate = true) {
+  if (!tourTrack) return;
+
+  tourTrack.classList.toggle("is-resetting", !shouldAnimate);
+  tourTrack.style.transform = `translate3d(${-tourPosition * 100}%,0,0)`;
+}
+
+function initTourSlider() {
+  if (!tourTrack || !tourImages.length) return;
+
+  tourTrack.classList.add("is-resetting");
+
+  if (tourTrack.children.length !== tourImages.length + 2) {
+    tourTrack.innerHTML = "";
+
+    const lastIndex = tourImages.length - 1;
+    tourTrack.append(createTourImage(lastIndex, true));
+    tourImages.forEach((_, index) => tourTrack.append(createTourImage(index)));
+    tourTrack.append(createTourImage(0, true));
+  }
+
+  tourIndex = 0;
+  tourPosition = 1;
+  setTourTrackPosition(false);
+  void tourTrack.offsetWidth;
+  tourTrack.classList.remove("is-resetting");
+}
+
+function showTourImage(direction = "next") {
+  if (!tourTrack || tourAnimating || !tourImages.length) return;
+
+  tourAnimating = true;
+  tourPosition += direction === "prev" ? -1 : 1;
+  setTourTrackPosition(true);
+}
+
+tourTrack?.addEventListener("transitionend", (event) => {
+  if (event.target !== tourTrack || event.propertyName !== "transform") return;
+
+  if (tourPosition === 0) {
+    tourPosition = tourImages.length;
+    tourIndex = tourImages.length - 1;
+    setTourTrackPosition(false);
+  } else if (tourPosition === tourImages.length + 1) {
+    tourPosition = 1;
+    tourIndex = 0;
+    setTourTrackPosition(false);
+  } else {
+    tourIndex = tourPosition - 1;
+  }
+
+  void tourTrack.offsetWidth;
+  tourTrack.classList.remove("is-resetting");
+  tourAnimating = false;
+});
+
+if (tourTrack) {
+  initTourSlider();
+}
+
+tourPrevButton?.addEventListener("click", () => showTourImage("prev"));
+tourNextButton?.addEventListener("click", () => showTourImage("next"));
 
 const animatedSections = [
   '.doctor-section',

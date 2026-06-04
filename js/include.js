@@ -51,21 +51,6 @@ function initNav() {
     link.addEventListener("click", closeMenu);
   });
 
-  // 서랍 메뉴 아코디언: 화살표 누르면 하위 탭 메뉴 펼침/접힘 (한 번에 하나만)
-  navMenu.querySelectorAll(".gnb-sub-toggle").forEach((toggle) => {
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const item = toggle.closest(".gnb-item");
-      const willOpen = !item.classList.contains("is-open");
-      navMenu.querySelectorAll(".gnb-item.is-open").forEach((openItem) => {
-        openItem.classList.remove("is-open");
-        openItem.querySelector(".gnb-sub-toggle")?.setAttribute("aria-expanded", "false");
-      });
-      item.classList.toggle("is-open", willOpen);
-      toggle.setAttribute("aria-expanded", String(willOpen));
-    });
-  });
-
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMenu();
   });

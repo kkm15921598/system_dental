@@ -275,19 +275,37 @@ a {
   font-weight: 400;
 }
 
-/* 서랍 메뉴 하단 SNS (데스크톱에서는 숨김) */
-.gnb-sns {
-  display: none;
-}
+/* 데스크톱 메뉴 호버: 색 전환 + 밑줄이 왼쪽에서 차오르는 효과 */
+@media (min-width: 981px) {
+  .gnb a {
+    position: relative;
+    padding: 6px 2px;
+    transition: color .25s ease;
+  }
 
-/* 데스크톱: 그룹 래퍼는 투명하게(메인 링크만 flex 항목으로), 하위 메뉴·토글 숨김 */
-.gnb-item {
-  display: contents;
-}
+  .gnb a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1);
+  }
 
-.gnb-sub-toggle,
-.gnb-sub {
-  display: none;
+  .gnb a:hover,
+  .gnb a:focus-visible {
+    color: var(--red);
+  }
+
+  .gnb a:hover::after,
+  .gnb a:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
 }
 
 /* Hamburger toggle (hidden on desktop) */
@@ -3404,94 +3422,6 @@ section {
     letter-spacing: -.01em;
   }
 
-  /* 서랍 메뉴 아코디언: 카테고리 행 + 펼침 토글 + 하위 탭 메뉴 */
-  .gnb-item {
-    display: block;
-    position: relative;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .gnb-item > a {
-    display: block;
-    border-bottom: 0;
-  }
-
-  .gnb-sub-toggle {
-    display: grid;
-    position: absolute;
-    top: 8px;
-    right: 0;
-    width: 46px;
-    height: 46px;
-    place-items: center;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: #999;
-    cursor: pointer;
-    transition: transform .3s ease, color .3s ease;
-  }
-
-  .gnb-item.is-open .gnb-sub-toggle {
-    transform: rotate(180deg);
-    color: var(--red);
-  }
-
-  .gnb-sub {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .35s ease;
-    background: #faf8f7;
-    border-radius: 8px;
-  }
-
-  .gnb-item.is-open .gnb-sub {
-    max-height: 320px;
-    margin-bottom: 14px;
-  }
-
-  .gnb-sub a {
-    display: block;
-    padding: 13px 16px;
-    border-bottom: 0;
-    color: #666;
-    font-size: 15px;
-  }
-
-  .gnb-sub a:first-child {
-    padding-top: 16px;
-  }
-
-  .gnb-sub a:last-child {
-    padding-bottom: 16px;
-  }
-
-  /* 서랍 메뉴 맨 아래 SNS 아이콘 */
-  .gnb-sns {
-    display: flex;
-    justify-content: center;
-    gap: 34px;
-    margin-top: auto;
-    padding-top: 28px;
-  }
-
-  .gnb-sns a {
-    display: grid;
-    justify-items: center;
-    gap: 7px;
-    padding: 0;
-    border-bottom: 0;
-    font-size: 12px;
-    color: #555;
-  }
-
-  .gnb-sns img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-  }
-
   /* 원데이 임플란트: 1열로 쌓고 고정 높이 해제 (섹션이 너무 길어져 등장 애니메이션이 안 뜨는 문제 방지) */
   /* check 목록 ↔ 자세히보기 버튼 사이 여백 절반(124px → 62px) */
   .implant-grid {
@@ -5013,48 +4943,4 @@ section {
 .subpage .cosmetic-step-grid p,
 .subpage .whitening-step-grid b,
 .subpage .whitening-step-grid h4,
-.subpage .whitening-step-grid p,
-.subpage .before-after-grid figcaption,
-.subpage .case-pair-grid figcaption,
-.subpage .milknate-grid p,
-.subpage .cosmetic-cta p,
-.subpage .cosmetic-cta a,
-/* 일반진료 */
-.subpage .general-kicker,
-.subpage .general-label,
-.subpage .general-section-title span,
-.subpage .general-card-grid b,
-.subpage .general-method-grid b,
-.subpage .general-card-grid p,
-.subpage .general-method-grid p,
-.subpage .general-before-after figcaption,
-.subpage .general-split p:not(.general-label),
-.subpage .general-feature-row p:not(.general-label),
-.subpage .general-cta p,
-.subpage .general-cta a { font-size:16px; }
-
-/* 모바일에서만 16px 미만으로 작아지는 제목·항목 (PC 크기는 유지) */
-@media (max-width:760px) {
-  .digital-page .equipment-grid h3,
-  .subpage .doctor-details li,
-  .subpage .cosmetic-step-grid h4,
-  .subpage .general-card-grid h4,
-  .subpage .general-method-grid h4,
-  .subpage .general-case-grid h4,
-  .subpage .general-number-list span { font-size:16px; }
-}
-
-/* 모바일(≤640px) 서브페이지 공통: 양옆 여백 절반 (40px → 20px) */
-@media (max-width: 640px) {
-  .general-inner,
-  .digital-inner,
-  .about-inner,
-  .implant-inner,
-  .cosmetic-inner,
-  .digital-tabs,
-  .route-grid,
-  .tour-slider,
-  .digital-crumb .crumb-inner {
-    width: min(1120px, calc(100% - 40px));
-  }
-}
+.subpage .whi

@@ -275,6 +275,21 @@ a {
   font-weight: 400;
 }
 
+/* 서랍 메뉴 하단 SNS (데스크톱에서는 숨김) */
+.gnb-sns {
+  display: none;
+}
+
+/* 데스크톱: 그룹 래퍼는 투명하게(메인 링크만 flex 항목으로), 하위 메뉴·토글 숨김 */
+.gnb-item {
+  display: contents;
+}
+
+.gnb-sub-toggle,
+.gnb-sub {
+  display: none;
+}
+
 /* Hamburger toggle (hidden on desktop) */
 .nav-toggle {
   display: none;
@@ -1456,6 +1471,11 @@ section {
   font-size: 18px;
   font-weight: 100;
   line-height: 1.58;
+}
+
+/* 모바일 전용 줄바꿈 (640px 이하에서만 표시) */
+.m-br {
+  display: none;
 }
 
 .digital-section {
@@ -3345,6 +3365,11 @@ section {
 }
 
 @media (max-width: 980px) {
+  /* 헤더(z20)가 스태킹 컨텍스트라 서랍 메뉴가 플로팅바(z30)에 가려지던 문제 → 헤더를 위로 */
+  .site-header {
+    z-index: 40;
+  }
+
   .nav-toggle {
     display: block;
   }
@@ -3377,6 +3402,94 @@ section {
     border-bottom: 1px solid #f0f0f0;
     font-size: 18px;
     letter-spacing: -.01em;
+  }
+
+  /* 서랍 메뉴 아코디언: 카테고리 행 + 펼침 토글 + 하위 탭 메뉴 */
+  .gnb-item {
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .gnb-item > a {
+    display: block;
+    border-bottom: 0;
+  }
+
+  .gnb-sub-toggle {
+    display: grid;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #999;
+    cursor: pointer;
+    transition: transform .3s ease, color .3s ease;
+  }
+
+  .gnb-item.is-open .gnb-sub-toggle {
+    transform: rotate(180deg);
+    color: var(--red);
+  }
+
+  .gnb-sub {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
+    background: #faf8f7;
+    border-radius: 8px;
+  }
+
+  .gnb-item.is-open .gnb-sub {
+    max-height: 320px;
+    margin-bottom: 14px;
+  }
+
+  .gnb-sub a {
+    display: block;
+    padding: 13px 16px;
+    border-bottom: 0;
+    color: #666;
+    font-size: 15px;
+  }
+
+  .gnb-sub a:first-child {
+    padding-top: 16px;
+  }
+
+  .gnb-sub a:last-child {
+    padding-bottom: 16px;
+  }
+
+  /* 서랍 메뉴 맨 아래 SNS 아이콘 */
+  .gnb-sns {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    margin-top: auto;
+    padding-top: 28px;
+  }
+
+  .gnb-sns a {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    padding: 0;
+    border-bottom: 0;
+    font-size: 12px;
+    color: #555;
+  }
+
+  .gnb-sns img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
   }
 
   /* 원데이 임플란트: 1열로 쌓고 고정 높이 해제 (섹션이 너무 길어져 등장 애니메이션이 안 뜨는 문제 방지) */
@@ -3478,11 +3591,13 @@ section {
     display: none;
   }
 
-  /* 섹션5 이벤트: 1열로 쌓아 상담신청 폼을 아래로 + 고정 높이 해제, 위 내용과 70px 간격 */
+  /* 섹션5 이벤트: 1열로 쌓아 상담신청 폼을 아래로 + 고정 높이 해제, 위 내용과 70px 간격
+     (1300px 블록의 justify-content: center가 남아 내용이 화면 밖으로 밀리던 것도 해제) */
   .event-grid {
     grid-template-columns: 1fr;
     width: auto;
     gap: 70px;
+    justify-content: stretch;
   }
 
   .event-section {
@@ -3605,6 +3720,29 @@ section {
 }
 
 @media (max-width: 640px) {
+  /* 일부 요소가 화면 폭을 넘어 생기던 가로 스크롤바 차단 */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+
+  /* 탑메뉴 축소 + 로고도 비율 맞춰 축소 */
+  .site-header {
+    min-height: 0;
+    padding: 10px 0;
+  }
+
+  /* 탑메뉴 양옆 여백 축소 (42px → 16px) */
+  .site-header .nav-wrap {
+    width: calc(100% - 32px);
+  }
+
+  .brand {
+    width: 120px;
+    height: 25px;
+  }
+
   /* 히어로 문구 32px */
   .hero-copy__headline {
     font-size: 32px;
@@ -3635,6 +3773,414 @@ section {
     font-size: 32px;
   }
 
+  /* 모바일 전용 줄바꿈 표시 */
+  .m-br {
+    display: inline;
+  }
+
+  /* 디지털 자세히보기 버튼 15px 위로 (문구 아래 여백 58px → 43px) */
+  .digital-section .section-copy p {
+    margin-bottom: 43px;
+  }
+
+  /* 디지털 장비 카드 제목 22px → 18px */
+  .system-list b {
+    font-size: 18px;
+  }
+
+  /* 리얼스토리 슬라이드 좌우 화살표 숨김 (스와이프로 넘김) */
+  .before-after button {
+    display: none;
+  }
+
+  /* 슬라이드 이미지 가로 100% (화살표 자리 제거) + 아래 여백 절반 (54px → 27px) */
+  .before-after {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    margin-bottom: 27px;
+  }
+
+  /* Before/After 세로 일렬 배치: 사진-Before-사진-After */
+  .story-case {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  /* Before/After 라벨 30px → 18px */
+  .story-photo figcaption {
+    font-size: 18px;
+    height: 40px;
+  }
+
+  /* 슬라이드 이미지 세로 축소 (300px → 240px) */
+  .story-photo img {
+    height: 240px;
+  }
+
+  /* "시술 경험 및~" 안내 문구 18px → 16px */
+  .story-wrap small {
+    font-size: 16px;
+  }
+
+  /* 이벤트 섹션만 위 여백이 20px 더 컸던 것 제거 → 다른 섹션과 60px로 통일 */
+  .event-section .wrap {
+    margin-top: 0;
+  }
+
+  /* 이벤트 타이틀 ↔ 혜택 목록 사이 여백 축소 (94px → 30px, 다른 섹션과 통일) */
+  .event-grid {
+    margin-top: 30px;
+  }
+
+  /* "※ 상담 신청 하신~" 안내: 고정 줄바꿈 해제, 화면 폭대로 자연스럽게 줄바꿈 */
+  .event-note br {
+    display: none;
+  }
+
+  /* 상담 폼: 좌우 패딩 축소로 화면 안에 들어오게 */
+  .consult-form {
+    padding: 55px 24px 36px;
+  }
+
+  /* 폼 제목 26px → 22px, 위아래 여백 5px 축소 */
+  .form-title {
+    font-size: 22px;
+    margin-bottom: 35px;
+  }
+
+  /* 출발 영상 버튼 2개 세로 일렬 정렬 */
+  .map-videos {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .map-card a.map-video-btn {
+    width: 100%;
+  }
+
+  /* 푸터: 진료시간 ↔ 병원정보 사이 여백 축소 (64px → 24px) */
+  .footer-info {
+    gap: 24px;
+  }
+
+  /* 푸터 하단: 링크가 세로로 깨지던 것 수정 — 카피라이트 아래 줄로 내림 */
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .footer-bottom nav {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom a {
+    white-space: nowrap;
+  }
+
+  /* 플로팅 상담바: 스크롤 방향에 따라 자연스럽게 나타나고 숨김 */
+  .floating-sns {
+    transition: transform .35s ease, opacity .35s ease;
+  }
+
+  .floating-sns.is-scroll-hidden {
+    transform: translateX(-50%) translateY(calc(100% + 30px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 라벨과 입력칸을 위아래로 (이름 ↵ 입력폼) */
+  .consult-form > label:not(.agree) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* 동의 문구 줄바꿈 허용 (잘림 방지) + 자세히보기는 아랫줄로 */
+  .consult-form .agree {
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+  .privacy-detail-wrap {
+    width: 100%;
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  /* 폼 상단 치아 아이콘 60% 크기 (92px → 55px) */
+  .consult-form::before {
+    top: -28px;
+    width: 55px;
+    height: 55px;
+    background-size: 25px 32px;
+  }
+
+  /* 혜택 상담 신청하기 버튼 22px → 20px */
+  .consult-form .consult-submit {
+    font-size: 20px;
+  }
+
+  /* 동의 줄 ↔ 신청 버튼 사이 여백 절반 (42px → 21px) */
+  .consult-form .agree {
+    margin-bottom: 21px;
+  }
+
+  /* 진료안내 타이틀 아래 빨간 줄 제거 + 본문과의 여백 축소 */
+  .info-title {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .info-grid {
+    padding-top: 24px;
+  }
+
+  /* 진료안내&오시는길: 1열 세로 일렬(진료안내→지하철→SNS→문의전화) + 박스 가로 % 유동 */
+  .info-left {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .info-block {
+    width: 100%;
+  }
+
+  /* 블록 사이 여백 통일: 각 블록 마지막 요소의 자체 아래 여백 제거 → 항상 36px */
+  .info-block > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 진료안내 글꼴: 다른 섹션과 비슷한 비율로 축소 */
+  .info-block h3 {
+    font-size: 18px;
+  }
+
+  .info-block dt {
+    font-size: 16px;
+  }
+
+  .info-block dd {
+    font-size: 15px;
+  }
+
+  .info-block p {
+    font-size: 16px;
+  }
+
+  .info-block p span {
+    font-size: 14px;
+  }
+
+  .info-block small {
+    font-size: 14px;
+  }
+
+  .info-block .call {
+    font-size: 20px;
+  }
+
+  /* 진료시간 표: 라벨 칸 줄여서 폭에 맞게 */
+  .info-block dl div {
+    column-gap: 20px;
+  }
+
+  /* 이벤트 혜택: 1열로, 아이콘 왼쪽 + 제목/설명 오른쪽 배치 */
+  .benefits {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .benefits article {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .benefits i {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+  }
+
+  .benefits article > div {
+    min-width: 0;
+  }
+
+  .benefits b {
+    margin-bottom: 4px;
+    font-size: 18px;
+  }
+
+  .benefits p {
+    font-size: 14px;
+  }
+
+  /* 디지털 기구 이미지: 태블릿 최종 크기(640px의 46% ≈ 294px)로 고정.
+     모바일에서는 크기 변화 없이 top/right로 위치만 조절 */
+  /* 이미지가 오른쪽 화면 밖으로 나가도 가로 스크롤 안 생기게 */
+  .digital-section {
+    overflow: hidden;
+  }
+
+  .machine {
+    width: 294px;
+    top: -40px;
+    right: -70px;
+  }
+
+  /* "당일 즉시 식립을~" 문구 두께 300 → 200 */
+  .implant-section .implant-desc {
+    font-weight: 200;
+  }
+
+  /* 원데이 임플란트 육각 아이콘: 고정 px 대신 %로, 화면 폭에 맞춰 유동 */
+  .hex-list {
+    gap: 5%;
+    margin-top: 36px;
+    margin-bottom: 20px;
+  }
+
+  /* 원데이 임플란트 내용 가운데 정렬 */
+  .implant-section .section-copy {
+    text-align: center;
+  }
+
+  .hex-list {
+    justify-content: center;
+  }
+
+  /* 체크리스트: 왼쪽 육각 아이콘 크게 축소해서 Check 글자 왼쪽에 인라인 배치 */
+  .checks article {
+    padding-left: 0;
+  }
+
+  .checks article img {
+    position: static;
+    display: inline-block;
+    width: 16px;
+    height: 18px;
+    transform: none;
+    vertical-align: -3px;
+    margin-right: 6px;
+  }
+
+  /* 체크리스트 박스 글꼴 모바일 비율로 축소 */
+  .checks span {
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .checks h3 {
+    font-size: 18px;
+  }
+
+  .checks p {
+    font-size: 15px;
+  }
+
+  /* 내용은 줄바꿈 없이 이어서 */
+  .checks p br {
+    display: none;
+  }
+
+  .hex-list div {
+    width: 30%;
+  }
+
+  .hex-list img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 160 / 162;
+  }
+
+  .hex-list b {
+    font-size: 16px;
+  }
+
+  /* 각 섹션 타이틀 위 소개 문구(eyebrow/kicker) 20px → 18px */
+  .doctor-section .section-copy .eyebrow,
+  .digital-section .section-copy .eyebrow,
+  .implant-section .implant-kicker,
+  .story-wrap > p {
+    font-size: 18px;
+  }
+
+  /* 각 섹션 타이틀 아래 문구 20px → 16px */
+  .doctor-section .section-copy p:not(.eyebrow),
+  .implant-section .implant-desc,
+  .digital-section .section-copy p,
+  .story-wrap > span,
+  .event-head span,
+  .info-title span {
+    font-size: 16px;
+  }
+
+  /* 섹션 공통 좌우 여백 절반 (42px → 21px) */
+  .wrap {
+    width: calc(100% - 42px);
+  }
+
+  /* 패널이 짧아져 영상과 패널 사이에 생긴 검은 띠 제거:
+     영상이 패널 바로 위까지 채우도록 (패널 카드들이 불투명이라 겹쳐도 안 보임) */
+  .hero-media,
+  .hero-shade {
+    bottom: 0;
+  }
+
+  /* 진료시간·전화상담 패널은 좌우 여백 없이 풀폭 */
+  .quick-panel.wrap {
+    width: 100%;
+  }
+
+  /* 진료시간 안내: 3줄이 다 보이게 고정 높이 해제 + 위아래 20px */
+  .hours-card {
+    height: auto;
+    min-height: 0;
+    padding: 20px;
+  }
+
+  /* 제목 줄: 18px + 아래 여백 축소 */
+  .hours-card strong {
+    margin-bottom: 6px;
+    font-size: 18px;
+    flex-wrap: wrap;
+    row-gap: 5px;
+  }
+
+  /* "※ 일요일 및 공휴일 휴일"은 아랫줄로 (아이콘+간격 30px만큼 들여쓰기) + 아래 여백 10px */
+  .hours-card strong small {
+    width: 100%;
+    margin-left: 30px;
+    margin-bottom: 10px;
+  }
+
+  /* 시간 줄 자체의 위아래 패딩 축소 */
+  .hours-card dl div {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  /* 진료시간 안내: 라벨·시간 줄바꿈 없애고 "평일 09:30 - 19:30" 형태로 한 줄씩 */
+  .hours-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .hours-card div {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+  }
+
+  .hours-card div + div {
+    border-left: 0;
+    border-top: 1px solid #ebe7e2;
+  }
+
   /* 전화상담을 아이콘 버튼형으로 (번호·문의사항 숨김, 아이콘+라벨 중앙, 33% 칸) */
   .phone-card__number,
   .phone-card small {
@@ -3645,6 +4191,8 @@ section {
     align-items: center;
     justify-content: center;
     text-align: center;
+    height: auto;
+    min-height: 0;
     padding: 14px 8px;
     border-left: 0;
   }
@@ -3653,30 +4201,82 @@ section {
     flex-direction: column;
     gap: 8px;
     margin-bottom: 0;
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .phone-card span img {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+  }
+
+  /* 오시는길·상담문의 아이콘도 전화상담과 같은 30px + 글씨 같은 줄에 정렬 */
+  .quick img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .quick,
+  .quick-link {
+    gap: 8px;
+  }
+
+  .quick {
+    font-size: 16px;
+    height: auto;
+    min-height: 0;
+    padding: 14px 0;
+  }
+
+  .quick-link {
+    min-height: 0;
   }
 
   /* 각 섹션 자세히보기 버튼 ~70% 축소 */
   .outline-btn,
   .outline-btn.white,
-  .doctor-section .outline-btn {
+  .doctor-section .outline-btn,
+  .digital-section .outline-btn {
     width: 140px;
     min-width: 140px;
     height: 40px;
     font-size: 14px;
   }
 
+  /* 의사소개 섹션 상단 여백 절반 (40+60 → 20+30) */
+  .doctor-grid {
+    padding-top: 20px;
+  }
+
+  .doctor-section .section-copy {
+    margin-top: 30px;
+  }
+
   /* 의료진 그룹: 이 모습 그대로 60%로 축소 + 우측 정렬, 왼쪽으로 100px 이동, 하단 빈 공간만큼 섹션 높이 축소 */
   .doctor-photo {
     margin-left: 0;
-    margin-bottom: -380px;
+    margin-bottom: -410px;
     transform: translateX(-100px) scale(0.6) !important;
     transform-origin: top right;
+  }
+
+  /* 모바일에서만: --a 선생님 오른쪽으로 10% 이동 (90% → 100%) */
+  .doctor-photo__card--a {
+    left: 100%;
+  }
+
+  /* 모바일에서만: --b 선생님 오른쪽으로 10% 이동 (71% → 81%) */
+  .doctor-photo__card--b {
+    left: 81%;
+  }
+
+  /* 모바일에서만: --c 선생님 왼쪽으로 10% 이동 (40% → 30%) */
+  .doctor-photo__card--c {
+    left: 30%;
+  }
+
+  /* 모바일에서만: --d 선생님 오른쪽으로 15% 이동 (100% → 115%) */
+  .doctor-photo__card--d {
+    left: 115%;
   }
 
   /* 모바일: 의사 이름 툴팁 숨김 + 흑백 효과 끄기 */
@@ -4442,4 +5042,19 @@ section {
   .subpage .general-method-grid h4,
   .subpage .general-case-grid h4,
   .subpage .general-number-list span { font-size:16px; }
+}
+
+/* 모바일(≤640px) 서브페이지 공통: 양옆 여백 절반 (40px → 20px) */
+@media (max-width: 640px) {
+  .general-inner,
+  .digital-inner,
+  .about-inner,
+  .implant-inner,
+  .cosmetic-inner,
+  .digital-tabs,
+  .route-grid,
+  .tour-slider,
+  .digital-crumb .crumb-inner {
+    width: min(1120px, calc(100% - 40px));
+  }
 }

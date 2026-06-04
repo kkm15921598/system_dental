@@ -219,10 +219,17 @@ function nextStoryCase() {
   showStoryCase(storyIndex + 1, false, "next");
 }
 
+// 모바일(≤640px)에서는 자동 슬라이드 중지
+const storyMobileQuery = window.matchMedia("(max-width: 640px)");
+
 function restartStoryTimer() {
   window.clearInterval(storyTimer);
+  if (storyMobileQuery.matches) return;
   storyTimer = window.setInterval(nextStoryCase, storyDuration);
 }
+
+// 화면 크기가 바뀌면 자동 슬라이드 재시작/중지
+storyMobileQuery.addEventListener?.("change", restartStoryTimer);
 
 storyPrevButton?.addEventListener("click", () => {
   showStoryCase(storyIndex - 1, true, "prev");
@@ -231,6 +238,26 @@ storyPrevButton?.addEventListener("click", () => {
 storyNextButton?.addEventListener("click", () => {
   showStoryCase(storyIndex + 1, true, "next");
 });
+
+// 손가락 스와이프로 슬라이드 넘기기
+const storySwipeArea = document.querySelector(".before-after");
+let storyTouchStartX = null;
+
+storySwipeArea?.addEventListener("touchstart", (e) => {
+  storyTouchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+storySwipeArea?.addEventListener("touchend", (e) => {
+  if (storyTouchStartX === null) return;
+  const dx = e.changedTouches[0].clientX - storyTouchStartX;
+  storyTouchStartX = null;
+  if (Math.abs(dx) < 40) return; // 짧은 터치는 무시
+  if (dx < 0) {
+    showStoryCase(storyIndex + 1, true, "next");
+  } else {
+    showStoryCase(storyIndex - 1, true, "prev");
+  }
+}, { passive: true });
 
 function updateStoryDots() {
   storyDotButtons.forEach((dot, i) => {
@@ -305,6 +332,12 @@ const subTabs = [...document.querySelectorAll("[data-sub-tab]")];
 if (subTabs.length && document.querySelector("[data-sub-panel]")) {
   const activeSubTab = subTabs.find((tab) => tab.dataset.subTab === location.hash.slice(1));
   activeSubTab?.click();
+
+  // 같은 페이지에서 해시만 바뀌어도(예: 햄버거 하위 메뉴 클릭) 탭 전환
+  window.addEventListener("hashchange", () => {
+    const tab = subTabs.find((t) => t.dataset.subTab === location.hash.slice(1));
+    tab?.click();
+  });
 }
 
 const tourTrack = document.querySelector("[data-tour-track]");
@@ -563,6 +596,35 @@ consultSubmit?.addEventListener('click', (event) => {
 });
 
 const floatingBar = document.querySelector('.floating-sns');
+
+// 모바일(≤640px): 스크롤 내리면 플로팅바 표시, 올리면 숨김
+const floatingMobileQuery = window.matchMedia('(max-width: 640px)');
+let lastFloatingScrollY = window.scrollY || 0;
+
+function updateFloatingBarVisibility() {
+  if (!floatingBar) return;
+  if (!floatingMobileQuery.matches) {
+    floatingBar.classList.remove('is-scroll-hidden');
+    return;
+  }
+  const y = window.scrollY || 0;
+  const diff = y - lastFloatingScrollY;
+  if (Math.abs(diff) < 5) return; // 미세한 흔들림 무시
+  if (diff > 0) {
+    floatingBar.classList.remove('is-scroll-hidden'); // 아래로 스크롤 → 표시
+  } else {
+    floatingBar.classList.add('is-scroll-hidden'); // 위로 스크롤 → 숨김
+  }
+  lastFloatingScrollY = y;
+}
+
+if (floatingBar && floatingMobileQuery.matches) {
+  floatingBar.classList.add('is-scroll-hidden'); // 모바일 첫 화면에서는 숨김
+}
+
+window.addEventListener('scroll', updateFloatingBarVisibility, { passive: true });
+floatingMobileQuery.addEventListener?.('change', updateFloatingBarVisibility);
+
 const floatingToggle = floatingBar && floatingBar.querySelector('.floating-toggle');
 const floatingContent = floatingBar && floatingBar.querySelector('.floating-sns-content');
 

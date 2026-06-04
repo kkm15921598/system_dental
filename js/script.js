@@ -340,6 +340,94 @@ if (subTabs.length && document.querySelector("[data-sub-panel]")) {
   });
 }
 
+// 서브페이지: 하단 고정 플로팅 바 (전화 · 오시는 길 · 상담신청)
+const isSubpageForFloating = document.querySelector(".digital-visual") && !document.querySelector(".floating-sns");
+if (isSubpageForFloating) {
+  const subFloating = document.createElement("nav");
+  subFloating.className = "sub-floating";
+  subFloating.setAttribute("aria-label", "빠른 연락 메뉴");
+  subFloating.innerHTML = `
+    <a class="sub-floating__btn sub-floating__btn--call" href="tel:050714702875">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      <span>전화상담</span>
+    </a>
+    <a class="sub-floating__btn sub-floating__btn--map" href="about.html#location">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span>오시는 길</span>
+    </a>
+    <a class="sub-floating__btn sub-floating__btn--consult" href="index.html#consulting-form">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>상담신청</span>
+    </a>`;
+  document.body.appendChild(subFloating);
+  document.body.classList.add("has-sub-floating");
+}
+
+// 모바일: 서브 탭메뉴를 커스텀 드롭다운으로 (CSS에서 ≤640px일 때만 표시)
+const tabBarForSelect = document.querySelector(".digital-tabs");
+if (tabBarForSelect) {
+  const tabLinks = [...tabBarForSelect.querySelectorAll("a")];
+  if (tabLinks.length) {
+    const dropdown = document.createElement("div");
+    dropdown.className = "tab-dropdown";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "tab-dropdown__toggle";
+    toggle.setAttribute("aria-haspopup", "listbox");
+    toggle.setAttribute("aria-expanded", "false");
+
+    const list = document.createElement("ul");
+    list.className = "tab-dropdown__list";
+
+    const closeDropdown = () => {
+      dropdown.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    const syncDropdown = () => {
+      const active = tabLinks.find((l) => l.classList.contains("is-active")) || tabLinks[0];
+      toggle.textContent = active.textContent.trim();
+      [...list.children].forEach((li, i) => {
+        li.classList.toggle("is-active", tabLinks[i] === active);
+      });
+    };
+
+    tabLinks.forEach((link) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = link.textContent.trim();
+      btn.addEventListener("click", () => {
+        link.click(); // 기존 탭 전환 로직 재사용
+        closeDropdown();
+      });
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+
+    toggle.addEventListener("click", () => {
+      const open = !dropdown.classList.contains("is-open");
+      dropdown.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) closeDropdown();
+    });
+
+    // 탭(또는 해시)으로 전환될 때 라벨·활성 표시 동기화
+    tabLinks.forEach((link) => {
+      link.addEventListener("click", () => window.setTimeout(syncDropdown, 0));
+    });
+
+    dropdown.appendChild(toggle);
+    dropdown.appendChild(list);
+    tabBarForSelect.insertAdjacentElement("afterend", dropdown);
+    syncDropdown();
+  }
+}
+
 const tourTrack = document.querySelector("[data-tour-track]");
 const tourPrevButton = document.querySelector(".tour-prev");
 const tourNextButton = document.querySelector(".tour-next");

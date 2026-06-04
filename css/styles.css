@@ -308,6 +308,11 @@ a {
   }
 }
 
+/* 서랍 메뉴 하단 SNS (데스크톱에서는 숨김) */
+.gnb-sns {
+  display: none;
+}
+
 /* Hamburger toggle (hidden on desktop) */
 .nav-toggle {
   display: none;
@@ -3422,6 +3427,31 @@ section {
     letter-spacing: -.01em;
   }
 
+  /* 서랍 메뉴 맨 아래 SNS 아이콘 3개 */
+  .gnb-sns {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    margin-top: auto;
+    padding-top: 28px;
+  }
+
+  .gnb-sns a {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    padding: 0;
+    border-bottom: 0;
+    color: #555;
+    font-size: 12px;
+  }
+
+  .gnb-sns img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+
   /* 원데이 임플란트: 1열로 쌓고 고정 높이 해제 (섹션이 너무 길어져 등장 애니메이션이 안 뜨는 문제 방지) */
   /* check 목록 ↔ 자세히보기 버튼 사이 여백 절반(124px → 62px) */
   .implant-grid {
@@ -4317,11 +4347,11 @@ section {
 .digital-title { position:relative; margin:0 0 50px; padding-left:40px; color:#222; font-size:34px; font-weight:600; }
 .digital-title::before { content:""; position:absolute; left:0; top:2px; width:30px; height:33px; background:url("../images/dot_01.png") center/contain no-repeat; }
 .digital-panel em { color:#ae292d; font-style:normal; }
-.subpage-about { background-image:linear-gradient(rgba(0,0,0,.47),rgba(0,0,0,.47)),url("../images/sub_top_01.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
-.subpage-implant { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_02.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
-.subpage-cosmetic { background-image:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("../images/sub_top_03.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
-.subpage-general { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_04.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
-.subpage-digital { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_05.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
+.subpage-about { background-image:linear-gradient(rgba(0,0,0,.47),rgba(0,0,0,.47)),url("../images/sub_top_01.png"); background-attachment: fixed; background-position: center 20px; background-size: 1920px auto; background-repeat: no-repeat; }
+.subpage-implant { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_02.png"); background-attachment: fixed; background-position: center 20px; background-size: 1920px auto; background-repeat: no-repeat; }
+.subpage-cosmetic { background-image:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("../images/sub_top_03.png"); background-attachment: fixed; background-position: center 20px; background-size: 1920px auto; background-repeat: no-repeat; }
+.subpage-general { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_04.png"); background-attachment: fixed; background-position: center 20px; background-size: 1920px auto; background-repeat: no-repeat; }
+.subpage-digital { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_05.png"); background-attachment: fixed; background-position: center 20px; background-size: 1920px auto; background-repeat: no-repeat; }
 .digital-visual.subpage-digital .digital-crumb { top: 0; }
 .subpage-icon { width:77px; height:77px; background:none; }
 .subpage-icon img { width:77px; height:77px; }
@@ -4695,11 +4725,8 @@ section {
 }
 
 @media (max-width: 760px) {
-  .digital-visual { height:280px; }
   .digital-crumb { left:16px; top:18px; padding:6px 10px; font-size:12px; border-radius:6px; max-width: calc(100% - 40px); }
   .digital-crumb i { margin:0 8px; font-size:12px; }
-  .digital-visual-copy { padding-top:52px; }
-  .digital-visual h1 { font-size:28px; }
   .digital-tabs { width:calc(100% - 40px); height:auto; margin:0 auto; }
   .digital-tabs a { min-height:52px; padding:8px 3px; font-size:13px; text-align:center; }
   .digital-panel { padding:70px 0; }
@@ -4910,14 +4937,304 @@ section {
 .implant-panel .implant-process-detail-grid p,
 .implant-panel .implant-cta p,
 .implant-panel .implant-cta a { font-size:16px; }
-/* 전체 임플란트 안내 박스(다음과 같은 경우 고려할 수 있습니다) 텍스트는 15px */
-.implant-panel .full-implant li { font-size:15px; }
+/* 전체 임플란트 안내  (주석이 저장 중 잘려 자동으로 닫았습니다) */
 
-/* ===== 서브페이지(디지털·심미·일반진료·치과소개) 최소 글씨 16px =====
-   기존 11~15px 본문·설명 텍스트를 16px로 올립니다. (16px 이상 제목·강조는 유지)
-   디지털 페이지는 .digital-page, 나머지 서브페이지는 .subpage 로 한정합니다. */
-/* 디지털 */
-.digital-page .ct-points b,
-.digital-page .ct-detail p,
-.digital-page .process-grid p,
-.
+/* 모바일용 탭 드롭다운: 기본은 숨김 (640px 이하에서만 표시) */
+.tab-dropdown {
+  display: none;
+}
+
+/* ===== 태블릿 이하: 서브 탑배너 배경 cover (아래 빈 공간 방지, PC는 고정 100% auto 유지) ===== */
+@media (max-width: 980px) {
+  .subpage-about,
+  .subpage-implant,
+  .subpage-cosmetic,
+  .subpage-general,
+  .subpage-digital {
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* 배너 높이를 화면 폭에 비례해 축소 (400px → 최소 240px) → 이미지도 %로 줄어듦 */
+  .digital-visual {
+    height: clamp(240px, 40vw, 400px);
+  }
+
+  /* 비급여 진료비 표: 태블릿에서 글씨·패딩 줄여 한 화면에 맞춤 */
+  .fee-table {
+    font-size: 13px;
+  }
+
+  .fee-table th,
+  .fee-table td {
+    height: 38px;
+    padding: 6px 8px;
+  }
+
+  .fee-note {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 20px;
+  }
+
+  /* 탑 배너 문구 (760 블록에서 이동: 태블릿부터 적용) */
+  .digital-visual-copy {
+    padding-top: 52px;
+  }
+
+  .digital-visual h1 {
+    font-size: 28px;
+  }
+
+  /* 브레드크럼: "홈" 왼쪽 여백 약간 */
+  .digital-crumb {
+    padding-left: 12px;
+    padding-right: 0;
+  }
+
+  .digital-crumb .crumb-inner {
+    width: 100%;
+  }
+}
+
+/* ===== 모바일: 서브페이지 공통 양옆 여백 절반 (40px → 20px) ===== */
+@media (max-width: 640px) {
+  .general-inner,
+  .digital-inner,
+  .about-inner,
+  .implant-inner,
+  .cosmetic-inner,
+  .digital-tabs,
+  .route-grid,
+  .tour-slider {
+    width: min(1120px, calc(100% - 40px));
+  }
+
+  /* 브레드크럼(홈 > 페이지명) 모바일에서 숨김 */
+  .digital-crumb {
+    display: none;
+  }
+
+  /* 비급여 진료비 표: 모바일에서는 최소 폭 확보 + 좌우 스와이프로 보기 */
+  .fee-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+  }
+
+  .fee-table {
+    min-width: 520px;
+    font-size: 12px;
+  }
+
+  .fee-table th,
+  .fee-table td {
+    height: 34px;
+    padding: 5px 6px;
+  }
+
+  /* 탭메뉴 → 셀렉트 박스로 교체 */
+  .digital-tabs {
+    display: none;
+  }
+
+  /* 커스텀 드롭다운: 브랜드 레드 버튼 + 디자인된 펼침 목록 */
+  .tab-dropdown {
+    display: block;
+    position: relative;
+    width: calc(100% - 40px);
+    margin: -26px auto 0;
+    z-index: 5;
+  }
+
+  .tab-dropdown__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 52px;
+    padding: 0 18px 0 22px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    background: linear-gradient(135deg, #b23436, #8e2526);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+    cursor: pointer;
+  }
+
+  .tab-dropdown__toggle::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center / contain no-repeat;
+    transition: transform .25s ease;
+  }
+
+  .tab-dropdown.is-open .tab-dropdown__toggle::after {
+    transform: rotate(180deg);
+  }
+
+  /* 펼침 목록: 흰 카드, 부드러운 등장 애니메이션 */
+  .tab-dropdown__list {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    margin: 0;
+    padding: 6px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, .18);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .22s ease, transform .22s ease, visibility .22s;
+  }
+
+  .tab-dropdown.is-open .tab-dropdown__list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .tab-dropdown__list li + li {
+    border-top: 1px solid #f4f1ef;
+  }
+
+  .tab-dropdown__list button {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: #555;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .tab-dropdown__list button:active {
+    background: #f6eceb;
+  }
+
+  /* 현재 선택된 탭: 레드 포인트 */
+  .tab-dropdown__list li.is-active button {
+    color: #a12d2e;
+    font-weight: 600;
+    background: #faf5f4;
+  }
+
+  /* 서브 배너: 아이콘을 제목 왼쪽에 인라인 배치 + 글꼴 크기에 맞춰 축소
+     + 세로 정중앙 (위아래 여백 동일) */
+  .digital-visual-copy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    column-gap: 10px;
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 0;
+  }
+
+  .visual-icon,
+  .subpage-icon {
+    width: 30px;
+    height: 34px;
+    margin-bottom: 0;
+  }
+
+  .visual-icon img {
+    width: 16px;
+    height: 12px;
+  }
+
+  .subpage-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .digital-visual h1 {
+    margin: 0;
+  }
+
+  .digital-visual-copy p {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+/* ===== 서브페이지 하단 고정 플로팅 바 (전화 · 오시는 길 · 상담신청) ===== */
+.sub-floating {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  width: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, .14);
+}
+
+.sub-floating__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  text-decoration: none;
+  transition: filter .2s ease;
+}
+
+.sub-floating__btn svg {
+  width: 19px;
+  height: 19px;
+}
+
+.sub-floating__btn--call {
+  background: #fff;
+  color: #a12d2e;
+}
+
+.sub-floating__btn--map {
+  background: #282424;
+  color: #fff;
+}
+
+.sub-floating__btn--consult {
+  background: #a12d2e;
+  color: #fff;
+}
+
+.sub-floating__btn:hover,
+.sub-floating__btn:focus-visible {
+  filter: brightness(1.08);
+}
+
+/* 바에 가려지지 않게 페이지 하단 여백 확보 */
+body.has-sub-floating {
+  padding-bottom: 56px;
+}
+
+/* PC(981px 이상)에서는 숨김 — 태블릿·모바일 전용 */
+@media (min-width: 981px) {
+  .sub-floating {
+    display: none;
+  }
+
+  body.has-sub-floating {
+    padding-bottom: 0;
+  }
+}

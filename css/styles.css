@@ -4088,10 +4088,10 @@ section {
     margin-bottom: 10px;
   }
 
-  /* 시간 줄 자체의 위아래 패딩 축소 */
+  /* 시간 줄 자체의 위아래 패딩 (6px + 추가 3px) */
   .hours-card dl div {
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 
   /* 진료시간 안내: 라벨·시간 줄바꿈 없애고 "평일 09:30 - 19:30" 형태로 한 줄씩 */
@@ -4125,6 +4125,7 @@ section {
     min-height: 0;
     padding: 14px 8px;
     border-left: 0;
+    cursor: pointer;
   }
 
   .phone-card span {
@@ -4316,11 +4317,11 @@ section {
 .digital-title { position:relative; margin:0 0 50px; padding-left:40px; color:#222; font-size:34px; font-weight:600; }
 .digital-title::before { content:""; position:absolute; left:0; top:2px; width:30px; height:33px; background:url("../images/dot_01.png") center/contain no-repeat; }
 .digital-panel em { color:#ae292d; font-style:normal; }
-.subpage-about { background-image:linear-gradient(rgba(0,0,0,.47),rgba(0,0,0,.47)),url("../images/sub_top_01.png"); background-position:center; background-size:cover; background-repeat:no-repeat; }
-.subpage-implant { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_02.png"); background-position:center; background-size:cover; background-repeat:no-repeat; }
-.subpage-cosmetic { background-image:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("../images/sub_top_03.png"); background-position:center; background-size:cover; background-repeat:no-repeat; }
-.subpage-general { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_04.png"); background-position:center; background-size:cover; background-repeat:no-repeat; }
-.subpage-digital { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_05.png"); background-position:center; background-size:cover; background-repeat:no-repeat; }
+.subpage-about { background-image:linear-gradient(rgba(0,0,0,.47),rgba(0,0,0,.47)),url("../images/sub_top_01.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
+.subpage-implant { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_02.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
+.subpage-cosmetic { background-image:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("../images/sub_top_03.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
+.subpage-general { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_04.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
+.subpage-digital { background-image:linear-gradient(rgba(0,0,0,.37),rgba(0,0,0,.37)),url("../images/sub_top_05.png"); background-attachment: fixed; background-position: center 20px; background-size: 100% auto; background-repeat: no-repeat; }
 .digital-visual.subpage-digital .digital-crumb { top: 0; }
 .subpage-icon { width:77px; height:77px; background:none; }
 .subpage-icon img { width:77px; height:77px; }
@@ -4919,28 +4920,4 @@ section {
 .digital-page .ct-points b,
 .digital-page .ct-detail p,
 .digital-page .process-grid p,
-.digital-page .merit-grid p,
-.digital-page .cerec-banner p,
-.digital-page .lab-features p,
-.digital-page .equipment-grid p,
-.digital-page .equipment-bottom p,
-/* 치과소개 */
-.subpage .doctor-profile b,
-.subpage .doctor-profile p,
-.subpage .fee-table,
-.subpage .fee-note b,
-.subpage .fee-note p,
-.subpage .navigation-links a,
-.subpage .route-grid p,
-.subpage .route-grid b,
-/* 심미 */
-.subpage .cosmetic-kicker,
-.subpage .cosmetic-benefit-grid p,
-.subpage .cosmetic-material p,
-.subpage .cosmetic-cerec p,
-.subpage .cosmetic-subhead p,
-.subpage .whitening-system p,
-.subpage .cosmetic-step-grid p,
-.subpage .whitening-step-grid b,
-.subpage .whitening-step-grid h4,
-.subpage .whi
+.

@@ -595,6 +595,15 @@ consultSubmit?.addEventListener('click', (event) => {
   window.location.href = `mailto:zbxm2000@naver.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 
+// 모바일(≤640px): 전화상담 카드 누르면 바로 전화 연결
+const phoneCard = document.querySelector('.phone-card');
+phoneCard?.addEventListener('click', (e) => {
+  if (!window.matchMedia('(max-width: 640px)').matches) return;
+  if (e.target.closest('a')) return; // 번호 링크 자체를 누른 경우는 그대로
+  const tel = phoneCard.querySelector('.phone-card__number')?.getAttribute('href');
+  if (tel) window.location.href = tel;
+});
+
 const floatingBar = document.querySelector('.floating-sns');
 
 // 모바일(≤640px): 스크롤 내리면 플로팅바 표시, 올리면 숨김

@@ -4970,18 +4970,20 @@ section {
   display: none;
 }
 
-/* ===== 태블릿 이하: 서브 탑배너 배경 cover (아래 빈 공간 방지, PC는 고정 100% auto 유지) ===== */
+/* ===== 태블릿 이하: 서브 탑배너 이미지를 화면 폭 100%로 비례 축소
+   (이미지 1920x490 비율 유지, 세로 240px까지만 줄어들고 그 밑으로는 좌우만 크롭) ===== */
 @media (max-width: 980px) {
   .subpage-about,
   .subpage-implant,
   .subpage-cosmetic,
   .subpage-general,
   .subpage-digital {
-    background-size: cover;
-    background-position: center;
+    background-size: auto 100%;
+    background-position: right top;
+    background-attachment: scroll;
   }
 
-  /* 배너 높이를 화면 폭에 비례해 축소 (400px → 최소 240px) → 이미지도 %로 줄어듦 */
+  /* 배너 영역 높이 원복 (배경이미지 세로는 이 높이에 맞춰짐) */
   .digital-visual {
     height: clamp(240px, 40vw, 400px);
   }

@@ -4402,15 +4402,17 @@ section {
 .lab-features h4 { margin:9px 0; font-size:22px; font-weight:600; }
 .lab-features p { margin:0; color:#888; font-size:13px; line-height:1.7; }
 .lab-features img { width:100%; height:112px; border-radius:6px; object-fit:cover; }
+.equipment-intro { margin:0 0 56px; }
+.equipment-intro h3 { margin:0 0 24px; }
+.equipment-intro p { margin:0; }
 .equipment-grid { display:grid; grid-template-columns:repeat(4,1fr); }
 .equipment-grid article { min-height:390px; padding:16px 14px 24px; border:1px solid #f0f0f0; text-align:center; background:#fff; }
 .equipment-grid img { width:100%; height:220px; object-fit:contain; }
 .equipment-grid h3,.equipment-bottom h3 { margin:8px 0 12px; color:#a12d2e; font-size:17px; font-weight:500; }
 .equipment-grid p,.equipment-bottom p { margin:0; color:#666; font-size:14px; line-height:1.75; }
-.equipment-bottom { display:grid; grid-template-columns:220px 1fr 1fr; align-items:center; min-height:160px; margin-top:18px; padding:15px 26px; background:#f9f9fa; }
-.equipment-bottom>img { width:200px; height:130px; object-fit:contain; }
-.equipment-note { display:grid; grid-template-columns:92px 1fr; gap:12px; align-items:center; padding-left:30px; border-left:1px solid #eee; }
-.equipment-note>img { width:88px; height:98px; object-fit:contain; }
+.equipment-bottom { display:flex; justify-content:center; align-items:center; min-height:160px; margin-top:18px; padding:28px 26px; background:#f9f9fa; }
+.equipment-note { display:flex; align-items:center; gap:20px; max-width:820px; text-align:left; }
+.equipment-note>img { width:88px; height:98px; flex-shrink:0; object-fit:contain; }
 .equipment-note h3 { color:#555; line-height:1.5; }
 
 /* ---- About page ---- */
@@ -4633,7 +4635,8 @@ section {
 .cosmetic-cerec div { padding:70px 40px; }
 .cosmetic-cerec h3,.whitening-system h3,.cosmetic-subhead h3 { margin:0 0 20px; font-size:30px; font-weight:500; line-height:1.2; }
 .cosmetic-cerec img { width:100%; height:300px; object-fit:cover; }
-.cosmetic-step-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:70px 0; }
+.cosmetic-step-title { margin:70px 0 35px; font-size:30px; font-weight:500; text-align:center; }
+.cosmetic-step-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:0 0 70px; }
 .cosmetic-step-grid article { text-align:center; }
 .cosmetic-step-grid b { display:block; color:#a12d2e; font-size:16px; }
 .cosmetic-step-grid h4 { min-height:42px; margin:7px 0 13px; font-size:16px; line-height:1.35; }
@@ -4691,6 +4694,7 @@ section {
 .ct-intro h3,
 .cerec-intro h3,
 .lab-intro h3,
+.equipment-intro h3,
 .about-intro h3,
 .implant-head h3,
 .cosmetic-hero h3,
@@ -4705,6 +4709,7 @@ section {
 .ct-intro p,
 .cerec-intro p,
 .lab-intro p,
+.equipment-intro p,
 .about-intro p,
 .implant-head p,
 .cosmetic-hero p,
@@ -4764,9 +4769,9 @@ section {
   .equipment-grid img { height:145px; }
   .equipment-grid h3 { font-size:14px; }
   .equipment-grid p { font-size:12px; }
-  .equipment-bottom { grid-template-columns:130px 1fr; padding:12px; }
-  .equipment-bottom>img { width:120px; height:100px; }
-  .equipment-note { grid-column:1/-1; margin-top:12px; padding:16px 0 0; border-top:1px solid #eee; border-left:0; }
+  .equipment-bottom { padding:20px 14px; }
+  .equipment-note { flex-direction:column; gap:12px; text-align:center; }
+  .equipment-note>img { width:72px; height:80px; }
   .about-panel { padding:70px 0; }
   .about-title { margin-bottom:34px; padding-left:34px; font-size:26px; }
   .about-title::before { width:25px; height:28px; }
@@ -4876,7 +4881,7 @@ section {
   .cosmetic-cerec div,.whitening-system div { padding:70px 20px; }
   .cosmetic-cerec h3,.whitening-system h3,.cosmetic-subhead h3 { font-size:25px; }
   .cosmetic-cerec img,.whitening-system img { height:210px; }
-  .cosmetic-step-grid { gap:8px; padding:70px 0; }
+  .cosmetic-step-grid { gap:8px; padding:0 0 70px; }
   .cosmetic-step-grid h4 { font-size:13px; }
   .cosmetic-step-grid img { height:95px; }
   .cosmetic-step-grid p { font-size:11px; }
@@ -4903,6 +4908,7 @@ section {
   .ct-intro h3,
   .cerec-intro h3,
   .lab-intro h3,
+  .equipment-intro h3,
   .about-intro h3,
   .implant-head h3,
   .cosmetic-hero h3,
@@ -4911,6 +4917,7 @@ section {
   .ct-intro p,
   .cerec-intro p,
   .lab-intro p,
+  .equipment-intro p,
   .about-intro p,
   .implant-head p,
   .cosmetic-hero p,

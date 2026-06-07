@@ -182,6 +182,8 @@ body {
   margin: 0;
   color: #222;
   font-family: "A2z", sans-serif;
+  word-break: keep-all;
+  overflow-wrap: normal;
   background: #fff;
 }
 
@@ -4450,8 +4452,8 @@ section {
 .tour-prev { left:-90px; }
 .tour-next { right:-90px; }
 .fee-intro { margin-bottom:70px; }
-.fee-table-wrap { overflow-x:auto; }
-.fee-table { width:100%; border-spacing:0; overflow:hidden; border:1px solid #ddd; border-radius:14px; font-size:15px; text-align:center; }
+.fee-table-wrap { max-width:100%; overflow-x:hidden; }
+.fee-table { width:100%; table-layout:fixed; border-spacing:0; overflow:hidden; border:1px solid #ddd; border-radius:14px; font-size:15px; text-align:center; }
 .fee-table th,.fee-table td { height:43px; padding:7px 12px; border-right:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8; font-weight:400; }
 .fee-table thead th { height:52px; color:#fff; background:#a12d2e; font-weight:500; }
 .fee-table tbody th { background:#fafafa; font-weight:500; }
@@ -4552,9 +4554,9 @@ section {
 .advanced-cases-head { margin-bottom:34px; padding-left:12px; }
 .advanced-case-stack { display:grid; gap:18px; }
 .advanced-case-stack + .advanced-bone-grid,
+.advanced-case-stack + .advanced-reoperation-grid { margin-top:24px; }
 .advanced-bone-grid + .advanced-case-stack,
-.advanced-case-stack + .advanced-reoperation-grid,
-.advanced-reoperation-grid + .advanced-case-stack { margin-top:24px; }
+.advanced-reoperation-grid + .advanced-case-stack { margin-top:70px; }
 .advanced-case-stack article { display:grid; grid-template-columns:42% 1fr; overflow:hidden; border:1px solid #eee; background:#fff; }
 .advanced-case-stack img { display:block; width:100%; height:100%; min-height:260px; object-fit:cover; }
 .advanced-case-stack div { display:flex; min-height:260px; flex-direction:column; justify-content:center; padding:38px; }
@@ -4564,16 +4566,19 @@ section {
 .advanced-bone-grid,
 .advanced-reoperation-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:24px; }
 .advanced-bone-grid article,
-.advanced-reoperation-grid article { display:grid; grid-template-columns:132px 1fr; gap:24px; align-items:center; min-height:170px; padding:26px; border:1px solid #eee; background:#fff; }
-.advanced-bone-thumb { display:block; width:132px; aspect-ratio:1 / 1; border:1px dashed #d7d7d7; border-radius:8px; background:#f7f7f7; }
-.advanced-bone-grid p,
-.advanced-reoperation-grid p { margin:0; color:#666; font-size:20px; font-weight:300; line-height:1.65; word-break:keep-all; }
-.advanced-bone-grid strong { color:#333; font-weight:700; }
+.advanced-reoperation-grid article { display:grid; grid-template-columns:48% 1fr; overflow:hidden; min-height:230px; padding:0; border:1px solid #eee; background:#fff; }
+.advanced-bone-thumb { display:block; width:100%; height:230px; border:0; border-radius:0; object-fit:cover; background:#f7f7f7; }
+.advanced-detail-copy { display:flex; flex-direction:column; justify-content:center; min-width:0; padding:28px 26px; text-align:left; }
+.advanced-detail-copy h5 { margin:0 0 12px; color:#222; font-size:24px; font-weight:700; line-height:1.25; letter-spacing:-.04em; }
+.advanced-detail-copy p { margin:0; color:#666; font-size:18px; font-weight:300; line-height:1.55; word-break:keep-all; }
 .full-implant { display:grid; grid-template-columns:280px 1fr; gap:30px; margin-top:70px; padding:70px 40px; background:linear-gradient(90deg,#fff,#fafafa 28%,#fff); }
+.advanced-cases + .full-implant { margin-top:24px; }
 .full-implant .implant-kicker { margin-bottom:20px; font-weight:300; }
 .full-implant ol { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:0; padding:0; list-style:none; }
 .full-implant li { min-height:108px; padding:16px 12px; border:1px solid #e5e5e5; border-radius:6px; color:#555; font-size:14px; line-height:1.5; word-break:keep-all; overflow-wrap:normal; background:#fff; }
 .full-implant li b { display:block; margin-bottom:14px; color:#a12d2e; font-size:19px; }
+.advanced-full-case { margin-top:24px; }
+.case-pair-grid.advanced-full-case img { height:230px; }
 .implant-process-panel { padding-bottom:70px; }
 .implant-process-intro { display:grid; grid-template-columns:.92fr 1.08fr; align-items:stretch; margin-top:70px; overflow:hidden; background:#f8f8f8; }
 .implant-process-intro>div { display:flex; min-height:350px; padding:70px 40px; flex-direction:column; justify-content:center; }
@@ -4789,7 +4794,8 @@ section {
   .tour-prev { left:-42px; }
   .tour-next { right:-42px; }
   .tour-arrow { width:38px; height:38px; font-size:37px; line-height:31px; }
-  .fee-table { min-width:760px; font-size:14px; }
+  .fee-table { min-width:0; font-size:12px; }
+  .fee-table th,.fee-table td { padding:6px 4px; }
   .fee-note { grid-template-columns:1fr; padding:14px 16px; }
   .location-heading { margin-top:70px; }
   .location-heading span { width:43px; height:43px; }
@@ -4836,11 +4842,13 @@ section {
   .advanced-bone-grid,
   .advanced-reoperation-grid { grid-template-columns:1fr; gap:12px; }
   .advanced-bone-grid article,
-  .advanced-reoperation-grid article { grid-template-columns:82px 1fr; gap:16px; min-height:120px; padding:18px; }
-  .advanced-bone-thumb { width:82px; }
-  .advanced-bone-grid p,
-  .advanced-reoperation-grid p { font-size:16px; }
+  .advanced-reoperation-grid article { grid-template-columns:1fr; min-height:0; padding:0; }
+  .advanced-bone-thumb { width:100%; height:190px; }
+  .advanced-detail-copy { padding:18px; }
+  .advanced-detail-copy h5 { margin-bottom:8px; font-size:21px; }
+  .advanced-detail-copy p { font-size:16px; }
   .full-implant { gap:10px; margin-top:70px; padding:70px 20px; }
+  .advanced-cases + .full-implant { margin-top:24px; }
   .full-implant ol { grid-template-columns:1fr; }
   .full-implant li { min-height:0; }
   .implant-process-intro { grid-template-columns:1fr; margin-top:70px; }
@@ -4990,13 +4998,14 @@ section {
 
   /* 비급여 진료비 표: 태블릿에서 글씨·패딩 줄여 한 화면에 맞춤 */
   .fee-table {
-    font-size: 13px;
+    min-width: 0;
+    font-size: 12px;
   }
 
   .fee-table th,
   .fee-table td {
     height: 38px;
-    padding: 6px 8px;
+    padding: 6px 4px;
   }
 
   .fee-note {
@@ -5043,22 +5052,22 @@ section {
     display: none;
   }
 
-  /* 비급여 진료비 표: 모바일에서는 최소 폭 확보 + 좌우 스와이프로 보기 */
+  /* 비급여 진료비 표: 모바일에서도 화면 안에 맞춤 */
   .fee-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     border-radius: 14px;
   }
 
   .fee-table {
-    min-width: 520px;
-    font-size: 12px;
+    width: 100%;
+    min-width: 0;
+    font-size: 10px;
   }
 
   .fee-table th,
   .fee-table td {
     height: 34px;
-    padding: 5px 6px;
+    padding: 5px 2px;
   }
 
   /* 탭메뉴 → 셀렉트 박스로 교체 */

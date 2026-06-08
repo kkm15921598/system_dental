@@ -4709,6 +4709,7 @@ section {
 .cosmetic-nowrap { white-space:nowrap; }
 .cosmetic-mobile-break { display:none; }
 .cosmetic-hero p,.cosmetic-lead p { margin:0; color:#555; font-size:16px; font-weight:300; line-height:1.6; }
+.cosmetic-hero p { word-break:keep-all; overflow-wrap:normal; }
 .cosmetic-panel .cosmetic-hero p,.cosmetic-panel .cosmetic-lead p { font-size:18px; }
 .cosmetic-hero img { display:block; width:100%; height:390px; object-fit:contain; object-position:center; background:#000; }
 .cosmetic-center { padding:140px 0 70px; text-align:center; }
@@ -4721,8 +4722,9 @@ section {
 .cosmetic-benefit-grid p { margin:0; color:#777; font-size:13px; line-height:1.55; }
 .cosmetic-material { display:grid; grid-template-columns:1fr 1fr; gap:42px; align-items:center; padding:70px 0; }
 .cosmetic-material img { width:100%; height:270px; object-fit:cover; }
-.cosmetic-material h3 { margin:0 0 20px; font-size:24px; font-weight:500; line-height:1.45; }
+.cosmetic-material h3 { margin:0 0 20px; font-size:24px; font-weight:500; line-height:1.45; word-break:keep-all; overflow-wrap:normal; }
 .cosmetic-material p,.cosmetic-cerec p,.cosmetic-subhead p,.whitening-system p { margin:0; color:#666; font-size:14px; font-weight:300; line-height:1.7; }
+.cosmetic-material p { word-break:keep-all; overflow-wrap:normal; }
 .cosmetic-cerec { display:grid; grid-template-columns:.78fr 1.22fr; align-items:center; background:#f8f8f8; }
 .cosmetic-cerec div { padding:70px 40px; }
 .cosmetic-cerec h3,.whitening-system h3,.cosmetic-subhead h3 { margin:0 0 20px; font-size:30px; font-weight:500; line-height:1.2; }

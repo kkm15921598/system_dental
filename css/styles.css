@@ -5026,6 +5026,7 @@ section {
   .implant-title::before { width:25px; height:28px; }
   .implant-head { padding-left:0; }
   .implant-head h3 { font-size:29px; }
+  .oneday-mobile-line { display:block; }
   .implant-process-panel .implant-head h3 { font-size:29px; }
   .implant-process-headline-line { white-space:nowrap; }
   .implant-head p { font-size:16px; }

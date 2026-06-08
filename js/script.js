@@ -431,6 +431,7 @@ if (tabBarForSelect) {
 const tourTrack = document.querySelector("[data-tour-track]");
 const tourPrevButton = document.querySelector(".tour-prev");
 const tourNextButton = document.querySelector(".tour-next");
+const tourThumbs = document.querySelector("[data-tour-thumbs]");
 const tourImages = [
   "images/sub1_2_img1.png",
   "images/sub1_2_img2.png",
@@ -441,6 +442,7 @@ const tourImages = [
 let tourIndex = 0;
 let tourAnimating = false;
 let tourPosition = 1;
+let tourThumbButtons = [];
 
 function createTourImage(index, isClone = false) {
   const image = document.createElement("img");
@@ -457,6 +459,34 @@ function setTourTrackPosition(shouldAnimate = true) {
 
   tourTrack.classList.toggle("is-resetting", !shouldAnimate);
   tourTrack.style.transform = `translate3d(${-tourPosition * 100}%,0,0)`;
+}
+
+function updateTourThumbs() {
+  tourThumbButtons.forEach((button, index) => {
+    const isActive = index === tourIndex;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-current", isActive ? "true" : "false");
+  });
+}
+
+function initTourThumbs() {
+  if (!tourThumbs || !tourImages.length) return;
+
+  tourThumbs.innerHTML = "";
+  tourThumbButtons = tourImages.map((src, index) => {
+    const button = document.createElement("button");
+    const image = document.createElement("img");
+
+    button.type = "button";
+    button.setAttribute("aria-label", `시스템치과 내부 공간 ${index + 1} 보기`);
+    image.src = src;
+    image.alt = "";
+
+    button.appendChild(image);
+    button.addEventListener("click", () => goTourImage(index));
+    tourThumbs.appendChild(button);
+    return button;
+  });
 }
 
 function initTourSlider() {
@@ -476,6 +506,8 @@ function initTourSlider() {
   tourIndex = 0;
   tourPosition = 1;
   setTourTrackPosition(false);
+  initTourThumbs();
+  updateTourThumbs();
   void tourTrack.offsetWidth;
   tourTrack.classList.remove("is-resetting");
 }
@@ -485,6 +517,16 @@ function showTourImage(direction = "next") {
 
   tourAnimating = true;
   tourPosition += direction === "prev" ? -1 : 1;
+  setTourTrackPosition(true);
+}
+
+function goTourImage(index) {
+  if (!tourTrack || tourAnimating || !tourImages.length || index === tourIndex) return;
+
+  tourAnimating = true;
+  tourIndex = index;
+  tourPosition = index + 1;
+  updateTourThumbs();
   setTourTrackPosition(true);
 }
 
@@ -503,6 +545,7 @@ tourTrack?.addEventListener("transitionend", (event) => {
     tourIndex = tourPosition - 1;
   }
 
+  updateTourThumbs();
   void tourTrack.offsetWidth;
   tourTrack.classList.remove("is-resetting");
   tourAnimating = false;

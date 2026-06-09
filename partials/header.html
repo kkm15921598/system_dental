@@ -22,11 +22,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span><img src="images/logo.png" alt="시스템치과"></span>
     </a>
     <nav class="gnb" id="gnb" aria-label="주요 메뉴">
-      <a href="about.html">치과소개</a>
-      <a href="implant.html">임플란트</a>
-      <a href="cosmetic.html">심미보철</a>
-      <a href="general.html">일반진료</a>
-      <a href="digital.html">디지털진료시스템</a>
+      <div class="gnb-item">
+        <a class="gnb-link" href="about.html">치과소개</a><button class="gnb-subtoggle" type="button" aria-label="치과소개 하위 메뉴 열기" aria-expanded="false"></button>
+        <div class="gnb-submenu" aria-label="치과소개 하위 메뉴">
+          <a href="about.html#doctors">의료진 소개</a>
+          <a href="about.html#clinic-tour">치과 둘러보기</a>
+          <a href="about.html#fees">비급여 진료비</a>
+          <a href="about.html#location">찾아오시는 길</a>
+        </div>
+      </div>
+      <div class="gnb-item">
+        <a class="gnb-link" href="implant.html">임플란트</a><button class="gnb-subtoggle" type="button" aria-label="임플란트 하위 메뉴 열기" aria-expanded="false"></button>
+        <div class="gnb-submenu" aria-label="임플란트 하위 메뉴">
+          <a href="implant.html#oneday">원데이 임플란트</a>
+          <a href="implant.html#advanced">고난도 임플란트</a>
+          <a href="implant.html#process">임플란트 치료 과정</a>
+        </div>
+      </div>
+      <div class="gnb-item">
+        <a class="gnb-link" href="cosmetic.html">심미보철</a><button class="gnb-subtoggle" type="button" aria-label="심미보철 하위 메뉴 열기" aria-expanded="false"></button>
+        <div class="gnb-submenu" aria-label="심미보철 하위 메뉴">
+          <a href="cosmetic.html#zirconia">지르코니아 크라운</a>
+          <a href="cosmetic.html#whitening">치아미백</a>
+          <a href="cosmetic.html#gum">잇몸성형</a>
+          <a href="cosmetic.html#milknate">밀크네이트</a>
+        </div>
+      </div>
+      <div class="gnb-item">
+        <a class="gnb-link" href="general.html">일반진료</a><button class="gnb-subtoggle" type="button" aria-label="일반진료 하위 메뉴 열기" aria-expanded="false"></button>
+        <div class="gnb-submenu" aria-label="일반진료 하위 메뉴">
+          <a href="general.html#cavity">충치치료</a>
+          <a href="general.html#wisdom">사랑니 발치</a>
+          <a href="general.html#tmj">턱관절 치료</a>
+        </div>
+      </div>
+      <div class="gnb-item">
+        <a class="gnb-link" href="digital.html">디지털진료시스템</a><button class="gnb-subtoggle" type="button" aria-label="디지털진료시스템 하위 메뉴 열기" aria-expanded="false"></button>
+        <div class="gnb-submenu" aria-label="디지털진료시스템 하위 메뉴">
+          <a href="digital.html#ct">3D-CT</a>
+          <a href="digital.html#cerec">세렉 시스템</a>
+          <a href="digital.html#lab">원내 기공실</a>
+          <a href="digital.html#equipment">디지털 장비</a>
+        </div>
+      </div>
       <div class="gnb-sns">
         <a href="https://www.youtube.com/@%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%B9%98%EA%B3%BC" target="_blank" rel="noopener" aria-label="유튜브"><img src="images/Utube.png" alt=""><span>유튜브</span></a>
         <a href="https://www.instagram.com/system_dental" target="_blank" rel="noopener" aria-label="인스타그램"><img src="images/Insta.png" alt=""><span>인스타그램</span></a>
@@ -41,3 +79,4 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
   <div class="nav-backdrop" aria-hidden="true"></div>
 </header>
+

@@ -342,31 +342,47 @@ a {
 }
 
 @media (min-width: 981px) {
+  .site-header,
+  .site-header .nav-wrap,
+  .gnb,
+  .gnb-item {
+    overflow: visible;
+  }
+
   .gnb {
     align-items: center;
   }
 
   .gnb-item {
+    position: relative;
+    display: block;
     padding: 0;
+  }
+
+  .gnb-link {
+    position: relative;
+    display: block;
+    padding: 6px 2px;
   }
 
   .gnb-submenu {
     position: absolute;
-    top: calc(100% + 14px);
+    top: 100%;
     left: 50%;
-    z-index: 45;
+    z-index: 1001;
     display: grid;
     min-width: 196px;
+    margin-top: 14px;
     padding: 12px;
     border: 1px solid rgba(211, 59, 59, .13);
     border-radius: 8px;
-    background: rgba(255, 255, 255, .97);
+    background: rgba(255, 255, 255, .98);
     box-shadow: 0 18px 42px rgba(16, 18, 20, .13);
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, 10px);
+    transform: translate(-50%, 8px);
     pointer-events: none;
-    transition: opacity .24s ease, transform .24s ease, visibility .24s ease;
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
   }
 
   .gnb-submenu::before {
@@ -374,16 +390,16 @@ a {
     position: absolute;
     left: 0;
     right: 0;
-    top: -16px;
-    height: 16px;
+    top: -18px;
+    height: 18px;
   }
 
-  .gnb-item:hover .gnb-submenu,
-  .gnb-link:hover ~ .gnb-submenu,
-  .gnb-subtoggle:hover ~ .gnb-submenu,
+  .gnb-item:hover > .gnb-submenu,
+  .gnb-item.is-hover > .gnb-submenu,
+  .gnb-link:hover + .gnb-subtoggle + .gnb-submenu,
+  .gnb-subtoggle:hover + .gnb-submenu,
   .gnb-submenu:hover,
-  .gnb-item:focus-within .gnb-submenu,
-  .gnb-item.is-hover .gnb-submenu {
+  .gnb-item:focus-within > .gnb-submenu {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
@@ -412,8 +428,7 @@ a {
     background: #fff4f4;
     transform: translateX(3px);
   }
-}
-/* 서랍 메뉴 하단 SNS (데스크톱에서는 숨김) */
+}/* 서랍 메뉴 하단 SNS (데스크톱에서는 숨김) */
 .gnb-sns {
   display: none;
 }
@@ -4643,13 +4658,34 @@ section {
 .about-panel .about-intro p { font-size:18px; }
 .doctor-heading,
 .implant-panel .implant-definition .implant-definition-label,
-.implant-panel .implant-process-section>.implant-kicker { display:flex; align-items:center; gap:14px; margin:0 0 34px; padding:18px 24px; border:1px solid #e6e1df; border-left:4px solid #a12d2e; border-radius:8px; color:#222; background:#faf8f7; font-size:24px; font-weight:500; line-height:1.3; letter-spacing:-.035em; text-align:left; }
+.implant-panel .implant-process-section>.implant-kicker,
+.implant-solution-heading { display:flex; align-items:center; gap:14px; margin:0 0 34px; padding:18px 24px; border:1px solid #e6e1df; border-left:4px solid #a12d2e; border-radius:8px; color:#222; background:#faf8f7; font-size:24px; font-weight:500; line-height:1.3; letter-spacing:-.035em; text-align:left; }
 .doctor-heading::before,
 .implant-panel .implant-definition .implant-definition-label::before,
-.implant-panel .implant-process-section>.implant-kicker::before { content:""; display:block; width:10px; height:10px; flex:0 0 10px; border-radius:50%; background:#a12d2e; box-shadow:0 0 0 5px rgba(161,45,46,.1); }
+.implant-panel .implant-process-section>.implant-kicker::before,
+.implant-solution-heading::before { content:""; display:block; width:10px; height:10px; flex:0 0 10px; border-radius:50%; background:#a12d2e; box-shadow:0 0 0 5px rgba(161,45,46,.1); }
 .doctor-heading::after,
 .implant-panel .implant-definition .implant-definition-label::after,
-.implant-panel .implant-process-section>.implant-kicker::after { display:none; }
+.implant-panel .implant-process-section>.implant-kicker::after,
+.implant-solution-heading::after { display:none; }
+.doctor-heading,
+.implant-panel .implant-definition .implant-definition-label,
+.implant-panel .implant-process-section>.implant-kicker,
+.implant-solution-heading {
+  border: 0;
+  border-left: 0;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 14px 28px rgba(211, 59, 59, .16);
+}
+
+.doctor-heading::before,
+.implant-panel .implant-definition .implant-definition-label::before,
+.implant-panel .implant-process-section>.implant-kicker::before,
+.implant-solution-heading::before {
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .18);
+}
 .about-doctor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:50px 20px; }
 .about-doctor-card { min-height:830px; padding:28px 30px 32px; border:1px solid #d8d8d8; background:#fff; }
 .doctor-profile { display:grid; grid-template-columns:52% 48%; min-height:300px; align-items:start; }
@@ -4789,26 +4825,39 @@ section {
 .implant-caution .implant-kicker::before { content:""; width:8px; height:8px; border-radius:50%; background:#a12d2e; box-shadow:0 0 0 5px rgba(161,45,46,.1); }
 .implant-caution h3 { margin:0; font-size:24px; font-weight:500; line-height:1.28; letter-spacing:-.035em; }
 .implant-caution>p { margin:0; padding:22px 0 22px 30px; border-left:1px solid #e1d8d5; color:#555; font-size:16px; font-weight:300; line-height:1.75; word-break:keep-all; overflow-wrap:normal; }
-.advanced-diagnosis { display:grid; grid-template-columns:1.18fr .82fr; align-items:center; margin-top:70px; background:#f8f8f8; }
-.advanced-diagnosis img { width:100%; height:340px; object-fit:cover; }
-.advanced-diagnosis div { padding:70px 40px; }
+.advanced-diagnosis { display:flex; flex-direction:column; gap:11px; margin-top:23px; background:transparent; text-align:center; }
+.advanced-diagnosis img { display:block; width:100%; max-width:920px; height:auto; margin:0 auto; border-radius:8px; object-fit:cover; box-shadow:0 18px 42px rgba(0,0,0,.08); }
+.advanced-diagnosis div { padding:0; text-align:center; }
+.advanced-diagnosis .implant-kicker { margin-bottom:40px; }
+.advanced-diagnosis h3 { margin-bottom:11px; }
+.advanced-diagnosis h3,.advanced-diagnosis p { word-break:keep-all; }
+.advanced-diagnosis h3 { white-space:nowrap; }
+.advanced-diagnosis h3 span { color:#a12d2e; font-weight:700; }
+.advanced-diagnosis div > p:last-child { white-space:nowrap; }
+.advanced-diagnosis div { padding-top:35px; padding-bottom:35px; }
 .advanced-system { margin-top:70px; padding:70px 40px; text-align:center; background:#fafafa; }
+.advanced-system .implant-kicker { color:#a12d2e; font-weight:700; }
 .advanced-system-diagram { position:relative; width:min(640px,100%); aspect-ratio:1; margin:34px auto 0; }
 .system-orbit { position:absolute; inset:0; width:100%; height:100%; overflow:visible; fill:none; stroke:#e4babc; stroke-dasharray:4 5; stroke-width:1.4; }
 .system-orbit .orbit-arrow { stroke:#a12d2e; stroke-dasharray:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; }
 .system-core { position:absolute; left:50%; top:50%; width:75px; transform:translate(-50%,-50%); }
 .system-core img { display:block; width:100%; height:auto; }
 .system-node { position:absolute; display:flex; width:174px; height:174px; flex-direction:column; align-items:center; justify-content:center; border:1px solid #dedede; border-radius:50%; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.025); }
-.system-node img { width:54px; height:54px; margin-bottom:4px; object-fit:contain; }
-.system-node small { color:#777; font-size:14px; }
+.system-node img { width:54px; height:54px; margin:4px 0 4px; object-fit:contain; }
+.system-node small { order:-1; color:#777; font-size:14px; font-weight:600; }
 .system-node strong { margin-top:6px; font-size:14px; font-weight:600; }
+.system-node img,.system-node small,.system-node strong { transform:translateY(-5px); }
 .system-node--ct { left:50%; top:14%; transform:translate(-50%,-50%); }
 .system-node--diagnosis { left:85%; top:36%; transform:translate(-50%,-50%); }
 .system-node--plan { left:72%; top:78%; transform:translate(-50%,-50%); }
 .system-node--surgery { left:28%; top:78%; transform:translate(-50%,-50%); }
 .system-node--care { left:15%; top:36%; transform:translate(-50%,-50%); }
+
 .advanced-cases { margin-top:70px; }
+.implant-solution-heading { margin-top:70px; }
+.implant-solution-heading + .advanced-cases { margin-top:0; }
 .advanced-cases-head { margin-bottom:34px; padding-left:12px; }
+.advanced-cases-head h3 { white-space:nowrap; }
 .advanced-case-stack { display:grid; gap:18px; }
 .advanced-case-stack + .advanced-bone-grid,
 .advanced-case-stack + .advanced-reoperation-grid { margin-top:24px; }
@@ -5131,6 +5180,9 @@ section {
   padding-right:var(--subpage-card-pad-x);
 }
 
+/* advanced diagnosis compact copy padding */
+.advanced-diagnosis div { padding-top:35px; padding-bottom:35px; }
+
 @media (max-width: 760px) {
   .digital-crumb { left:0; right:0; top:0; max-width:none; padding:8px 0; border-radius:0; font-size:12px; line-height:1; }
   .digital-crumb i { margin:0 8px; font-size:12px; }
@@ -5177,7 +5229,25 @@ section {
   .about-panel[data-sub-panel="location"] .about-intro { margin-bottom:35px; }
   .about-intro h3 { font-size:27px; }
   .about-doctor-grid,.location-details,.route-grid { grid-template-columns:1fr; }
-  .about-doctor-grid { gap:25px 10px; }
+  .doctor-heading,
+.implant-panel .implant-definition .implant-definition-label,
+.implant-panel .implant-process-section>.implant-kicker,
+.implant-solution-heading {
+  border: 0;
+  border-left: 0;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 14px 28px rgba(211, 59, 59, .16);
+}
+
+.doctor-heading::before,
+.implant-panel .implant-definition .implant-definition-label::before,
+.implant-panel .implant-process-section>.implant-kicker::before,
+.implant-solution-heading::before {
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .18);
+}
+.about-doctor-grid { gap:25px 10px; }
   .about-doctor-card { min-height:0; padding:15px; }
   .doctor-profile { min-height:175px; }
   .doctor-profile img { height:175px; }
@@ -5188,7 +5258,8 @@ section {
   .doctor-details li { font-size:14px; }
   .doctor-heading,
   .implant-panel .implant-definition .implant-definition-label,
-  .implant-panel .implant-process-section>.implant-kicker { gap:10px; margin-bottom:24px; padding:15px 16px; font-size:20px; }
+  .implant-panel .implant-process-section>.implant-kicker,
+  .implant-solution-heading { gap:10px; margin-bottom:24px; padding:15px 16px; font-size:20px; }
   .tour-section { padding:35px 0; }
   .tour-slider { width:calc(100% - 40px); }
   .tour-viewport { height:auto; aspect-ratio:800/545; }
@@ -5230,13 +5301,16 @@ section {
   .definition-flow { min-height:0; padding:10px 14px; }
   .definition-flow span { min-height:44px; gap:14px; padding:0 12px; font-size:14px; }
   .definition-flow b { font-size:14px; }
+  .advanced-cases-head h3 { white-space:normal; }
   .advanced-cases-head h3 br { display:none; }
   .implant-system-intro { min-height:300px; margin-top:35px; background:#111; }
-  .implant-system-intro>div,.advanced-diagnosis div { padding:35px 20px; }
+  .implant-system-intro>div { padding:35px 20px; }
+  .advanced-diagnosis div { padding-top:35px; padding-bottom:35px; }
+  .advanced-diagnosis h3, .advanced-diagnosis div > p:last-child { white-space:normal; }
   .implant-system-intro>div { width:calc(100% - 40px); padding:42px 0; }
   .implant-system-intro>div::before { margin-bottom:18px; }
   .implant-system-intro img { height:100%; }
-  .advanced-diagnosis img { height:210px; }
+  .advanced-diagnosis img { height:auto; }
   .implant-feature-list { grid-template-columns:1fr; }
   .implant-feature-list img { height:190px; }
   .implant-feature-list div { min-height:0; padding:20px; }
@@ -5246,16 +5320,20 @@ section {
   .implant-caution .implant-kicker { margin-bottom:12px; }
   .implant-caution h3 { font-size:21px; }
   .implant-caution>p { padding:18px 0 0; border-top:1px solid #e1d8d5; border-left:0; font-size:14px; }
-  .advanced-diagnosis { margin-top:35px; }
+  .advanced-diagnosis { gap:8px; margin-top:12px; }
   .advanced-system { margin-top:35px; padding:35px 20px; }
   .advanced-system-diagram { height:auto; aspect-ratio:auto; margin-top:26px; }
   .system-orbit { display:none; }
   .system-core { display:none; }
   .system-node { position:relative; left:auto; right:auto; top:auto; bottom:auto; width:100%; height:92px; flex-direction:row; justify-content:flex-start; gap:6px; margin-top:9px; padding:12px 18px; border-radius:8px; text-align:left; transform:none; }
   .system-node img { width:46px; height:46px; flex:0 0 auto; margin:0; }
-  .system-node small { color:#a12d2e; }
+  .system-node small { order:0; color:#a12d2e; }
   .system-node strong { margin:0; font-size:14px; }
+  .system-node img,.system-node small,.system-node strong { transform:none; }
+
   .advanced-cases { margin-top:35px; }
+  .implant-solution-heading { margin-top:35px; }
+  .implant-solution-heading + .advanced-cases { margin-top:0; }
   .advanced-case-stack article { grid-template-columns:1fr; }
   .advanced-case-stack article { min-height:270px; }
   .advanced-case-stack img { height:100%; min-height:0; }
@@ -5458,6 +5536,8 @@ section {
 .implant-panel .implant-process-detail-grid p,
 .implant-panel .implant-cta p,
 .implant-panel .implant-cta a { font-size:var(--subpage-body-size); }
+.implant-panel .system-node small { font-weight:600; }
+.implant-panel .system-node strong { font-weight:500; }
 /* 전체 임플란트 안내  (주석이 저장 중 잘려 자동으로 닫았습니다) */
 
 /* 모바일용 탭 드롭다운: 기본은 숨김 (640px 이하에서만 표시) */
@@ -5767,32 +5847,105 @@ body.has-sub-floating {
 
 
 
-/* Final desktop dropdown guard */
-@media (min-width: 981px) {
-  .site-header {
-    z-index: 1000;
-    overflow: visible;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* implant mobile spacing normalization */
+@media (max-width: 760px) {
+  .implant-panel {
+    padding-top: var(--subpage-mobile-panel-y);
+    padding-bottom: 0;
   }
 
-  .site-header .nav-wrap,
-  .gnb,
-  .gnb-item {
-    overflow: visible;
+  .implant-panel .implant-recommend,
+  .implant-panel .implant-definition,
+  .implant-panel .implant-system-intro,
+  .implant-panel .advanced-diagnosis,
+  .implant-panel .advanced-system,
+  .implant-panel .advanced-cases,
+  .implant-panel .advanced-reoperation-grid + .advanced-case-stack,
+  .implant-panel .full-implant,
+  .implant-panel .implant-process-intro,
+  .implant-panel .implant-process-section,
+  .implant-panel .implant-process-panel .implant-process-section,
+  .implant-panel .implant-cta {
+    margin-top: var(--subpage-mobile-section-y);
   }
 
-  .gnb-item:hover > .gnb-submenu,
-  .gnb-link:hover ~ .gnb-submenu,
-  .gnb-subtoggle:hover ~ .gnb-submenu,
-  .gnb-submenu:hover,
-  .gnb-item:focus-within > .gnb-submenu,
-  .gnb-item.is-hover > .gnb-submenu {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translate(-50%, 0) !important;
-    pointer-events: auto !important;
+  .implant-panel .implant-recommend,
+  .implant-panel .implant-system-intro > div,
+  .implant-panel .advanced-diagnosis > div,
+  .implant-panel .advanced-system,
+  .implant-panel .full-implant,
+  .implant-panel .implant-process-intro > div,
+  .implant-panel .implant-cta {
+    padding-top: var(--subpage-mobile-card-pad-y);
+    padding-bottom: var(--subpage-mobile-card-pad-y);
+  }
+
+  .implant-panel .implant-caution {
+    margin: var(--subpage-mobile-section-y) 0 0;
+  }
+
+  .implant-panel .implant-feature-list,
+  .implant-panel .advanced-case-stack,
+  .implant-panel .advanced-bone-grid,
+  .implant-panel .advanced-reoperation-grid,
+  .implant-panel .implant-process-detail-grid {
+    gap: 12px;
+  }
+
+  .implant-panel .implant-solution-heading {
+    margin-top: var(--subpage-mobile-section-y);
+    margin-bottom: 24px;
+  }
+
+  .implant-panel .implant-solution-heading + .advanced-cases {
+    margin-top: 0;
+  }
+}
+
+
+/* implant mobile card auto height */
+@media (max-width: 760px) {
+  .implant-panel .advanced-bone-grid .advanced-detail-copy,
+  .implant-panel .advanced-reoperation-grid .advanced-detail-copy {
+    min-height: 0;
+    padding: 18px;
+  }
+}
+
+/* system node desktop double border */
+@media (min-width: 761px) {
+  .implant-panel .system-node {
+    border-color: #a12d2e; outline: 1px solid #dedede; outline-offset: 5px; box-shadow: 0 6px 18px rgba(0,0,0,.025);
   }
 }
 
 
 
 
+/* full implant mobile title one line */
+@media (max-width: 760px) {
+  .implant-panel .full-implant h3 {
+    white-space: nowrap;
+    font-size: 21px;
+  }
+
+  .implant-panel .full-implant h3 br {
+    display: none;
+  }
+}
